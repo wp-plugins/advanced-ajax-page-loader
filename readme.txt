@@ -1,11 +1,11 @@
 === Advanced AJAX Page Loader ===
 Contributors: deano1987, snumb130, bbodine1, HappyApple
 Donate link: http://resplace.net
-Version 2.0.0
+Version 2.0.1
 Tags: ajax, posts, pages, page, post, loading, loader, no refresh, dynamic, jquery
 Requires at least: 2.0?
 Tested up to: 3.3.1
-Stable tag: 2.0.0
+Stable tag: 2.0.1
 
 AJAX Page Loader will load posts, pages, etc. without reloading entire page.
 
@@ -16,6 +16,7 @@ AJAX Page Loader will load posts, pages, etc. without reloading entire page. It 
 Many thanks to Luke Howell, author of the original plugin. 
 
 == Change Log ==
+V2.0.1 > Yup some fixes for the readme.
 V2.0.0 > First release by Dean williams with a huge improvement...
        > Using jQuery more than pure javascript to help compatibility and code layout.
 	   > Updated jquery to the latest 1.7 release.
@@ -28,7 +29,7 @@ V1.0.0 > First release by Luke Howell.
 
 == Installation ==
 
-1. Upload `ajax-page-loader-15` folder to the `/wp-content/plugins/` directory
+1. Upload `advanced-ajax-page-loader` folder to the `/wp-content/plugins/` directory
 2. Activate the plugin through the 'Plugins' menu in WordPress. 
 
 == Frequently Asked Questions ==
@@ -44,7 +45,7 @@ This edit may be required by some users with certain themes that cause AJAX Page
 1. Open your theme's index.php file.
 2.  find the "div" tag that contains the following inside a php tag: " if (have_posts()) : while (have_posts()) : the_post(); " . 
 3. Give this "div" tag a unique ID. (Example: div id="blogcontent")
-4. Edit "ajax-page-loader.js" and replace the word "content" inside every single or double quote marks with your new ID.
+4. Edit "ajax-page-loader.js" and replace the word "content" at the top of the page with your id of the content area.
 
 If you theme's search function stops working or causes the page to reload, then you'll need to edit your theme's "search.php" and "searchform.php" files.
 
