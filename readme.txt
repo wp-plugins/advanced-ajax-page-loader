@@ -1,4 +1,4 @@
-=== Advanced AJAX Page Loader 2 ===
+=== Advanced AJAX Page Loader ===
 Contributors: deano1987, snumb130, bbodine1, HappyApple
 Donate link: http://resplace.net
 Version 2.0.0
