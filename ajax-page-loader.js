@@ -1,6 +1,9 @@
 //CHANGE THIS TO MATCH THE ID OF YOUR CONTENT AREA IN YOUR THEME
 var content = "content";
 
+//Set this to true if your getting sone javascript problems
+var DocReadyReload = false;
+
 var isWorking = false;
 var http = getHTTPObject();
 
@@ -70,7 +73,7 @@ function loadPage(url, push){
 		
 		//start changing the page content.
 		$('#' + content).fadeOut("slow", function() {
-			$('#' + content).html('<center>Loading... Please Wait...<br><img src="'+loadingIMG.src+'" border="0" alt="(Loading Animation)" title="Please Wait..." /></center>');
+			$('#' + content).html('<center><p>Loading... Please Wait...</p><p><img src="'+loadingIMG.src+'" border="0" alt="(Loading Animation)" title="Please Wait..." /></p></center>');
 			$('#' + content).fadeIn("slow", function() {
 				http.open('GET', url, true);
 				isWorking = true;
@@ -84,7 +87,7 @@ function loadPage(url, push){
 function submitSearch(param){
 	if (!isWorking){
 		scroll(0, 0);
-		$('#' + content).html('<center>Loading... Please Wait...<br><img src="'+loadingIMG.src+'" border="0" alt="(Loading Animation)" title="Please Wait..." /></center>');
+		$('#' + content).html('<center><p>Loading... Please Wait...</p><p><img src="'+loadingIMG.src+'" border="0" alt="(Loading Animation)" title="Please Wait..." /></p></center>');
 		http.open('GET',window.location+param,true);
 		isWorking = true;
 		http.onreadystatechange = showPage;
@@ -121,6 +124,9 @@ function showPage(){
 			//put the resulting html back into the page!
 			$('#' + content).fadeOut("slow", function() {
 				$('#' + content).html(output);
+				if (DocReadyReload == true) {
+					$(document).trigger("ready");
+				}
 				$('#' + content).fadeIn("slow", function() {
 					//recall loader so that new URLS are captured.
 					pageLoaderInit();
@@ -128,7 +134,7 @@ function showPage(){
 			});
 		} else {
 			//Would append this, but would not be good if this fired more than once!!
-			$('#' + content).html('<center>Loading... Please Wait...<br><img src="'+loadingIMG.src+'" border="0" alt="(Loading Animation)" title="Please Wait..." /><br><font color="red">There seems to be a problem, please click the link again.</font></center>');
+			$('#' + content).html('<center><p><b>Error!</b></p><p><p><font color="red">There seems to be a problem, please click the link again.</font></p></center>');
 		}
 	}
 }

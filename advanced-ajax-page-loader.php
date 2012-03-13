@@ -41,6 +41,9 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 */
 
+//Set this to false to stop checking for jQuery
+$checkJQuery = true;
+
 if(!function_exists('get_option'))
   require_once('../../../wp-config.php');
 
@@ -49,7 +52,26 @@ if(!function_exists('get_option'))
 add_action('wp_head','advanced_ajax_page_loader_js');
 
 function advanced_ajax_page_loader_js() {?>
-  <script type="text/javascript" src="<?php echo get_settings('home')?>/wp-content/plugins/advanced-ajax-page-loader/jquery.js"></script>
+  <script type="text/javascript">
+	jQueryScriptOutputted = <?php echo ($checkJQuery===false?"true":"false");?>;
+	function initJQuery() {
+		//if the jQuery object isn't available
+		if (typeof(jQuery) == 'undefined') {
+		
+		
+			if (! jQueryScriptOutputted) {
+				//only output the script once..
+				jQueryScriptOutputted = true;
+				
+				//output the script (load it from google api)
+				document.write("<scr" + "ipt type=\"text/javascript\" src=\"<?php echo get_settings('home')?>/wp-content/plugins/advanced-ajax-page-loader/jquery.js\"></scr" + "ipt>");
+			}
+			setTimeout("initJQuery()", 50);
+		}
+	}
+	initJQuery();
+  </script>
+
   <script type="text/javascript" src="<?php echo get_settings('home')?>/wp-content/plugins/advanced-ajax-page-loader/ajax-page-loader.js"></script>
   <script type="text/javascript" src="<?php echo get_settings('home')?>/wp-content/plugins/advanced-ajax-page-loader/querystring.js"></script>
   <script type="text/javascript">
