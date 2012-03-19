@@ -1,11 +1,11 @@
 === Advanced AJAX Page Loader ===
 Contributors: deano1987, snumb130, bbodine1, HappyApple
 Donate link: http://resplace.net
-Version: 2.2.0
+Version: 2.2.1
 Tags: ajax, posts, pages, page, post, loading, loader, no refresh, dynamic, jquery
 Requires at least: 2.0?
 Tested up to: 3.3.1
-Stable tag: 2.2.0
+Stable tag: 2.2.1
 
 AJAX Page Loader will load posts, pages, etc. without reloading entire page.
 
@@ -13,9 +13,14 @@ AJAX Page Loader will load posts, pages, etc. without reloading entire page.
 Description:
 AJAX Page Loader will load posts, pages, etc. without reloading entire page. It will also update the URL bar with the url the user would have been going to without AJAX, this means the user can copy the url or bookmark it and return to the page they were visiting! This plugin will also add the page to there history for even more usability!
 
+If this has helped you and saved you time please consider a donation via PayPal to:
+
+dt_8792@yahoo.co.uk
+
 Many thanks to Luke Howell, author of the original plugin. 
 
 == Change Log ==
+V2.2.1 > Fixed small problems checking if jQuery is called.
 V2.2.0 > Some workaround code so things like jscrollpane can work properly.
 V2.1.0 > jQuery check to make sure it has not already been included
 	   > jQuery var in advanced-ajax-page-loader.php, set this to false to stop jQuery being included altogether.

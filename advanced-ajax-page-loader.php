@@ -1,7 +1,7 @@
 <?php
 /*
 Plugin Name: Advanced AJAX Page Loader
-Version: 2.2.0
+Version: 2.2.1
 Plugin URI: http://software.resplace.net/WordPress/AjaxPageLoader.php
 Description: Load pages within blog without reloading page, shows loading bar and updates the browsers URL so that the user can bookmark or share the url as if they had loaded a page normally. Also updates there history so they have a track of there browsing habbits on your blog!
 Author URI: http://dean.resplace.net
@@ -63,7 +63,7 @@ function advanced_ajax_page_loader_js() {?>
 	jQueryScriptOutputted = <?php echo ($checkJQuery===false?"true":"false");?>;
 	function initJQuery() {
 		//if the jQuery object isn't available
-		if (typeof(jQuery) == 'undefined') {
+		if (typeof($) == 'undefined') {
 		
 		
 			if (! jQueryScriptOutputted) {
@@ -71,7 +71,7 @@ function advanced_ajax_page_loader_js() {?>
 				jQueryScriptOutputted = true;
 				
 				//output the script (load it from google api)
-				document.write("<scr" + "ipt type=\"text/javascript\" src=\"<?php echo get_settings('home')?>/wp-content/plugins/advanced-ajax-page-loader/jquery.js\"></scr" + "ipt>");
+				document.write("<scr" + "ipt type='text/javascript' src='<?php echo get_settings('home')?>/wp-content/plugins/advanced-ajax-page-loader/jquery.js'></scr" + "ipt>");
 			}
 			setTimeout("initJQuery()", 50);
 		}
