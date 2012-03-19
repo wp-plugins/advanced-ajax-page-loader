@@ -1,11 +1,11 @@
 === Advanced AJAX Page Loader ===
 Contributors: deano1987, snumb130, bbodine1, HappyApple
 Donate link: http://resplace.net
-Version: 2.1.0
+Version: 2.2.0
 Tags: ajax, posts, pages, page, post, loading, loader, no refresh, dynamic, jquery
 Requires at least: 2.0?
 Tested up to: 3.3.1
-Stable tag: 2.1.0
+Stable tag: 2.2.0
 
 AJAX Page Loader will load posts, pages, etc. without reloading entire page.
 
@@ -16,6 +16,7 @@ AJAX Page Loader will load posts, pages, etc. without reloading entire page. It 
 Many thanks to Luke Howell, author of the original plugin. 
 
 == Change Log ==
+V2.2.0 > Some workaround code so things like jscrollpane can work properly.
 V2.1.0 > jQuery check to make sure it has not already been included
 	   > jQuery var in advanced-ajax-page-loader.php, set this to false to stop jQuery being included altogether.
 	   > When content is loaded you can optionally call document.ready, change the ready variable in javascript file.
@@ -43,7 +44,10 @@ A: You may need to use the Theme Support Guide in order to use AJAX Page Loader 
 
 Q: I have content that usually uses JavaScript but now that is not working when loaded with ajax.
 
-A: Unfortunately any inline javascript in the HTML being loaded into the page is ignored by your browser, also any bindings for lightbox for example need to be reloaded when new HTML is put into the page. please reload required code on line 123 of the javascript file just after the page fades back in.
+A: Unfortunately any inline javascript in the HTML being loaded into the page is ignored by your browser, 
+also any bindings for lightbox for example need to be reloaded when new HTML is put into the page. 
+You need to take the code used to bind the javascript to your elements and re-call them after the content
+changes... Put the binding code in the JS file after the line which says "DROP YOUR RELOAD CODES BELOW HERE"
 
 ----Theme Support----
 

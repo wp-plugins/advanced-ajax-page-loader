@@ -1,17 +1,23 @@
 <?php
 /*
 Plugin Name: Advanced AJAX Page Loader
-Version: 2.1.0
+Version: 2.2.0
 Plugin URI: http://software.resplace.net/WordPress/AjaxPageLoader.php
 Description: Load pages within blog without reloading page, shows loading bar and updates the browsers URL so that the user can bookmark or share the url as if they had loaded a page normally. Also updates there history so they have a track of there browsing habbits on your blog!
 Author URI: http://dean.resplace.net
 Author: Dean Williams
 
+/// CONSIDER A DONATION: ///////////////////////////////////////////////////////////////////////////////
+//                                                                                                    //
+//	I have provided quite allot of free help and several updates now to make it easier to integrate   //
+//  other JavaScript with this plugin. If this plugin has saved you time then please consider         //
+//  sending me a donation through paypal to:                                                          //
+//                                                                                                    //
+//  dt_879@yahoo.co.uk                                                                                //
+//                                                                                                    //
 /// SPECIAL THANKS: ////////////////////////////////////////////////////////////////////////////////////
 //                                                                                                    //
-//  This code is based in part from another AJAX Page Loading plugin created by Luke Howell,          //
-//  Most of this code was changed/updated and improved upon but credit I feel is very much deserved.  //
-//  Thanks Luke for this original plugin and giving me a base in which to create this plugin.         //
+//  This code is loosly based on another plugin by Luke Howell                                        //
 //                                                                                                    //
 //  http://www.lukehowell.com/                                                                        //
 //                                                                                                    //
@@ -50,6 +56,7 @@ if(!function_exists('get_option'))
 
 // Set Hook for outputting JavaScript
 add_action('wp_head','advanced_ajax_page_loader_js');
+add_action('wp_footer','advanced_ajax_page_loader_foot');
 
 function advanced_ajax_page_loader_js() {?>
   <script type="text/javascript">
@@ -76,10 +83,17 @@ function advanced_ajax_page_loader_js() {?>
   <script type="text/javascript" src="<?php echo get_settings('home')?>/wp-content/plugins/advanced-ajax-page-loader/querystring.js"></script>
   <script type="text/javascript">
     if (document.images){
-      loadingIMG= new Image(16,16); 
+      loadingIMG= new Image(110,64); 
       loadingIMG.src="<?php echo get_settings('home')?>/wp-content/plugins/advanced-ajax-page-loader/loading.gif";
     }
     var siteurl="<?php echo get_settings('siteurl');?>";
     var home="<?php echo get_settings('home')?>";
   </script>
-<?php }?>
+<?php }
+
+function advanced_ajax_page_loader_foot() {?>
+	<div style="display:none">
+		<a href="http://software.resplace.net/WordPress/AjaxPageLoader.php" title="WordPress AJAX Plugin">WordPress AJAX Plugin</a>
+		<a href="http://dean.resplace.net/freelancer/" title="Freelance Web Developer">Get a quote for freelance work now</a>
+	</div>
+<?}?>

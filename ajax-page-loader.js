@@ -122,15 +122,36 @@ function showPage(){
 			}
 
 			//put the resulting html back into the page!
-			$('#' + content).fadeOut("slow", function() {
-				$('#' + content).html(output);
-				if (DocReadyReload == true) {
-					$(document).trigger("ready");
-				}
-				$('#' + content).fadeIn("slow", function() {
-					//recall loader so that new URLS are captured.
-					pageLoaderInit();
-				});
+			$('#' + content).html(output);
+
+			//move content area so we cant see it.
+			$('#' + content).css("position", "absolute");
+			$('#' + content).css("left", "20000px");
+
+			//show the content area
+			$('#' + content).show();
+
+			//do the code
+			pageLoaderInit();
+			if (DocReadyReload == true) {
+				$(document).trigger("ready");
+			}
+			
+			/////////////////////////////////////////
+			//  DROP YOUR RELOAD CODES BELOW HERE  //
+			/////////////////////////////////////////
+			
+			//How to re-call the jScrollPane...
+			//$('.scroll-pane').jScrollPane();
+
+			//now hide it again and put the position back!
+			$('#' + content).hide();
+			$('#' + content).css("position", "");
+			$('#' + content).css("left", "");
+
+			$('#' + content).fadeIn("slow", function() {
+				//recall loader so that new URLS are captured.
+				  
 			});
 		} else {
 			//Would append this, but would not be good if this fired more than once!!
