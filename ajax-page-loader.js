@@ -1,3 +1,12 @@
+/*
+Plugin Name: Advanced AJAX Page Loader
+Version: 2.3.0
+Plugin URI: http://software.resplace.net/WordPress/AjaxPageLoader.php
+Description: Load pages within blog without reloading page, shows loading bar and updates the browsers URL so that the user can bookmark or share the url as if they had loaded a page normally. Also updates there history so they have a track of there browsing habbits on your blog!
+Author URI: http://dean.resplace.net
+Author: Dean Williams
+*/
+
 //CHANGE THIS TO MATCH THE ID OF YOUR CONTENT AREA IN YOUR THEME
 var content = "content";
 
@@ -17,26 +26,32 @@ window.onpopstate = function(event) {
 };
 
 function pageLoaderInit(){
-  $("a").click(function(event){
-    if(this.href.indexOf(home)>=0&&this.href.indexOf('/wp-') < 0){
-    /*if(this.href.split('?')[1].split('=')[0]=='m'||
-       this.href.split('?')[1].split('=')[0]=='p'||
-       this.href.split('?')[1].split('=')[0]=='cat'||
-       this.href.split('?')[1].split('=')[0]=='page_id'){*/
-      // stop default behaviour
-      event.preventDefault();
-      // remove click border
-      this.blur();
-      // get caption: either title or name attribute
-      var caption = this.title || this.name || "";
-      // get rel attribute for image groups
-      var group = this.rel || false;
-      // display the box for the elements href
-      loadPage(this.href);
-    }
-  });
-  $('#searchform').name = 'searchform';
-  $('#searchform').attr("action", "javascript:submitSearch('?s='+document.getElementById('s').value)");
+	$("a").click(function(event){
+		if(this.href.indexOf(home)>=0&&this.href.indexOf('/wp-') < 0){
+			//stop default behaviour
+			event.preventDefault();
+
+			//remove click border
+			this.blur();
+
+			// get caption: either title or name attribute
+			var caption = this.title || this.name || "";
+
+			// get rel attribute for image groups
+			var group = this.rel || false;
+
+			// highlight the current menu item
+			$('ul.menu li').each(function() {
+				$(this).removeClass('current-menu-item');
+			});
+			$(this).parents('li').addClass('current-menu-item');
+
+			// load the content
+			loadPage(this.href);
+		}
+	});
+	$('#searchform').name = 'searchform';
+	$('#searchform').attr("action", "javascript:submitSearch('?s='+document.getElementById('s').value)");
 }
 
 function getHTTPObject() {
@@ -65,10 +80,14 @@ function loadPage(url, push){
 		firstsla = nohttp.indexOf("/");
 		pathpos = url.indexOf(nohttp);
 		path = url.substring(pathpos + firstsla);
+		
 		//Only do a history state if clicked on the page.
 		if (push != 1) {
-			var stateObj = { foo: 1000 + Math.random()*1001 };
-			history.pushState(stateObj, "ajax page loaded...", path);
+			//TODO: implement a method for IE
+			if (typeof window.history.pushState == "function") {
+				var stateObj = { foo: 1000 + Math.random()*1001 };
+				history.pushState(stateObj, "ajax page loaded...", path);
+			}
 		}
 		
 		//start changing the page content.
@@ -100,6 +119,16 @@ function showPage(){
 		if (http.status == 200) {
 			isWorking = false;
 			var details = http.responseText;
+			
+			//get title attribute
+			details = details.split('<title>')[1];
+			titles = details.split('</title>')[0];
+			
+			//set the title?
+			//TODO: this still doesnt set the title in the history list (atleast in chrome...) more research required here.
+			document.title = titles;
+			
+			//get content
 			details = details.split('id="' + content + '"')[1];
 			details = details.substring(details.indexOf('>') + 1);
 			var depth = 1;
@@ -141,8 +170,23 @@ function showPage(){
 			//  DROP YOUR RELOAD CODES BELOW HERE  //
 			/////////////////////////////////////////
 			
+			//Here.			
+			
+			/////////////////////////////////////////
+			//  DROP YOUR RELOAD CODES ABOVE HERE  //
+			/////////////////////////////////////////
+			
 			//How to re-call the jScrollPane...
 			//$('.scroll-pane').jScrollPane();
+			
+			//How to re-call nivoSlider
+			//$('#slider').nivoSlider({
+			//	pauseTime:3000,
+			//	effect:'boxRandom',
+			//	animSpeed:700,
+			//	directionNav:true,
+			//	controlNav: false
+			//});
 
 			//now hide it again and put the position back!
 			$('#' + content).hide();
@@ -151,10 +195,11 @@ function showPage(){
 
 			$('#' + content).fadeIn("slow", function() {
 				//recall loader so that new URLS are captured.
-				  
+				
 			});
 		} else {
 			//Would append this, but would not be good if this fired more than once!!
+			document.title = "Error loading requested page!";
 			$('#' + content).html('<center><p><b>Error!</b></p><p><p><font color="red">There seems to be a problem, please click the link again.</font></p></center>');
 		}
 	}

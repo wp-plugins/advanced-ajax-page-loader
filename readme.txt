@@ -1,11 +1,11 @@
 === Advanced AJAX Page Loader ===
 Contributors: deano1987, snumb130, bbodine1, HappyApple
 Donate link: http://resplace.net
-Version: 2.2.2
+Version: 2.3.0
 Tags: ajax, posts, pages, page, post, loading, loader, no refresh, dynamic, jquery
 Requires at least: 2.0?
 Tested up to: 3.3.1
-Stable tag: 2.2.2
+Stable tag: 2.3.0
 
 AJAX Page Loader will load posts, pages, etc. without reloading entire page.
 
@@ -19,34 +19,60 @@ dt_8792@yahoo.co.uk
 
 Many thanks to Luke Howell, author of the original plugin. 
 
-== Change Log ==
-v2.2.2 > Removed link-back as it is against wordpress TOC
-V2.2.1 > Fixed small problems checking if jQuery is called.
-V2.2.0 > Some workaround code so things like jscrollpane can work properly.
-V2.1.0 > jQuery check to make sure it has not already been included
-	   > jQuery var in advanced-ajax-page-loader.php, set this to false to stop jQuery being included altogether.
-	   > When content is loaded you can optionally call document.ready, change the ready variable in javascript file.
-V2.0.1 > Yup some fixes for the readme.
-V2.0.0 > First release by Dean williams with a huge improvement...
-       > Using jQuery more than pure javascript to help compatibility and code layout.
-	   > Updated jquery to the latest 1.7 release.
-	   > fade transitions used when ajax is loading the page.
-	   > If a page fails to load it shows on the page (no ugly message box's)
-	   > When a page is loaded the URL bar is updated on the browser for easy copying or bookmarking of links.
-	   > When a page is loaded the browsers history is updated so that the user can go back/forward between pages.
-	   > Easier to edit the used id for content area, some themes differ on this one so it's useful.
-V1.0.0 > First release by Luke Howell. 
+== Changelog ==
+
+= 1.0.0 =
+* First release by Luke Howell.
+
+= 2.0.0 =
+* First release by Dean williams with a huge improvement...
+* Using jQuery more than pure javascript to help compatibility and code layout.
+* Updated jquery to the latest 1.7 release.
+* fade transitions used when ajax is loading the page.
+* If a page fails to load it shows on the page (no ugly message box's)
+* When a page is loaded the URL bar is updated on the browser for easy copying or bookmarking of links.
+* When a page is loaded the browsers history is updated so that the user can go back/forward between pages.
+* Easier to edit the used id for content area, some themes differ on this one so it's useful.
+
+= 2.0.1 =
+* Yup some fixes for the readme.
+
+= 2.1.0 =
+* jQuery check to make sure it has not already been included
+* jQuery var in advanced-ajax-page-loader.php, set this to false to stop jQuery being included altogether.
+* When content is loaded you can optionally call document.ready, change the ready variable in javascript file.
+
+= 2.2.0 =
+* Some workaround code so things like jscrollpane can work properly.
+
+= 2.2.1 =
+* Fixed small problems checking if jQuery is called.
+
+= 2.2.2 =
+* Removed link-back as it is against wordpress TOC
+
+= 2.3.0 =
+Load current menu item (thanks to euphoriuhh).
+* nivoslider example reload code added.
+* IE fix for browser history (thanks to euphoriuhh).
+* Now sets page title when you change page.
+
+== Upgrade Notice ==
+
+= 2.3.0 = 
+This version fix's IE issues and updates the page title. dont forget to backup any custom inserted code in the JS file before updating.
 
 == Installation ==
 
 1. Upload `advanced-ajax-page-loader` folder to the `/wp-content/plugins/` directory
-2. Activate the plugin through the 'Plugins' menu in WordPress. 
+2. Activate the plugin through the 'Plugins' menu in WordPress.
+3. make sure your theme has the content area wrapped in a tag such as a DIV with an id attribute called "content". (data within this div will be replaced with AJAX content). SEE THEME GUIDE IN FAQ.
 
 == Frequently Asked Questions ==
 
 Q: The plugin isn't working right,  HHEEEELLLPPPP!!!!!!!!
 
-A: You may need to use the Theme Support Guide in order to use AJAX Page Loader with your custom theme.
+A: You may need to use the Theme Support Guide in order to use AJAX Page Loader with your custom theme (SEE BELOW).
 
 Q: I have content that usually uses JavaScript but now that is not working when loaded with ajax.
 
@@ -54,6 +80,8 @@ A: Unfortunately any inline javascript in the HTML being loaded into the page is
 also any bindings for lightbox for example need to be reloaded when new HTML is put into the page. 
 You need to take the code used to bind the javascript to your elements and re-call them after the content
 changes... Put the binding code in the JS file after the line which says "DROP YOUR RELOAD CODES BELOW HERE"
+
+I have included a few example codes for nivoslider and jScrollPane, if you have other code please let me know and I can add it to the list.
 
 ----Theme Support----
 
