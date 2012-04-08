@@ -32,11 +32,7 @@ window.onpopstate = function(event) {
 	if (currentState == null) {
 		currentState = document.location.toString();
 	} else {
-		if (document.location.toString() != currentState) {
-			currentState = document.location.toString();
-
-			loadPage(document.location.toString(),1);
-		}
+		loadPage(document.location.toString(),1);
 	}
 };
 
