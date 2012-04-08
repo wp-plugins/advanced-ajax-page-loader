@@ -1,7 +1,7 @@
 <?php
 /*
 Plugin Name: Advanced AJAX Page Loader
-Version: 2.3.0
+Version: 2.4.0
 Plugin URI: http://software.resplace.net/WordPress/AjaxPageLoader.php
 Description: Load pages within blog without reloading page, shows loading bar and updates the browsers URL so that the user can bookmark or share the url as if they had loaded a page normally. Also updates there history so they have a track of there browsing habbits on your blog!
 Author URI: http://dean.resplace.net
@@ -13,7 +13,11 @@ Author: Dean Williams
 //  other JavaScript with this plugin. If this plugin has saved you time then please consider         //
 //  sending me a donation through paypal to:                                                          //
 //                                                                                                    //
-//  dt_879@yahoo.co.uk                                                                                //
+//  dt_8792@yahoo.co.uk                                                                               //
+//                                                                                                    //
+/// DONATION THANKS: ///////////////////////////////////////////////////////////////////////////////////
+//                                                                                                    //
+//	Travis Avery (travisavery)                                                                        //
 //                                                                                                    //
 /// SPECIAL THANKS: ////////////////////////////////////////////////////////////////////////////////////
 //                                                                                                    //
@@ -52,33 +56,34 @@ add_action('wp_head','advanced_ajax_page_loader_js');
 function advanced_ajax_page_loader_js() {?>
   <script type="text/javascript">
 	jQueryScriptOutputted = <?php echo ($checkJQuery===false?"true":"false");?>;
+	
 	function initJQuery() {
 		//if the jQuery object isn't available
 		if (typeof($) == 'undefined') {
-		
 		
 			if (! jQueryScriptOutputted) {
 				//only output the script once..
 				jQueryScriptOutputted = true;
 				
-				//output the script (load it from google api)
-				document.write("<scr" + "ipt type='text/javascript' src='<?php echo get_settings('home')?>/wp-content/plugins/advanced-ajax-page-loader/jquery.js'></scr" + "ipt>");
+				//output the jquery script
+				document.write("<scr" + "ipt type='text/javascript' src='<?php echo get_settings('home');?>/wp-content/plugins/advanced-ajax-page-loader/jquery.js'></scr" + "ipt>");
 			}
 			setTimeout("initJQuery()", 50);
+			
 		}
 	}
+	
 	initJQuery();
   </script>
 
-  <script type="text/javascript" src="<?php echo get_settings('home')?>/wp-content/plugins/advanced-ajax-page-loader/ajax-page-loader.js"></script>
-  <script type="text/javascript" src="<?php echo get_settings('home')?>/wp-content/plugins/advanced-ajax-page-loader/querystring.js"></script>
+  <script type="text/javascript" src="<?php echo get_settings('home');?>/wp-content/plugins/advanced-ajax-page-loader/ajax-page-loader.js"></script>
   <script type="text/javascript">
     if (document.images){
-      loadingIMG= new Image(110,64); 
-      loadingIMG.src="<?php echo get_settings('home')?>/wp-content/plugins/advanced-ajax-page-loader/loading.gif";
+      AAPLloadingIMG = new Image(110,64); 
+      AAPLloadingIMG.src = "<?php echo get_settings('home');?>/wp-content/plugins/advanced-ajax-page-loader/loading.gif";
     }
-    var siteurl="<?php echo get_settings('siteurl');?>";
-    var home="<?php echo get_settings('home')?>";
+    var AAPLsiteurl="<?php echo get_settings('siteurl');?>";
+    var AAPLhome="<?php echo get_settings('home');?>";
   </script>
 	<?php 
 }

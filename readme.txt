@@ -1,11 +1,11 @@
 === Advanced AJAX Page Loader ===
-Contributors: deano1987, snumb130, bbodine1, HappyApple
+Contributors: deano1987, HappyApple, travisavery, snumb130, bbodine1
 Donate link: http://resplace.net
-Version: 2.3.0
+Version: 2.4.0
 Tags: ajax, posts, pages, page, post, loading, loader, no refresh, dynamic, jquery
 Requires at least: 2.0?
 Tested up to: 3.3.1
-Stable tag: 2.3.0
+Stable tag: 2.4.0
 
 AJAX Page Loader will load posts, pages, etc. without reloading entire page.
 
@@ -52,15 +52,26 @@ Many thanks to Luke Howell, author of the original plugin.
 * Removed link-back as it is against wordpress TOC
 
 = 2.3.0 =
-Load current menu item (thanks to euphoriuhh).
+* Load current menu item (thanks to euphoriuhh).
 * nivoslider example reload code added.
 * IE fix for browser history (thanks to euphoriuhh).
 * Now sets page title when you change page.
+
+= 2.4.0 =
+* onpopstate fixed, sometimes clicking back on the browser would not work... Now it should!
+* The bindings to the search form were pretty poor (original authors code), I have re-written this and it should now work much better, still needs a little improving though.
+* Ajax requesting code completely re-written to use jQuery's library, this should offer better compatibility between browsers, makes the code neater and offers more options such as caching.
+* Ajax requests are not cached, and error catching is more reliable (you dont see it randomly when the page is in fact loading correctly).
+* New 'warnings' system implemented to give you debug if you set 'showWarnings' to 'true' in the .js file... This could help us BOTH ;)
+
 
 == Upgrade Notice ==
 
 = 2.3.0 = 
 This version fix's IE issues and updates the page title. dont forget to backup any custom inserted code in the JS file before updating.
+
+= 2.4.0 =
+This version brings better cross-browser compatiblity, includes better error checking and fixes some annoying bugs.
 
 == Installation ==
 
