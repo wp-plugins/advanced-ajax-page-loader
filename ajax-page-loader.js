@@ -1,6 +1,6 @@
 /*
 Plugin Name: Advanced AJAX Page Loader
-Version: 2.4.0
+Version: 2.4.1
 Plugin URI: http://software.resplace.net/WordPress/AjaxPageLoader.php
 Description: Load pages within blog without reloading page, shows loading bar and updates the browsers URL so that the user can bookmark or share the url as if they had loaded a page normally. Also updates there history so they have a track of there browsing habbits on your blog!
 Author URI: http://dean.resplace.net
@@ -30,10 +30,10 @@ $(document).ready(function() {
 
 window.onpopstate = function(event) {
 	if (currentState == null) {
-		currentState = document.location;
+		currentState = document.location.toString();
 	} else {
-		if (document.location != currentState) {
-			currentState = document.location;
+		if (document.location.toString() != currentState) {
+			currentState = document.location.toString();
 
 			loadPage(document.location.toString(),1);
 		}
