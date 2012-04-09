@@ -29,7 +29,7 @@ $(document).ready(function() {
 
 
 window.onpopstate = function(event) {
-	if (startAjax == true) {
+	if (startAjax === true) {
 	//	currentState = document.location.toString();
 	//} else {
 		loadPage(document.location.toString(),1);
