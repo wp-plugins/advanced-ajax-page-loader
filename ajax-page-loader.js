@@ -1,6 +1,6 @@
 /*
 Plugin Name: Advanced AJAX Page Loader
-Version: 2.4.5
+Version: 2.4.6
 Plugin URI: http://software.resplace.net/WordPress/AjaxPageLoader.php
 Description: Load pages within blog without reloading page, shows loading bar and updates the browsers URL so that the user can bookmark or share the url as if they had loaded a page normally. Also updates there history so they have a track of there browsing habbits on your blog!
 Author URI: http://dean.resplace.net
@@ -38,7 +38,8 @@ window.onpopstate = function(event) {
 
 function pageLoaderInit(scope){
 	$(scope+"a").click(function(event){
-		if(this.href.indexOf(AAPLhome)>=0&&this.href.indexOf('/wp-') < 0){
+		//if its not an admin url, or doesnt contain #
+		if (this.href.indexOf(AAPLhome) >= 0 && this.href.indexOf('/wp-') < 0 && this.href.indexOf('#') < 0){
 			// stop default behaviour
 			event.preventDefault();
 
@@ -136,7 +137,7 @@ function loadPage(url, push, getData){
 							
 							//set the title?
 							//TODO: this still doesnt set the title in the history list (atleast in chrome...) more research required here.
-							document.title = titles;
+							document.title =  $('<div>').text(titles).html();
 						} else {
 							if (showWarnings == true) {
 								alert("You seem to have more than one <title> tag on the page, this is going to cause some major problems so page title changing is disabled.");

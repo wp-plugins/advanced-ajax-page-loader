@@ -1,11 +1,11 @@
 === Advanced AJAX Page Loader ===
 Contributors: deano1987, HappyApple, travisavery, snumb130, bbodine1
 Donate link: http://resplace.net
-Version: 2.4.5
+Version: 2.4.7
 Tags: ajax, posts, pages, page, post, loading, loader, no refresh, dynamic, jquery
 Requires at least: 2.0?
 Tested up to: 3.3.1
-Stable tag: 2.4.5
+Stable tag: 2.4.7
 
 AJAX Page Loader will load posts, pages, etc. without reloading entire page.
 
@@ -67,6 +67,14 @@ Many thanks to Luke Howell, author of the original plugin.
 = 2.4.5 =
 * Fixed back button again and again and again and again (sorry my bad)
 
+= 2.4.6 =
+* Page title doesnt show html special character encoding anymore.
+
+= 2.4.7 =
+* HTML Special characters in the page <title> now display correctly (I hope).
+* Anchor links (hash (#) links) are now ignored by the ajax process.
+* I think I#m now correctly tagging my releases, hopefully!
+
 == Upgrade Notice ==
 
 = 2.3.0 = 
@@ -75,8 +83,11 @@ This version fix's IE issues and updates the page title. dont forget to backup a
 = 2.4.0 =
 This version brings better cross-browser compatiblity, includes better error checking and fixes some annoying bugs.
 
-= 2.4.5 =
+= 2.4.6 =
 Fixed back button again and again and again and again (sorry my bad)
+
+= 2.4.7 =
+Page titles will display better, and if you have any links with an anchor reference (# hash) they will be ignored.
 
 == Installation ==
 
@@ -115,5 +126,15 @@ If you theme's search function stops working or causes the page to reload, then 
  "if (have_posts()) : "
 3. Give this "div" the same unique ID as mentioned earlier. (Example:  div id="blogcontent")
 4. Now edit your theme's "searchform.php" file.
-5. Make sure the "form" tag has the ID of "searchform" .
-6. Make sure the "input" tag has the ID of "s"  . 
+5. Make sure the "form" tag has the ID of "searchform".
+6. Make sure the "input" tag has the ID of "s".
+
+== Donations ==
+
+I have got to give a very special thanks to the people mentioned below who have offered their support with donations, let me also take the time to thank others who report problems, offer solutions and help debug the plugin. Your all helping wordpress to be a better blog/CMS.
+
+* Travis Avery (travisavery)
+
+Please send your donations to:
+
+dt_8792@yahoo.co.uk
