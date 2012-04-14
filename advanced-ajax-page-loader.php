@@ -66,7 +66,7 @@ function advanced_ajax_page_loader_js() {?>
 				jQueryScriptOutputted = true;
 				
 				//output the jquery script
-				document.write("<scr" + "ipt type='text/javascript' src='<?php echo get_settings('home');?>/wp-content/plugins/advanced-ajax-page-loader/jquery.js'></scr" + "ipt>");
+				document.write("<scr" + "ipt type='text/javascript' src='<?php echo plugins_url( 'jquery.js' , __FILE__ );?>'></scr" + "ipt>");
 			}
 			setTimeout("initJQuery()", 50);
 			
@@ -76,14 +76,18 @@ function advanced_ajax_page_loader_js() {?>
 	initJQuery();
   </script>
 
-  <script type="text/javascript" src="<?php echo get_settings('home');?>/wp-content/plugins/advanced-ajax-page-loader/ajax-page-loader.js"></script>
+  <script type="text/javascript" src="<?php echo plugins_url( 'ajax-page-loader.js' , __FILE__ );?>"></script>
   <script type="text/javascript">
-    if (document.images){
-      AAPLloadingIMG = new Image(110,64); 
-      AAPLloadingIMG.src = "<?php echo get_settings('home');?>/wp-content/plugins/advanced-ajax-page-loader/loading.gif";
-    }
+	//The old code here was RETARDED - Much like the rest of the code... Now I have replaced this with something better ;)
+	//PRELOADING YEEEYYYYY!!
+	var AAPLloadingIMG = $('<img/>').attr('src', '<?php echo plugins_url( 'loading.gif' , __FILE__ );?>');
+	var AAPLloadingDIV = $('<div/>').attr('style', 'display:none;').attr('id', 'ajaxLoadDivElement');
+	AAPLloadingDIV.appendTo('body');
+	AAPLloadingIMG.appendTo('#ajaxLoadDivElement');
+	//My code can either be seen as sexy? Or just a terribly orchestrated hack? Really it's up to you...
+    
     var AAPLsiteurl="<?php echo get_settings('siteurl');?>";
-    var AAPLhome="<?php echo get_settings('home');?>";
+    var AAPLhome="<?php echo get_settings('siteurl');?>";
   </script>
 	<?php 
 }

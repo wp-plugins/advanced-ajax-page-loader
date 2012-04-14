@@ -1,6 +1,6 @@
 /*
 Plugin Name: Advanced AJAX Page Loader
-Version: 2.4.6
+Version: 2.4.8
 Plugin URI: http://software.resplace.net/WordPress/AjaxPageLoader.php
 Description: Load pages within blog without reloading page, shows loading bar and updates the browsers URL so that the user can bookmark or share the url as if they had loaded a page normally. Also updates there history so they have a track of there browsing habbits on your blog!
 Author URI: http://dean.resplace.net
@@ -57,6 +57,17 @@ function pageLoaderInit(scope){
 				$(this).removeClass('current-menu-item');
 			});
 			$(this).parents('li').addClass('current-menu-item');
+			
+			
+			//menu item changer if your using "Suffusion" theme
+			/*
+			$('ul.sf-menu li').each(function() {
+				$(this).removeClass('current_page_item');
+				$(this).find('a').removeClass('current');
+			});
+			$(this).parents('li').addClass('current_page_item');
+			$('li.current_page_item a').addClass('current');
+			*/
 
 			// display the box for the elements href
 			loadPage(this.href);
@@ -117,7 +128,7 @@ function loadPage(url, push, getData){
 		
 		//start changing the page content.
 		$('#' + content).fadeOut("slow", function() {
-			$('#' + content).html('<center><p>Loading... Please Wait...</p><p><img src="'+AAPLloadingIMG.src+'" border="0" alt="(Loading Animation)" title="Please Wait..." /></p></center>');
+			$('#' + content).html('<center><p style="text-align: center !important;">Loading... Please Wait...</p><p style="text-align: center !important;"><img src="' + AAPLloadingIMG.attr('src') + '" border="0" alt="(Loading Animation)" title="Please Wait..." /></p></center>');
 			$('#' + content).fadeIn("slow", function() {
 				$.ajax({
 					type: "GET",
@@ -225,7 +236,7 @@ function loadPage(url, push, getData){
 						//Would append this, but would not be good if this fired more than once!!
 						isWorking = false;
 						document.title = "Error loading requested page!";
-						$('#' + content).html('<center><p><b>Error!</b></p><p><p><font color="red">There seems to be a problem, please click the link again.</font></p></center>');
+						$('#' + content).html('<center><p style="text-align: center !important;"><b>Error!</b></p><p style="text-align: center !important;"><font color="red">There seems to be a problem, please click the link again.</font></p></center>');
 					}
 				});
 			});
