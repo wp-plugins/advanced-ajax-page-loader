@@ -15,16 +15,6 @@ Author: deano1987
 //                                                                                                    //
 //  dt_8792@yahoo.co.uk                                                                               //
 //                                                                                                    //
-/// DONATION THANKS: ///////////////////////////////////////////////////////////////////////////////////
-//                                                                                                    //
-//	Travis Avery (travisavery)                                                                        //
-//                                                                                                    //
-/// SPECIAL THANKS: ////////////////////////////////////////////////////////////////////////////////////
-//                                                                                                    //
-//  This code is loosly based on another plugin by Luke Howell                                        //
-//                                                                                                    //
-//  http://www.lukehowell.com/                                                                        //
-//                                                                                                    //
 ////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 ---------------------------------------------------------------------
@@ -54,41 +44,41 @@ if(!function_exists('get_option'))
 add_action('wp_head','advanced_ajax_page_loader_js');
 
 function advanced_ajax_page_loader_js() {?>
-  <script type="text/javascript">
-	jQueryScriptOutputted = <?php echo ($checkJQuery===false?"true":"false");?>;
-	
-	function initJQuery() {
-		//if the jQuery object isn't available
-		if (typeof($) == 'undefined') {
-		
-			if (! jQueryScriptOutputted) {
-				//only output the script once..
-				jQueryScriptOutputted = true;
-				
-				//output the jquery script
-				document.write("<scr" + "ipt type='text/javascript' src='<?php echo plugins_url( 'jquery.js' , __FILE__ );?>'></scr" + "ipt>");
-			}
-			setTimeout("initJQuery()", 50);
-			
-		}
-	}
-	
-	initJQuery();
-  </script>
+	<script type="text/javascript">
+		jQueryScriptOutputted = <?php echo ($checkJQuery===false?"true":"false");?>;
 
-  <script type="text/javascript" src="<?php echo plugins_url( 'ajax-page-loader.js' , __FILE__ );?>"></script>
-  <script type="text/javascript">
-	//The old code here was RETARDED - Much like the rest of the code... Now I have replaced this with something better ;)
-	//PRELOADING YEEEYYYYY!!
-	var AAPLloadingIMG = $('<img/>').attr('src', '<?php echo plugins_url( 'loading.gif' , __FILE__ );?>');
-	var AAPLloadingDIV = $('<div/>').attr('style', 'display:none;').attr('id', 'ajaxLoadDivElement');
-	AAPLloadingDIV.appendTo('body');
-	AAPLloadingIMG.appendTo('#ajaxLoadDivElement');
-	//My code can either be seen as sexy? Or just a terribly orchestrated hack? Really it's up to you...
-    
-    var AAPLsiteurl="<?php echo get_settings('siteurl');?>";
-    var AAPLhome="<?php echo get_settings('siteurl');?>";
-  </script>
+		function initJQuery() {
+			//if the jQuery object isn't available
+			if (typeof($) == 'undefined') {
+			
+				if (! jQueryScriptOutputted) {
+					//only output the script once..
+					jQueryScriptOutputted = true;
+					
+					//output the jquery script
+					document.write("<scr" + "ipt type='text/javascript' src='<?php echo plugins_url( 'jquery.js' , __FILE__ );?>'></scr" + "ipt>");
+				}
+				setTimeout("initJQuery()", 50);
+				
+			}
+		}
+
+		initJQuery();
+	</script>
+
+	<script type="text/javascript" src="<?php echo plugins_url( 'ajax-page-loader.js' , __FILE__ );?>"></script>
+	<script type="text/javascript">
+		//The old code here was RETARDED - Much like the rest of the code... Now I have replaced this with something better ;)
+		//PRELOADING YEEEYYYYY!!
+		var AAPLloadingIMG = $('<img/>').attr('src', '<?php echo plugins_url( 'loading.gif' , __FILE__ );?>');
+		var AAPLloadingDIV = $('<div/>').attr('style', 'display:none;').attr('id', 'ajaxLoadDivElement');
+		AAPLloadingDIV.appendTo('body');
+		AAPLloadingIMG.appendTo('#ajaxLoadDivElement');
+		//My code can either be seen as sexy? Or just a terribly orchestrated hack? Really it's up to you...
+
+		var AAPLsiteurl="<?php echo get_settings('siteurl');?>";
+		var AAPLhome="<?php echo get_settings('siteurl');?>";
+	</script>
 	<?php 
 }
 ?>

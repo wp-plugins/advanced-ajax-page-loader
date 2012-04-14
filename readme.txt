@@ -1,11 +1,11 @@
 === Advanced AJAX Page Loader ===
 Contributors: deano1987, HappyApple, travisavery, snumb130, bbodine1
 Donate link: http://resplace.net
-Version: 2.4.7
+Version: 2.4.8
 Tags: ajax, posts, pages, page, post, loading, loader, no refresh, dynamic, jquery
 Requires at least: 2.0?
 Tested up to: 3.3.1
-Stable tag: 2.4.7
+Stable tag: 2.4.8
 
 AJAX Page Loader will load posts, pages, etc. without reloading entire page.
 
@@ -75,6 +75,15 @@ Many thanks to Luke Howell, author of the original plugin.
 * Anchor links (hash (#) links) are now ignored by the ajax process.
 * I think I#m now correctly tagging my releases, hopefully!
 
+
+= 2.4.8 =
+* # links fix.
+* Improvements to loading.gif handling, dont need to provide dimensions anymore :)
+* Improvements to loading.gif handling, image is now pre-loaded and kept in memory :)
+* plugin file path code improved, now using plugins_url instead of hard coded paths!
+* Suffusion menu bar changer included (need to uncomment it to use it)
+* loading is more likely to be centered now - yup
+
 == Upgrade Notice ==
 
 = 2.3.0 = 
@@ -88,6 +97,9 @@ Fixed back button again and again and again and again (sorry my bad)
 
 = 2.4.7 =
 Page titles will display better, and if you have any links with an anchor reference (# hash) they will be ignored.
+
+= 2.4.8 =
+fixes for # links and general plugin improvements!
 
 == Installation ==
 

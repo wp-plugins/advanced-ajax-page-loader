@@ -29,9 +29,9 @@ $(document).ready(function() {
 
 
 window.onpopstate = function(event) {
-	if (startAjax === true) {
-	//	currentState = document.location.toString();
-	//} else {
+	//# links sets off onpopstate... lets make sure we ignore it ;)
+	if (startAjax === true && this.href.indexOf('#') < 0) {
+	
 		loadPage(document.location.toString(),1);
 	}
 };
