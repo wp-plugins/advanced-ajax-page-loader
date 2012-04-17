@@ -80,7 +80,9 @@ if (get_option('AAPL_upload_error')) {
 			<tr valign="top">
 				<th scope="row">Reload Code</th>
 				<td>
-					Drop any reload code you need below, if you need any help with this then please refer to the '<a href="http://software.resplace.net/WordPress/AjaxPageLoader.php" target="_blank">useful reload codes</a>', or <a href="http://wordpress.org/extend/plugins/advanced-ajax-page-loader/" target="_blank">ask for help on the WordPress forum</a>.<br><br>
+					Drop any reload code you need below, if you need any help with this then please refer to the '<a href="http://software.resplace.net/WordPress/AjaxPageLoader.php" target="_blank">useful reload codes</a>', or <a href="http://wordpress.org/extend/plugins/advanced-ajax-page-loader/" target="_blank">ask for help on the WordPress forum</a>.<br>
+					<i>Make sure function AAPL_reload_code() { } isnt around the code (if you upgraded from 2.5.0)</i>
+					<br><br>
 					<textarea name="AAPL_reload_code" style="width:100%;height:250px"><?php echo get_option('AAPL_reload_code'); ?></textarea>
 				</td>
 			</tr>

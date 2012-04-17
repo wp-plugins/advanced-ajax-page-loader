@@ -1,11 +1,11 @@
 === Advanced AJAX Page Loader ===
 Contributors: deano1987, HappyApple, travisavery, snumb130, bbodine1
 Donate link: http://resplace.net
-Version: 2.5.0
+Version: 2.5.1
 Tags: ajax, posts, pages, page, post, loading, loader, no refresh, dynamic, jquery
 Requires at least: 2.0?
 Tested up to: 3.3.1
-Stable tag: 2.5.0
+Stable tag: 2.5.1
 
 AJAX Page Loader will load posts, pages, etc. without reloading entire page.
 
@@ -94,6 +94,9 @@ Many thanks to Luke Howell, author of the original plugin.
 * You can optionally enable a footer link to link to the project site!
 * Various sample loaders included so you can choose one to suit you.
 
+= 2.5.0 =
+* Fix for reload code.
+
 == Upgrade Notice ==
 
 = 2.3.0 = 
@@ -113,6 +116,9 @@ fixes for # links and general plugin improvements!
 
 = 2.5.0 =
 majour changes, <b>MAKE SURE YOU BACKUP YOUR PLUGIN BEFORE UPGRADE JUST INCASE!</b> There is now an admin panel for settings (settings will be retained on update!).
+
+= 2.5.1 =
+small fix for reload code (well more of a confusion fix).
 
 == Installation ==
 
