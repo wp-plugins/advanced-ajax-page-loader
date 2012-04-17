@@ -7,14 +7,8 @@ Author URI: http://dean.resplace.net
 Author: Dean Williams
 */
 
-//CHANGE THIS TO MATCH THE ID OF YOUR CONTENT AREA IN YOUR THEME
-var content = "content";
-
-//Set this to true if your getting sone javascript problems
+//Set this to true if your getting some javascript problems
 var DocReadyReload = false;
-
-//If the script isnt doing something as expected try showing warnings, it will give some information
-var showWarnings = false;
 
 //Dont mess with these...
 var isWorking = false;
@@ -24,7 +18,7 @@ var searchAction = null;
 
 //The holy grail...
 $(document).ready(function() {
-	pageLoaderInit("");
+	AAPL_loadPageInit("");
 });
 
 
@@ -32,11 +26,11 @@ window.onpopstate = function(event) {
 	//# links sets off onpopstate... lets make sure we ignore it ;)
 	if (startAjax === true && this.href.indexOf('#') < 0) {
 	
-		loadPage(document.location.toString(),1);
+		AAPL_loadPage(document.location.toString(),1);
 	}
 };
 
-function pageLoaderInit(scope){
+function AAPL_loadPageInit(scope){
 	$(scope+"a").click(function(event){
 		//if its not an admin url, or doesnt contain #
 		if (this.href.indexOf(AAPLhome) >= 0 && this.href.indexOf('/wp-') < 0 && this.href.indexOf('#') < 0){
@@ -70,7 +64,7 @@ function pageLoaderInit(scope){
 			*/
 
 			// display the box for the elements href
-			loadPage(this.href);
+			AAPL_loadPage(this.href);
 		}
 	});
   
@@ -83,14 +77,14 @@ function pageLoaderInit(scope){
 			$('#searchform').name = 'searchform';
 			$('#searchform').attr("action", "javascript:submitSearch('s='+document.getElementById('s').value)");
 		} else {
-			if (showWarnings == true) {
+			if (AAPL_warnings == true) {
 				alert("Could not bind to search form...\nCould not find element with id='searchform' or attribute 'action' missing.");
 			}
 		}
 	}
 }
 
-function loadPage(url, push, getData){
+function AAPL_loadPage(url, push, getData){
 
 	if (!isWorking){
 		scroll(0,0);
@@ -113,23 +107,23 @@ function loadPage(url, push, getData){
 				var stateObj = { foo: 1000 + Math.random()*1001 };
 				history.pushState(stateObj, "ajax page loaded...", path);
 			} else {
-				if (showWarnings == true) {
+				if (AAPL_warnings == true) {
 					alert("'pushState' method not supported in this browser, sorry about that!");
 				}
 			}
 		}
 		
-		if (!$('#' + content)) {
-			if (showWarnings == true) {
+		if (!$('#' + AAPL_content)) {
+			if (AAPL_warnings == true) {
 				alert("Could not find content region, you need to set an ID to an element that surrounds the content on the page, make sure the 'content' variable is also set to the ID name.");
 				return false;
 			}
 		}
 		
 		//start changing the page content.
-		$('#' + content).fadeOut("slow", function() {
-			$('#' + content).html('<center><p style="text-align: center !important;">Loading... Please Wait...</p><p style="text-align: center !important;"><img src="' + AAPLloadingIMG.attr('src') + '" border="0" alt="(Loading Animation)" title="Please Wait..." /></p></center>');
-			$('#' + content).fadeIn("slow", function() {
+		$('#' + AAPL_content).fadeOut("slow", function() {
+			$('#' + AAPL_content).html('<center><p style="text-align: center !important;">Loading... Please Wait...</p><p style="text-align: center !important;"><img src="' + AAPLloadingIMG.attr('src') + '" border="0" alt="(Loading Animation)" title="Please Wait..." /></p></center>');
+			$('#' + AAPL_content).fadeIn("slow", function() {
 				$.ajax({
 					type: "GET",
 					url: url,
@@ -150,13 +144,13 @@ function loadPage(url, push, getData){
 							//TODO: this still doesnt set the title in the history list (atleast in chrome...) more research required here.
 							document.title =  $('<div>').text(titles).html();
 						} else {
-							if (showWarnings == true) {
+							if (AAPL_warnings == true) {
 								alert("You seem to have more than one <title> tag on the page, this is going to cause some major problems so page title changing is disabled.");
 							}
 						}
 						
 						//get content
-						data = data.split('id="' + content + '"')[1];
+						data = data.split('id="' + AAPL_content + '"')[1];
 						data = data.substring(data.indexOf('>') + 1);
 						var depth = 1;
 						var output = '';
@@ -178,17 +172,17 @@ function loadPage(url, push, getData){
 						}
 
 						//put the resulting html back into the page!
-						$('#' + content).html(output);
+						$('#' + AAPL_content).html(output);
 
 						//move content area so we cant see it.
-						$('#' + content).css("position", "absolute");
-						$('#' + content).css("left", "20000px");
+						$('#' + AAPL_content).css("position", "absolute");
+						$('#' + AAPL_content).css("left", "20000px");
 
 						//show the content area
-						$('#' + content).show();
+						$('#' + AAPL_content).show();
 
 						//recall loader so that new URLS are captured.
-						pageLoaderInit("#" + content + " ");
+						AAPL_loadPageInit("#" + AAPL_content + " ");
 						
 						if (DocReadyReload == true) {
 							$(document).trigger("ready");
@@ -198,7 +192,7 @@ function loadPage(url, push, getData){
 						//  DROP YOUR RELOAD CODES BELOW HERE  //
 						/////////////////////////////////////////
 						
-						//Here.			
+						AAPL_reload_code();		
 						
 						/////////////////////////////////////////
 						//  DROP YOUR RELOAD CODES ABOVE HERE  //
@@ -217,11 +211,11 @@ function loadPage(url, push, getData){
 						//});
 
 						//now hide it again and put the position back!
-						$('#' + content).hide();
-						$('#' + content).css("position", "");
-						$('#' + content).css("left", "");
+						$('#' + AAPL_content).hide();
+						$('#' + AAPL_content).css("position", "");
+						$('#' + AAPL_content).css("left", "");
 
-						$('#' + content).fadeIn("slow", function() {
+						$('#' + AAPL_content).fadeIn("slow", function() {
 							//errmmm... Well isnt this embarrasing... Nothing to do here :s Kinda makes you think why is there a function attatched in the first place...
 							return true;
 							//Ahhh. See what I did there? NO ITS NOT POINTLESS... NO! ... ummm ok it kinda is :(
@@ -236,7 +230,7 @@ function loadPage(url, push, getData){
 						//Would append this, but would not be good if this fired more than once!!
 						isWorking = false;
 						document.title = "Error loading requested page!";
-						$('#' + content).html('<center><p style="text-align: center !important;"><b>Error!</b></p><p style="text-align: center !important;"><font color="red">There seems to be a problem, please click the link again.</font></p></center>');
+						$('#' + AAPL_content).html('<center><p style="text-align: center !important;"><b>Error!</b></p><p style="text-align: center !important;"><font color="red">There seems to be a problem, please click the link again.</font></p></center>');
 					}
 				});
 			});
@@ -246,6 +240,6 @@ function loadPage(url, push, getData){
 
 function submitSearch(param){
 	if (!isWorking){
-		loadPage(searchAction, 0, param);
+		AAPL_loadPage(searchAction, 0, param);
 	}
 }

@@ -1,11 +1,11 @@
 === Advanced AJAX Page Loader ===
 Contributors: deano1987, HappyApple, travisavery, snumb130, bbodine1
 Donate link: http://resplace.net
-Version: 2.4.8
+Version: 2.5.0
 Tags: ajax, posts, pages, page, post, loading, loader, no refresh, dynamic, jquery
 Requires at least: 2.0?
 Tested up to: 3.3.1
-Stable tag: 2.4.8
+Stable tag: 2.5.0
 
 AJAX Page Loader will load posts, pages, etc. without reloading entire page.
 
@@ -84,6 +84,16 @@ Many thanks to Luke Howell, author of the original plugin.
 * Suffusion menu bar changer included (need to uncomment it to use it)
 * loading is more likely to be centered now - yup
 
+= 2.5.0 =
+* reverted AAPLhome variable as suggested by Brandon Nourse.
+* admin panel added for various options.
+* added ability to change the target id for changing content.
+* added ability to change/upload the loading image (image will now be kept on updates).
+* added ability to set reload code in admin panel, this will be kept upon upgrading.
+* Enable Javascript debug and jQuery check from the admin panel.
+* You can optionally enable a footer link to link to the project site!
+* Various sample loaders included so you can choose one to suit you.
+
 == Upgrade Notice ==
 
 = 2.3.0 = 
@@ -100,6 +110,9 @@ Page titles will display better, and if you have any links with an anchor refere
 
 = 2.4.8 =
 fixes for # links and general plugin improvements!
+
+= 2.5.0 =
+majour changes, <b>MAKE SURE YOU BACKUP YOUR PLUGIN BEFORE UPGRADE JUST INCASE!</b> There is now an admin panel for settings (settings will be retained on update!).
 
 == Installation ==
 
