@@ -235,7 +235,7 @@ function install_AAPL() {
 	}
 	
 	if (get_option('AAPL_reload_code') != "") {
-		update_option('AAPL_reload_code', 'function AAPL_reload_code() {\n\n\n\n}');
+		update_option('AAPL_reload_code', "function AAPL_reload_code() {\n\n\n\n}");
 	}
 	
 	//copy ajax loading images across.
