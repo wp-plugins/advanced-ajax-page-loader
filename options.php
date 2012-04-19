@@ -78,12 +78,42 @@ if (get_option('AAPL_upload_error')) {
 			</tr>
 			
 			<tr valign="top">
+				<th scope="row">Loading Layout</th>
+				<td>
+					Here you can change the HTML of the loading content, there are some special tags you can use:<br>
+					<i>{loader} - the loader image as defined above.</i>
+					<br><br>
+					<textarea name="AAPL_loading_code" style="width:100%;height:180px"><?php echo get_option('AAPL_loading_code'); ?></textarea>
+				</td>
+			</tr>
+			
+			<tr valign="top">
+				<th scope="row">Error Loading Layout</th>
+				<td>
+					Here you can change the HTML of the loading content when an error occurs, there are some special tags you can use:<br>
+					<i>{loader} - the loader image as defined above.</i>
+					<br><br>
+					<textarea name="AAPL_loading_error_code" style="width:100%;height:180px"><?php echo get_option('AAPL_loading_error_code'); ?></textarea>
+				</td>
+			</tr>
+			
+			<tr valign="top">
 				<th scope="row">Reload Code</th>
 				<td>
 					Drop any reload code you need below, if you need any help with this then please refer to the '<a href="http://software.resplace.net/WordPress/AjaxPageLoader.php" target="_blank">useful reload codes</a>', or <a href="http://wordpress.org/extend/plugins/advanced-ajax-page-loader/" target="_blank">ask for help on the WordPress forum</a>.<br>
 					<i>Make sure function AAPL_reload_code() { } isnt around the code (if you upgraded from 2.5.0)</i>
 					<br><br>
 					<textarea name="AAPL_reload_code" style="width:100%;height:250px"><?php echo get_option('AAPL_reload_code'); ?></textarea>
+				</td>
+			</tr>
+			
+			<tr valign="top">
+				<th scope="row">HREF Ignore List</th>
+				<td>
+					If you need to ignore certain urls then this is useful for you, insert the full URL, or part of a URL to capture a pattern of links, seperate each with a comma.<br>
+					<i>default: "#, /wp-, .pdf, .zip, .rar".</i>
+					<br><br>
+					<textarea name="AAPL_ignore_list" style="width:100%;height:50px"><?php echo get_option('AAPL_ignore_list'); ?></textarea>
 				</td>
 			</tr>
 			

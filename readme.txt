@@ -1,11 +1,11 @@
 === Advanced AJAX Page Loader ===
-Contributors: deano1987, HappyApple, travisavery, snumb130, bbodine1
+Contributors: deano1987, HappyApple, snumb130, bbodine1
 Donate link: http://resplace.net
-Version: 2.5.2
+Version: 2.5.3
 Tags: ajax, posts, pages, page, post, loading, loader, no refresh, dynamic, jquery
 Requires at least: 2.0?
 Tested up to: 3.3.1
-Stable tag: 2.5.2
+Stable tag: 2.5.3
 
 AJAX Page Loader will load posts, pages, etc. without reloading entire page.
 
@@ -94,11 +94,18 @@ Many thanks to Luke Howell, author of the original plugin.
 * You can optionally enable a footer link to link to the project site!
 * Various sample loaders included so you can choose one to suit you.
 
-= 2.5.0 =
+= 2.5.1 =
 * Fix for reload code.
 
 = 2.5.2 =
 * Fix for back button.
+
+= 2.5.3 =
+* admin panel work, MORE FEATURES!!! :D
+* - You can now set the loading HTML code.
+* - You can also set the loading error HTML code.
+* - The href ignore has been extended and can now be changed in the admin panel.
+
 
 == Upgrade Notice ==
 
@@ -126,6 +133,9 @@ small fix for reload code (well more of a confusion fix).
 = 2.5.2 =
 omg more back button fixes!
 
+= 2.5.3 =
+More editable features in the admin panel.
+
 == Installation ==
 
 1. Upload `advanced-ajax-page-loader` folder to the `/wp-content/plugins/` directory
@@ -136,7 +146,7 @@ omg more back button fixes!
 
 Q: The plugin isn't working right,  HHEEEELLLPPPP!!!!!!!!
 
-A: You may need to use the Theme Support Guide in order to use AJAX Page Loader with your custom theme (SEE BELOW).
+A: You may need to use the Theme Support Guide in order to use AJAX Page Loader with your custom theme (SEE BELOW). But try turning on "Debug Messages" in the admin settings first, report any messages to the wordpress forums.
 
 Q: I have content that usually uses JavaScript but now that is not working when loaded with ajax.
 
@@ -168,9 +178,10 @@ If you theme's search function stops working or causes the page to reload, then 
 
 == Donations ==
 
-I have got to give a very special thanks to the people mentioned below who have offered their support with donations, let me also take the time to thank others who report problems, offer solutions and help debug the plugin. Your all helping wordpress to be a better blog/CMS.
+I have got to give a very special thanks to the people mentioned below who have offered their support with donations, let me also take the time to thank others who report problems, offer solutions and help debug the plugin. I really appreciate the excellent support and feedback :).
 
 * Travis Avery (travisavery)
+* AlohaThemes (http://alohathemes.com/)
 
 Please send your donations to:
 

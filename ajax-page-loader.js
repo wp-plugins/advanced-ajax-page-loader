@@ -1,6 +1,6 @@
 /*
 Plugin Name: Advanced AJAX Page Loader
-Version: 2.5.2
+Version: 2.5.3
 Plugin URI: http://software.resplace.net/WordPress/AjaxPageLoader.php
 Description: Load pages within blog without reloading page, shows loading bar and updates the browsers URL so that the user can bookmark or share the url as if they had loaded a page normally. Also updates there history so they have a track of there browsing habbits on your blog!
 Author URI: http://dean.resplace.net
@@ -24,7 +24,7 @@ $(document).ready(function() {
 
 window.onpopstate = function(event) {
 	//# links sets off onpopstate... lets make sure we ignore it ;)
-	if (startAjax === true && document.location.toString().indexOf('#') < 0) {
+	if (startAjax === true && AAPL_check_ignore(document.location.toString()) == true) {
 	
 		AAPL_loadPage(document.location.toString(),1);
 	}
@@ -33,7 +33,7 @@ window.onpopstate = function(event) {
 function AAPL_loadPageInit(scope){
 	$(scope+"a").click(function(event){
 		//if its not an admin url, or doesnt contain #
-		if (this.href.indexOf(AAPLhome) >= 0 && this.href.indexOf('/wp-') < 0 && this.href.indexOf('#') < 0){
+		if (this.href.indexOf(AAPLhome) >= 0 && AAPL_check_ignore(this.href) == true){
 			// stop default behaviour
 			event.preventDefault();
 
@@ -122,7 +122,7 @@ function AAPL_loadPage(url, push, getData){
 		
 		//start changing the page content.
 		$('#' + AAPL_content).fadeOut("slow", function() {
-			$('#' + AAPL_content).html('<center><p style="text-align: center !important;">Loading... Please Wait...</p><p style="text-align: center !important;"><img src="' + AAPLloadingIMG.attr('src') + '" border="0" alt="(Loading Animation)" title="Please Wait..." /></p></center>');
+			$('#' + AAPL_content).html(AAPL_loading_code);
 			$('#' + AAPL_content).fadeIn("slow", function() {
 				$.ajax({
 					type: "GET",
@@ -226,7 +226,7 @@ function AAPL_loadPage(url, push, getData){
 						//Would append this, but would not be good if this fired more than once!!
 						isWorking = false;
 						document.title = "Error loading requested page!";
-						$('#' + AAPL_content).html('<center><p style="text-align: center !important;"><b>Error!</b></p><p style="text-align: center !important;"><font color="red">There seems to be a problem, please click the link again.</font></p></center>');
+						$('#' + AAPL_content).html(AAPL_loading_error_code);
 					}
 				});
 			});
@@ -238,4 +238,14 @@ function submitSearch(param){
 	if (!isWorking){
 		AAPL_loadPage(searchAction, 0, param);
 	}
+}
+
+function AAPL_check_ignore(url) {
+	for (var i in AAPL_ignore) {
+		if (url.indexOf(AAPL_ignore[i]) >= 0) {
+			return false;
+		}
+	}
+	
+	return true;
 }
