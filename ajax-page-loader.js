@@ -1,6 +1,6 @@
 /*
 Plugin Name: Advanced AJAX Page Loader
-Version: 2.5.3
+Version: 2.5.4
 Plugin URI: http://software.resplace.net/WordPress/AjaxPageLoader.php
 Description: Load pages within blog without reloading page, shows loading bar and updates the browsers URL so that the user can bookmark or share the url as if they had loaded a page normally. Also updates there history so they have a track of there browsing habbits on your blog!
 Author URI: http://dean.resplace.net
@@ -14,6 +14,7 @@ var DocReadyReload = false;
 var isWorking = false;
 var startAjax = false;
 var searchAction = null;
+var ua = $.browser;
 
 
 //The holy grail...
@@ -23,9 +24,8 @@ $(document).ready(function() {
 
 
 window.onpopstate = function(event) {
-	//# links sets off onpopstate... lets make sure we ignore it ;)
-	if (startAjax === true && AAPL_check_ignore(document.location.toString()) == true) {
-	
+	//We now have a smart multi-ignore feature controlled by the admin panel
+	if (startAjax === true && AAPL_check_ignore(document.location.toString()) == true) {	
 		AAPL_loadPage(document.location.toString(),1);
 	}
 };
@@ -245,6 +245,14 @@ function AAPL_check_ignore(url) {
 		if (url.indexOf(AAPL_ignore[i]) >= 0) {
 			return false;
 		}
+	}
+	
+	//WHOA!! Lets fuck IE7 and IE8 off because they are fucking shite!
+	if ( ua.msie && (ua.version.slice(0,1) == "8" || ua.version.slice(0,1) == "7") ) {
+		if (AAPL_warnings == true) {
+			alert("Unfortunately there is a bug in IE7 and IE8 which affects the renderer, it's called the peakaboo bug. So we have disabled this plugin.");
+		}
+		return false;
 	}
 	
 	return true;

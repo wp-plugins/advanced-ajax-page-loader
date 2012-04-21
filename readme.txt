@@ -1,11 +1,11 @@
 === Advanced AJAX Page Loader ===
 Contributors: deano1987, HappyApple, snumb130, bbodine1
 Donate link: http://resplace.net
-Version: 2.5.3
+Version: 2.5.4
 Tags: ajax, posts, pages, page, post, loading, loader, no refresh, dynamic, jquery
 Requires at least: 2.0?
 Tested up to: 3.3.1
-Stable tag: 2.5.3
+Stable tag: 2.5.4
 
 AJAX Page Loader will load posts, pages, etc. without reloading entire page.
 
@@ -106,6 +106,8 @@ Many thanks to Luke Howell, author of the original plugin.
 * - You can also set the loading error HTML code.
 * - The href ignore has been extended and can now be changed in the admin panel.
 
+= 2.5.4 =
+* Plugin is disabled for IE7 and IE8 due to the peakaboo rendering bug in these versions.
 
 == Upgrade Notice ==
 
@@ -135,6 +137,9 @@ omg more back button fixes!
 
 = 2.5.3 =
 More editable features in the admin panel.
+
+= 2.5.4 =
+Plugin is disabled for IE7 and IE8 due to the peakaboo rendering bug in these versions.
 
 == Installation ==
 
