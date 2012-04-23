@@ -1,7 +1,7 @@
 <?php
 /*
 Plugin Name: Advanced AJAX Page Loader
-Version: 2.5.4
+Version: 2.5.5
 Plugin URI: http://software.resplace.net/WordPress/AjaxPageLoader.php
 Description: Load pages within blog without reloading page, shows loading bar and updates the browsers URL so that the user can bookmark or share the url as if they had loaded a page normally. Also updates there history so they have a track of there browsing habbits on your blog!
 Author URI: http://dean.resplace.net
@@ -79,6 +79,9 @@ if (is_admin()) {
 		
 		update_option('AAPL_upload_error', '');
 		update_option('AAPL_loading_img', AAPL_options_validate());
+		
+		//will this fix various problems? hope so.
+		install_AAPL();
 		
 		//upgrade checks :o
 		$AAPLupdate = false;
@@ -222,35 +225,35 @@ function insert_head_AAPL() {
 function install_AAPL() {
 	//This is called when the plugin is activated.
 	
-	if (get_option('AAPL_content_id') != '') {
+	if (strcmp(get_option('AAPL_content_id'), '') == 0) {
 		update_option('AAPL_content_id', 'content');
 	}
 	
-	if (get_option('AAPL_version') != '') {
+	if (strcmp(get_option('AAPL_version'), '') == 0) {
 		update_option('AAPL_version', AAPL_get_version());
 	}
 	
-	if (get_option('AAPL_loading_img') != '') {
-		update_option('AAPL_loading_img', 'Running Woman.gif');
+	if (strcmp(get_option('AAPL_loading_img'), '') == 0) {
+		update_option('AAPL_loading_img', 'WordPress Ball Spin.gif');
 	}
 	
-	if (get_option('AAPL_js_debug') != '') {
+	if (strcmp(get_option('AAPL_js_debug'), '') == 0) {
 		update_option('AAPL_js_debug', 'false');
 	}
 	
-	if (get_option('AAPL_sponsor') != '') {
+	if (strcmp(get_option('AAPL_sponsor'), '') == 0) {
 		update_option('AAPL_sponsor', 'false');
 	}
 	
-	if (get_option('AAPL_jquery_check') != '') {
+	if (strcmp(get_option('AAPL_jquery_check'), '') == 0) {
 		update_option('AAPL_jquery_check', 'true');
 	}
 	
-	if (get_option('AAPL_reload_code') != '') {
+	if (strcmp(get_option('AAPL_reload_code'), '') == 0) {
 		update_option('AAPL_reload_code', '');
 	}
 	
-	if (get_option('AAPL_loading_code') != '') {
+	if (strcmp(get_option('AAPL_loading_code'), '') == 0) {
 		$data = 
 			'<center>' . "\n\t" .
 				'<p style="text-align: center !important;">Loading... Please Wait...</p>' . "\n\t" .
@@ -261,7 +264,7 @@ function install_AAPL() {
 		update_option('AAPL_loading_code', $data);
 	}
 	
-	if (get_option('AAPL_loading_error_code') != '') {
+	if (strcmp(get_option('AAPL_loading_error_code'), '') == 0) {
 		$data = 
 			'<center>' . "\n\t" .
 				'<p style="text-align: center !important;">Error!</p>' . "\n\t" .
@@ -272,7 +275,7 @@ function install_AAPL() {
 		update_option('AAPL_loading_error_code', $data);
 	}
 	
-	if (get_option('AAPL_ignore_list') != '') {
+	if (strcmp(get_option('AAPL_ignore_list'), '') == 0) {
 		update_option('AAPL_ignore_list', "#, /wp-, .pdf, .zip, .rar");
 	}
 	

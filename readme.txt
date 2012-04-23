@@ -1,11 +1,11 @@
 === Advanced AJAX Page Loader ===
 Contributors: deano1987, HappyApple, snumb130, bbodine1
 Donate link: http://resplace.net
-Version: 2.5.4
+Version: 2.5.5
 Tags: ajax, posts, pages, page, post, loading, loader, no refresh, dynamic, jquery
 Requires at least: 2.0?
 Tested up to: 3.3.1
-Stable tag: 2.5.4
+Stable tag: 2.5.5
 
 AJAX Page Loader will load posts, pages, etc. without reloading entire page.
 
@@ -109,6 +109,13 @@ Many thanks to Luke Howell, author of the original plugin.
 = 2.5.4 =
 * Plugin is disabled for IE7 and IE8 due to the peakaboo rendering bug in these versions.
 
+= 2.5.5 =
+* IE7 / IE8 issue resolved and was caused by jQuery : http://dean.resplace.net/blog/2012/04/ajax-loaded-content-not-visible-in-ie7-ie8-with-jquery/
+* Now using .on() to attatch click events.
+* Page titles are now not so messed up - but are still a problem :s
+* Leaving any field plank in the admin panel should now cause the default settings to load (useful when upgrading and there are new options).
+* Added some new loading animations (using WordPress logos)
+
 == Upgrade Notice ==
 
 = 2.3.0 = 
@@ -140,6 +147,9 @@ More editable features in the admin panel.
 
 = 2.5.4 =
 Plugin is disabled for IE7 and IE8 due to the peakaboo rendering bug in these versions.
+
+= 2.5.5 =
+IE7/8 bug now fixed and plugin works again in these browsers, also people having trouble with errors after updating should not anymore.
 
 == Installation ==
 

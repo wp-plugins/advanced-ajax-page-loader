@@ -10,20 +10,32 @@ if (get_option('AAPL_upload_error')) {
 <div class="wrap">
 	<h2>Advanced Ajax Page Loader</h2>
 	
-	<div style="border:1px solid #720921;color:#720921; background-color:#f9dbe1 ;padding:5px;margin-top:10px;margin-bottom:20px;">
-		<div style="float:right">
-			<form action="https://www.paypal.com/cgi-bin/webscr" method="post">
-				<input type="hidden" name="cmd" value="_s-xclick">
-				<input type="hidden" name="hosted_button_id" value="3P6VT6B5EBVCA">
-				<input type="image" src="https://www.paypalobjects.com/en_US/GB/i/btn/btn_donateCC_LG.gif" border="0" name="submit" alt="PayPal — The safer, easier way to pay online.">
-				<img alt="" border="0" src="https://www.paypalobjects.com/en_GB/i/scr/pixel.gif" width="1" height="1">
-			</form>
-		</div>
-		I'm working really hard to provide extremely useful functionality for this plugin, over the coming months this plugin will be packed with more and more features to make your life easier!
-		<br>
-		If your using this on your site and it has saved you time/money and/or just made your site FREAKIN AWESOME, or you are using this plugin in a commercial project, think about the time and
-		effort put into this plugin for free so that life is easier for you, <b>consider a donation!</b>
-	</div>
+	<table cellpadding="0" cellspacing="5px">
+		<tr>
+			<td valign="middle">
+				<div style="border:1px solid #720921;color:#720921; background-color:#f9dbe1 ;padding:10px;">
+					<div style="float:right">
+						<form action="https://www.paypal.com/cgi-bin/webscr" method="post">
+							<input type="hidden" name="cmd" value="_s-xclick">
+							<input type="hidden" name="hosted_button_id" value="3P6VT6B5EBVCA">
+							<input type="image" src="https://www.paypalobjects.com/en_US/GB/i/btn/btn_donateCC_LG.gif" border="0" name="submit" alt="PayPal — The safer, easier way to pay online.">
+							<img alt="" border="0" src="https://www.paypalobjects.com/en_GB/i/scr/pixel.gif" width="1" height="1">
+						</form>
+					</div>
+					I'm working really hard to provide extremely useful functionality for this plugin, over the coming months this plugin will be packed with more and more features to make your life easier!
+					<br>
+					If your using this on your site and it has saved you time/money and/or just made your site FREAKIN AWESOME, or you are using this plugin in a commercial project, think about the time and
+					effort put into this plugin for free so that life is easier for you, <b>consider a donation!</b>
+					<div style="clear:right"></div>
+				</div>
+			</td>
+			<td style="float:left;padding:10px;background-color:#87d6da">
+				<a href="https://www.e-junkie.com/ecom/gb.php?cl=66209&c=ib&aff=210604" target="ejejcsingle"><img src="http://alohathemes.com/wp-content/themes/reverb-aloha/images/logo.png" alt="Aloha Themes" title="Wordpress Themes" /></a>
+				<br>
+				<center><a href="https://www.e-junkie.com/ecom/gb.php?cl=66209&c=ib&aff=210604" target="ejejcsingle" style="color:black; text-decoration:none">Great themes for WordPress.</a></center>
+			</td>
+		</tr>
+	</table>
 
 	<form method="post" action="options.php" enctype="multipart/form-data">
 		<?php wp_nonce_field('update-options'); ?>

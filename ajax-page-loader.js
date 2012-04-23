@@ -1,6 +1,6 @@
 /*
 Plugin Name: Advanced AJAX Page Loader
-Version: 2.5.4
+Version: 2.5.5
 Plugin URI: http://software.resplace.net/WordPress/AjaxPageLoader.php
 Description: Load pages within blog without reloading page, shows loading bar and updates the browsers URL so that the user can bookmark or share the url as if they had loaded a page normally. Also updates there history so they have a track of there browsing habbits on your blog!
 Author URI: http://dean.resplace.net
@@ -31,7 +31,7 @@ window.onpopstate = function(event) {
 };
 
 function AAPL_loadPageInit(scope){
-	$(scope+"a").click(function(event){
+	$(scope+"a").on("click", function(event){
 		//if its not an admin url, or doesnt contain #
 		if (this.href.indexOf(AAPLhome) >= 0 && AAPL_check_ignore(this.href) == true){
 			// stop default behaviour
@@ -122,13 +122,18 @@ function AAPL_loadPage(url, push, getData){
 		
 		//start changing the page content.
 		$('#' + AAPL_content).fadeOut("slow", function() {
-			$('#' + AAPL_content).html(AAPL_loading_code);
+			//See the below - NEVER TRUST jQuery to sort ALL your problems - this breaks Ie7 + 8 :o
+			//$('#' + AAPL_content).html(AAPL_loading_code);
+			
+			//Nothing like good old pure JavaScript...
+			document.getElementById(AAPL_content).innerHTML = AAPL_loading_code;
+			
 			$('#' + AAPL_content).fadeIn("slow", function() {
 				$.ajax({
 					type: "GET",
 					url: url,
 					data: getData,
-					cache: true,
+					cache: false,
 					dataType: "html",
 					success: function(data) {
 						isWorking = false;
@@ -142,7 +147,7 @@ function AAPL_loadPage(url, push, getData){
 							
 							//set the title?
 							//TODO: this still doesnt set the title in the history list (atleast in chrome...) more research required here.
-							document.title =  $('<div>').text(titles).html();
+							document.title = titles;
 						} else {
 							if (AAPL_warnings == true) {
 								alert("You seem to have more than one <title> tag on the page, this is going to cause some major problems so page title changing is disabled.");
@@ -172,7 +177,12 @@ function AAPL_loadPage(url, push, getData){
 						}
 
 						//put the resulting html back into the page!
-						$('#' + AAPL_content).html(output);
+						
+						//See the below - NEVER TRUST jQuery to sort ALL your problems - this breaks Ie7 + 8 :o
+						//$('#' + AAPL_content).html(output);
+						
+						//Nothing like good old pure JavaScript...
+						document.getElementById(AAPL_content).innerHTML = output;
 
 						//move content area so we cant see it.
 						$('#' + AAPL_content).css("position", "absolute");
@@ -226,7 +236,11 @@ function AAPL_loadPage(url, push, getData){
 						//Would append this, but would not be good if this fired more than once!!
 						isWorking = false;
 						document.title = "Error loading requested page!";
-						$('#' + AAPL_content).html(AAPL_loading_error_code);
+						//See the below - NEVER TRUST jQuery to sort ALL your problems - this breaks Ie7 + 8 :o
+						//$('#' + AAPL_content).html(AAPL_loading_error_code);
+						
+						//Nothing like good old pure JavaScript...
+						document.getElementById(AAPL_content).innerHTML = AAPL_loading_error_code;
 					}
 				});
 			});
@@ -248,12 +262,15 @@ function AAPL_check_ignore(url) {
 	}
 	
 	//WHOA!! Lets fuck IE7 and IE8 off because they are fucking shite!
-	if ( ua.msie && (ua.version.slice(0,1) == "8" || ua.version.slice(0,1) == "7") ) {
-		if (AAPL_warnings == true) {
-			alert("Unfortunately there is a bug in IE7 and IE8 which affects the renderer, it's called the peakaboo bug. So we have disabled this plugin.");
+		//No I'm corrected, it may be IE's fault also but it's definately jQuery fault I've had this fucking nightmare!!
+		/*
+		if ( ua.msie && (ua.version.slice(0,1) == "8" || ua.version.slice(0,1) == "7") ) {
+			if (AAPL_warnings == true) {
+				alert("Unfortunately there is a bug in IE7 and IE8 which affects the renderer, it's called the peakaboo bug. So we have disabled this plugin.");
+			}
+			return false;
 		}
-		return false;
-	}
+		*/
 	
 	return true;
 }
