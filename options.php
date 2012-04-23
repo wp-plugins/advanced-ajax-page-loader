@@ -45,7 +45,17 @@ if (get_option('AAPL_upload_error')) {
 
 			<tr valign="top">
 				<th scope="row">Content Element ID:</th>
-				<td><input type="text" name="AAPL_content_id" value="<?php echo get_option('AAPL_content_id'); ?>" style="width:200px;" /></td>
+				<td>
+					<input type="text" name="AAPL_content_id" value="<?php echo get_option('AAPL_content_id'); ?>" style="width:200px;" /><br>
+					<i>For most themes this should not need to be changed, however if it does you need to find the container which wraps around the page content (not including any menu bars (vertical and/or horizontal), this container might already have an ID attribute, ie: "&lt;div id=""&gt;&lt;/div&gt;" or you may need to assign one.</i>
+				</td>
+			</tr>
+
+			<tr valign="top">
+				<th scope="row">Search Form CLASS:</th>
+				<td><input type="text" name="AAPL_search_class" value="<?php echo get_option('AAPL_search_class'); ?>" style="width:200px;" /><br>
+				<i>This plugin automatically binds to the search form with an attribute ID "searchform", but if this is not set for your theme or you have multiple search forms then you will need to set class to each form that is for searching, ie: "&lt;form class='searchform'&gt;".</i>
+				</td>
 			</tr>
 			
 			<tr valign="top">
@@ -130,11 +140,19 @@ if (get_option('AAPL_upload_error')) {
 			</tr>
 			
 			<tr valign="top">
+				<th scope="row">Google Analytics</th>
+				<td>
+					<input id="AAPL_track_analytics" type="checkbox" name="AAPL_track_analytics" value="true" <?php if (strcmp(get_option('AAPL_track_analytics'), "true")==0) { echo ' CHECKED="CHECKED" ';} ?> /><label for="AAPL_track_analytics">Enable Google Analytics Tracking.</label><br>
+					<i>This will only apply the tracking code when you AJAX between pages, so you will need to still include the main tracking code either by hand or using a <a href="http://wordpress.org/extend/plugins/google-analytics-for-wordpress/" target="_blank">Google Analytics plugin</a></i>
+				</td>
+			</tr>
+			
+			<tr valign="top">
 				<th scope="row">Plugin Debug</th>
 				<td>
 					Fiddle with these options if your having problems...<br><br>
 					<input id="AAPL_js_debug" type="checkbox" name="AAPL_js_debug" value="true" <?php if (strcmp(get_option('AAPL_js_debug'), "true")==0) { echo ' CHECKED="CHECKED" ';} ?> /><label for="AAPL_js_debug">Enable JavaScript Debug Messages.</label><br>
-					<input id="AAPL_jquery_check" type="checkbox" name="AAPL_jquery_check" value="true" <?php if (strcmp(get_option('AAPL_jquery_check'), "true")==0) { echo ' CHECKED="CHECKED" ';} ?> /><label for="AAPL_js_debug">Enable jQuery check.</label>
+					<input id="AAPL_jquery_check" type="checkbox" name="AAPL_jquery_check" value="true" <?php if (strcmp(get_option('AAPL_jquery_check'), "true")==0) { echo ' CHECKED="CHECKED" ';} ?> /><label for="AAPL_jquery_check">Enable jQuery check.</label>
 				</td>
 			</tr>
 			
@@ -142,7 +160,7 @@ if (get_option('AAPL_upload_error')) {
 				<th scope="row">Link to us</th>
 				<td>
 					Show your support for AAPL and link back to us :)<br><br>
-					<input id="AAPL_sponsor" type="checkbox" name="AAPL_sponsor" value="true" <?php if (strcmp(get_option('AAPL_sponsor'), "true")==0) { echo ' CHECKED="CHECKED" ';} ?> /><label for="AAPL_js_debug">Enable footer link.</label><br>
+					<input id="AAPL_sponsor" type="checkbox" name="AAPL_sponsor" value="true" <?php if (strcmp(get_option('AAPL_sponsor'), "true")==0) { echo ' CHECKED="CHECKED" ';} ?> /><label for="AAPL_sponsor">Enable footer link.</label><br>
 					</td>
 			</tr>
 

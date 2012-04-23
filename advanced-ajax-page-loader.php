@@ -1,7 +1,7 @@
 <?php
 /*
 Plugin Name: Advanced AJAX Page Loader
-Version: 2.5.5
+Version: 2.5.6
 Plugin URI: http://software.resplace.net/WordPress/AjaxPageLoader.php
 Description: Load pages within blog without reloading page, shows loading bar and updates the browsers URL so that the user can bookmark or share the url as if they had loaded a page normally. Also updates there history so they have a track of there browsing habbits on your blog!
 Author URI: http://dean.resplace.net
@@ -56,15 +56,18 @@ if (is_admin()) {
 		register_setting('AAPL', 'AAPL_upload_error');
 		register_setting('AAPL', 'AAPL_version');
 		register_setting('AAPL', 'AAPL_content_id');
+		register_setting('AAPL', 'AAPL_search_class');
 		register_setting('AAPL', 'AAPL_loading_img');
 		register_setting('AAPL', 'AAPL_reload_code');
 		register_setting('AAPL', 'AAPL_ignore_list');
 		register_setting('AAPL', 'AAPL_loading_code');
 		register_setting('AAPL', 'AAPL_loading_error_code');
 		
+		
 		register_setting('AAPL', 'AAPL_sponsor');
 		register_setting('AAPL', 'AAPL_js_debug');
 		register_setting('AAPL', 'AAPL_jquery_check');
+		register_setting('AAPL', 'AAPL_track_analytics');
 		
 		//Update all tick box's that are unchecked
 		if (get_option('AAPL_sponsor') == '') {
@@ -75,6 +78,9 @@ if (is_admin()) {
 		}
 		if (get_option('AAPL_jquery_check') == '') {
 			update_option('AAPL_jquery_check', 'false');
+		}
+		if (get_option('AAPL_track_analytics') == '') {
+			update_option('AAPL_track_analytics', 'false');
 		}
 		
 		update_option('AAPL_upload_error', '');
@@ -169,9 +175,15 @@ function insert_head_AAPL() {
 		//Content ID
 		var AAPL_content = '<?php echo get_option('AAPL_content_id'); ?>';
 		
+		//Search Class
+		var AAPL_search_class = '<?php echo get_option('AAPL_search_class'); ?>';
+		
 		//Ignore List - this is for travisavery who likes my comments... you ready?... I didn't ignore your mom last night... BOOM! ... Childish as fuck...
 		var AAPL_ignore_string = new String('<?php echo get_option('AAPL_ignore_list'); ?>'); 
 		var AAPL_ignore = AAPL_ignore_string.split(', ');
+		
+		//Shall we take care of analytics?
+		var AAPL_track_analytics = <?php echo get_option('AAPL_track_analytics'); ?>
 		
 		//Maybe the script is being a twat...
 		var AAPL_warnings = <?php echo get_option('AAPL_js_debug'); ?>;
@@ -229,6 +241,10 @@ function install_AAPL() {
 		update_option('AAPL_content_id', 'content');
 	}
 	
+	if (strcmp(get_option('AAPL_search_class'), '') == 0) {
+		update_option('AAPL_search_class', 'searchform');
+	}
+	
 	if (strcmp(get_option('AAPL_version'), '') == 0) {
 		update_option('AAPL_version', AAPL_get_version());
 	}
@@ -247,6 +263,10 @@ function install_AAPL() {
 	
 	if (strcmp(get_option('AAPL_jquery_check'), '') == 0) {
 		update_option('AAPL_jquery_check', 'true');
+	}
+	
+	if (strcmp(get_option('AAPL_track_analytics'), '') == 0) {
+		update_option('AAPL_track_analytics', 'false');
 	}
 	
 	if (strcmp(get_option('AAPL_reload_code'), '') == 0) {

@@ -1,6 +1,6 @@
 /*
 Plugin Name: Advanced AJAX Page Loader
-Version: 2.5.5
+Version: 2.5.6
 Plugin URI: http://software.resplace.net/WordPress/AjaxPageLoader.php
 Description: Load pages within blog without reloading page, shows loading bar and updates the browsers URL so that the user can bookmark or share the url as if they had loaded a page normally. Also updates there history so they have a track of there browsing habbits on your blog!
 Author URI: http://dean.resplace.net
@@ -8,30 +8,37 @@ Author: Dean Williams
 */
 
 //Set this to true if your getting some javascript problems
-var DocReadyReload = false;
+var AAPL_reloadDocumentReady = false;
 
 //Dont mess with these...
-var isWorking = false;
-var startAjax = false;
-var searchAction = null;
-var ua = $.browser;
+var AAPL_isLoad = false;
+var AAPL_started = false;
+var AAPL_searchPath = null;
+var AAPL_ua = $.browser;
 
 
 //The holy grail...
 $(document).ready(function() {
+	if (AAPL_warnings == true) {
+		AAPL_jqVersion = $().jquery;
+		if (AAPL_jqVersion.substr(0,3) != "1.7") {
+			alert("cmon guys, your jQuery version is outdated, please update it - I can see version: " + AAPL_jqVersion);
+		}
+	}
+	
 	AAPL_loadPageInit("");
 });
 
 
 window.onpopstate = function(event) {
 	//We now have a smart multi-ignore feature controlled by the admin panel
-	if (startAjax === true && AAPL_check_ignore(document.location.toString()) == true) {	
+	if (AAPL_started === true && AAPL_check_ignore(document.location.toString()) == true) {	
 		AAPL_loadPage(document.location.toString(),1);
 	}
 };
 
 function AAPL_loadPageInit(scope){
-	$(scope+"a").on("click", function(event){
+	$(scope + "a").on("click", function(event) {
 		//if its not an admin url, or doesnt contain #
 		if (this.href.indexOf(AAPLhome) >= 0 && AAPL_check_ignore(this.href) == true){
 			// stop default behaviour
@@ -67,15 +74,36 @@ function AAPL_loadPageInit(scope){
 			AAPL_loadPage(this.href);
 		}
 	});
+	
+	$('.' + AAPL_search_class).each(function(index) {
+		if ($(this).attr("action")) {
+			//Get the current action so we know where to submit to
+			AAPL_searchPath = $(this).attr("action");
+
+			//bind our code to search submit, now we can load everything through ajax :)
+			//$('#searchform').name = 'searchform';
+			$(this).submit(function() {
+				submitSearch($(this).serialize());
+				return false;
+			});
+		} else {
+			if (AAPL_warnings == true) {
+				alert("Search form found but attribute 'action' missing!?!?!");
+			}
+		}
+	});
   
 	if (scope == "") { 
 		if ($('#searchform').attr("action")) {
 			//Get the current action so we know where to submit to
-			searchAction = $('#searchform').attr("action");
+			AAPL_searchPath = $('#searchform').attr("action");
 
 			//bind our code to search submit, now we can load everything through ajax :)
-			$('#searchform').name = 'searchform';
-			$('#searchform').attr("action", "javascript:submitSearch('s='+document.getElementById('s').value)");
+			//$('#searchform').name = 'searchform';
+			$('#searchform').submit(function() {
+				submitSearch($(this).serialize());
+				return false;
+			});
 		} else {
 			if (AAPL_warnings == true) {
 				alert("Could not bind to search form...\nCould not find element with id='searchform' or attribute 'action' missing.");
@@ -86,12 +114,12 @@ function AAPL_loadPageInit(scope){
 
 function AAPL_loadPage(url, push, getData){
 
-	if (!isWorking){
+	if (!AAPL_isLoad){
 		scroll(0,0);
-		isWorking = true;
+		AAPL_isLoad = true;
 		
 		//enable onpopstate
-		startAjax = true;
+		AAPL_started = true;
 		
 		//AJAX Load page and update address bar url! :)
 		//get domain name...
@@ -136,7 +164,8 @@ function AAPL_loadPage(url, push, getData){
 					cache: false,
 					dataType: "html",
 					success: function(data) {
-						isWorking = false;
+						AAPL_isLoad = false;
+						
 						//get title attribute
 						datax = data.split('<title>');
 						titlesx = data.split('</title>');
@@ -151,6 +180,22 @@ function AAPL_loadPage(url, push, getData){
 						} else {
 							if (AAPL_warnings == true) {
 								alert("You seem to have more than one <title> tag on the page, this is going to cause some major problems so page title changing is disabled.");
+							}
+						}
+						
+						//Google analytics?
+						if (AAPL_track_analytics == true) {
+							if(typeof _gaq != "undefined") {
+								if (typeof getData == "undefined") {
+									getData = "";
+								} else {
+									getData = "?" + getData;
+								}
+								_gaq.push(['_trackPageview', path + getData]);
+							} else {
+								if (AAPL_warnings == true) {
+									alert("Analytics does not seem to be initialized! Could not track this page.");
+								}
 							}
 						}
 						
@@ -194,7 +239,7 @@ function AAPL_loadPage(url, push, getData){
 						//recall loader so that new URLS are captured.
 						AAPL_loadPageInit("#" + AAPL_content + " ");
 						
-						if (DocReadyReload == true) {
+						if (AAPL_reloadDocumentReady == true) {
 							$(document).trigger("ready");
 						}
 						
@@ -234,7 +279,7 @@ function AAPL_loadPage(url, push, getData){
 					},
 					error: function(jqXHR, textStatus, errorThrown) {
 						//Would append this, but would not be good if this fired more than once!!
-						isWorking = false;
+						AAPL_isLoad = false;
 						document.title = "Error loading requested page!";
 						//See the below - NEVER TRUST jQuery to sort ALL your problems - this breaks Ie7 + 8 :o
 						//$('#' + AAPL_content).html(AAPL_loading_error_code);
@@ -249,8 +294,8 @@ function AAPL_loadPage(url, push, getData){
 }
 
 function submitSearch(param){
-	if (!isWorking){
-		AAPL_loadPage(searchAction, 0, param);
+	if (!AAPL_isLoad){
+		AAPL_loadPage(AAPL_searchPath, 0, param);
 	}
 }
 
@@ -264,7 +309,7 @@ function AAPL_check_ignore(url) {
 	//WHOA!! Lets fuck IE7 and IE8 off because they are fucking shite!
 		//No I'm corrected, it may be IE's fault also but it's definately jQuery fault I've had this fucking nightmare!!
 		/*
-		if ( ua.msie && (ua.version.slice(0,1) == "8" || ua.version.slice(0,1) == "7") ) {
+		if ( AAPL_ua.msie && (AAPL_ua.version.slice(0,1) == "8" || AAPL_ua.version.slice(0,1) == "7") ) {
 			if (AAPL_warnings == true) {
 				alert("Unfortunately there is a bug in IE7 and IE8 which affects the renderer, it's called the peakaboo bug. So we have disabled this plugin.");
 			}
