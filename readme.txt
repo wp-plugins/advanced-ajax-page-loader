@@ -1,11 +1,11 @@
 === Advanced AJAX Page Loader ===
 Contributors: deano1987, HappyApple, snumb130, bbodine1
 Donate link: http://resplace.net
-Version: 2.5.7
+Version: 2.5.8
 Tags: ajax, posts, pages, page, post, loading, loader, no refresh, dynamic, jquery
 Requires at least: 2.0?
 Tested up to: 3.3.1
-Stable tag: 2.5.7
+Stable tag: 2.5.8
 
 AJAX Page Loader will load posts, pages, etc. without reloading entire page.
 
@@ -24,6 +24,9 @@ Many thanks to Luke Howell, author of the original plugin.
 
 
 == Changelog ==
+
+= 2.5.8 =
+* Reverted the .on() back to .click() - some people reported problems where their other plguins were calling jQuery 1.5 and AAPL was failing because it needed 1.7 minimum, now 1.5 will work again.
 
 = 2.5.7 =
 * Reversed the changelog and upgrade notice list so that the latest changes are at the top (thanks for the tip christianebuddy).
