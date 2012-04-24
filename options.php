@@ -10,7 +10,7 @@ if (get_option('AAPL_upload_error')) {
 <div class="wrap">
 	<h2>Advanced Ajax Page Loader</h2>
 	
-	<table cellpadding="0" cellspacing="5px">
+	<table cellpadding="0" cellspacing="5px" style="font-size:13px;">
 		<tr>
 			<td valign="middle">
 				<div style="border:1px solid #720921;color:#720921; background-color:#f9dbe1 ;padding:10px;">
@@ -22,11 +22,16 @@ if (get_option('AAPL_upload_error')) {
 							<img alt="" border="0" src="https://www.paypalobjects.com/en_GB/i/scr/pixel.gif" width="1" height="1">
 						</form>
 					</div>
-					I'm working really hard to provide extremely useful functionality for this plugin, over the coming months this plugin will be packed with more and more features to make your life easier!
-					<br>
 					If your using this on your site and it has saved you time/money and/or just made your site FREAKIN AWESOME, or you are using this plugin in a commercial project, think about the time and
 					effort put into this plugin for free so that life is easier for you, <b>consider a donation!</b>
 					<div style="clear:right"></div>
+				</div>
+				
+				<div style="margin-top:5px;text-align: left;background-color: #BFFF8F;border: 1px dashed #77DF29;padding: 2px;margin-bottom: 8px;">
+					<div style="float:right;color:#58BF0B"><b>From as little as &pound;12</b></div>
+					<b>Need this script installing/modifying?</b><br>
+					We can install this script and integrate it into your website for a small fee, or make modifications/add new features that you require.<br>
+					<a href="http://dean.resplace.net/freelance/quote/?script=AAPL" target="_blank" title="script install modification services from as little as &pound;12">Ask for a quote</a>.
 				</div>
 			</td>
 			<td style="float:left;padding:10px;background-color:#87d6da">
@@ -36,6 +41,7 @@ if (get_option('AAPL_upload_error')) {
 			</td>
 		</tr>
 	</table>
+	
 
 	<form method="post" action="options.php" enctype="multipart/form-data">
 		<?php wp_nonce_field('update-options'); ?>
@@ -105,7 +111,7 @@ if (get_option('AAPL_upload_error')) {
 					Here you can change the HTML of the loading content, there are some special tags you can use:<br>
 					<i>{loader} - the loader image as defined above.</i>
 					<br><br>
-					<textarea name="AAPL_loading_code" style="width:100%;height:180px"><?php echo get_option('AAPL_loading_code'); ?></textarea>
+					<textarea name="AAPL_loading_code" style="width:100%;height:140px"><?php echo get_option('AAPL_loading_code'); ?></textarea>
 				</td>
 			</tr>
 			
@@ -115,17 +121,31 @@ if (get_option('AAPL_upload_error')) {
 					Here you can change the HTML of the loading content when an error occurs, there are some special tags you can use:<br>
 					<i>{loader} - the loader image as defined above.</i>
 					<br><br>
-					<textarea name="AAPL_loading_error_code" style="width:100%;height:180px"><?php echo get_option('AAPL_loading_error_code'); ?></textarea>
+					<textarea name="AAPL_loading_error_code" style="width:100%;height:140px"><?php echo get_option('AAPL_loading_error_code'); ?></textarea>
 				</td>
 			</tr>
 			
 			<tr valign="top">
 				<th scope="row">Reload Code</th>
 				<td>
-					Drop any reload code you need below, if you need any help with this then please refer to the '<a href="http://software.resplace.net/WordPress/AjaxPageLoader.php" target="_blank">useful reload codes</a>', or <a href="http://wordpress.org/extend/plugins/advanced-ajax-page-loader/" target="_blank">ask for help on the WordPress forum</a>.<br>
+					<b><a href="http://software.resplace.net/WordPress/AjaxPageLoader.php" target="_blank">Useful reload codes</a>.</b><br>
+					Drop any reload code you need below, if you need any help with this then <a href="http://wordpress.org/extend/plugins/advanced-ajax-page-loader/" target="_blank">ask for help on the WordPress forum</a>.<br>
 					<i>Make sure function AAPL_reload_code() { } isnt around the code (if you upgraded from 2.5.0)</i>
 					<br><br>
-					<textarea name="AAPL_reload_code" style="width:100%;height:250px"><?php echo get_option('AAPL_reload_code'); ?></textarea>
+					<textarea name="AAPL_reload_code" style="width:100%;height:250px"><?php echo get_option('AAPL_reload_code'); ?></textarea><br>
+					<b>jQuery tip:</b> replace all '$' to 'jQuery'.
+				</td>
+			</tr>
+			
+			<tr valign="top">
+				<th scope="row">Click Code</th>
+				<td>
+					<b><a href="http://software.resplace.net/WordPress/AjaxPageLoader.php" target="_blank">Useful click codes</a>.</b><br>
+					This is a special code block for code needed to be hooked directly to the element interacted, for example if you need to change the class of a menu item that was clicked, if you need any help with this then <a href="http://wordpress.org/extend/plugins/advanced-ajax-page-loader/" target="_blank">ask for help on the WordPress forum</a>.<br>
+					<i>You can access the clicked element using "thiss." or "jQuery(thiss)"</i>
+					<br><br>
+					<textarea name="AAPL_click_code" style="width:100%;height:250px"><?php echo get_option('AAPL_click_code'); ?></textarea><br>
+					<b>jQuery tip:</b> replace all '$' to 'jQuery'.
 				</td>
 			</tr>
 			

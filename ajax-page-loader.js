@@ -1,6 +1,6 @@
 /*
 Plugin Name: Advanced AJAX Page Loader
-Version: 2.5.6
+Version: 2.5.7
 Plugin URI: http://software.resplace.net/WordPress/AjaxPageLoader.php
 Description: Load pages within blog without reloading page, shows loading bar and updates the browsers URL so that the user can bookmark or share the url as if they had loaded a page normally. Also updates there history so they have a track of there browsing habbits on your blog!
 Author URI: http://dean.resplace.net
@@ -14,13 +14,13 @@ var AAPL_reloadDocumentReady = false;
 var AAPL_isLoad = false;
 var AAPL_started = false;
 var AAPL_searchPath = null;
-var AAPL_ua = $.browser;
+var AAPL_ua = jQuery.browser;
 
 
 //The holy grail...
-$(document).ready(function() {
+jQuery(document).ready(function() {
 	if (AAPL_warnings == true) {
-		AAPL_jqVersion = $().jquery;
+		AAPL_jqVersion = jQuery().jquery;
 		if (AAPL_jqVersion.substr(0,3) != "1.7") {
 			alert("cmon guys, your jQuery version is outdated, please update it - I can see version: " + AAPL_jqVersion);
 		}
@@ -38,7 +38,7 @@ window.onpopstate = function(event) {
 };
 
 function AAPL_loadPageInit(scope){
-	$(scope + "a").on("click", function(event) {
+	jQuery(scope + "a").on("click", function(event) {
 		//if its not an admin url, or doesnt contain #
 		if (this.href.indexOf(AAPLhome) >= 0 && AAPL_check_ignore(this.href) == true){
 			// stop default behaviour
@@ -53,37 +53,23 @@ function AAPL_loadPageInit(scope){
 			// get rel attribute for image groups
 			var group = this.rel || false;
 
-			// highlight the current menu item
-			$('ul.menu li').each(function() {
-				$(this).removeClass('current-menu-item');
-			});
-			$(this).parents('li').addClass('current-menu-item');
-			
-			
-			//menu item changer if your using "Suffusion" theme
-			/*
-			$('ul.sf-menu li').each(function() {
-				$(this).removeClass('current_page_item');
-				$(this).find('a').removeClass('current');
-			});
-			$(this).parents('li').addClass('current_page_item');
-			$('li.current_page_item a').addClass('current');
-			*/
+			//Load click code - pass reference.
+			AAPL_click_code(this);
 
 			// display the box for the elements href
 			AAPL_loadPage(this.href);
 		}
 	});
 	
-	$('.' + AAPL_search_class).each(function(index) {
-		if ($(this).attr("action")) {
+	jQuery('.' + AAPL_search_class).each(function(index) {
+		if (jQuery(this).attr("action")) {
 			//Get the current action so we know where to submit to
-			AAPL_searchPath = $(this).attr("action");
+			AAPL_searchPath = jQuery(this).attr("action");
 
 			//bind our code to search submit, now we can load everything through ajax :)
-			//$('#searchform').name = 'searchform';
-			$(this).submit(function() {
-				submitSearch($(this).serialize());
+			//jQuery('#searchform').name = 'searchform';
+			jQuery(this).submit(function() {
+				submitSearch(jQuery(this).serialize());
 				return false;
 			});
 		} else {
@@ -94,14 +80,14 @@ function AAPL_loadPageInit(scope){
 	});
   
 	if (scope == "") { 
-		if ($('#searchform').attr("action")) {
+		if (jQuery('#searchform').attr("action")) {
 			//Get the current action so we know where to submit to
-			AAPL_searchPath = $('#searchform').attr("action");
+			AAPL_searchPath = jQuery('#searchform').attr("action");
 
 			//bind our code to search submit, now we can load everything through ajax :)
-			//$('#searchform').name = 'searchform';
-			$('#searchform').submit(function() {
-				submitSearch($(this).serialize());
+			//jQuery('#searchform').name = 'searchform';
+			jQuery('#searchform').submit(function() {
+				submitSearch(jQuery(this).serialize());
 				return false;
 			});
 		} else {
@@ -141,7 +127,7 @@ function AAPL_loadPage(url, push, getData){
 			}
 		}
 		
-		if (!$('#' + AAPL_content)) {
+		if (!jQuery('#' + AAPL_content)) {
 			if (AAPL_warnings == true) {
 				alert("Could not find content region, you need to set an ID to an element that surrounds the content on the page, make sure the 'content' variable is also set to the ID name.");
 				return false;
@@ -149,15 +135,15 @@ function AAPL_loadPage(url, push, getData){
 		}
 		
 		//start changing the page content.
-		$('#' + AAPL_content).fadeOut("slow", function() {
+		jQuery('#' + AAPL_content).fadeOut("slow", function() {
 			//See the below - NEVER TRUST jQuery to sort ALL your problems - this breaks Ie7 + 8 :o
-			//$('#' + AAPL_content).html(AAPL_loading_code);
+			//jQuery('#' + AAPL_content).html(AAPL_loading_code);
 			
 			//Nothing like good old pure JavaScript...
 			document.getElementById(AAPL_content).innerHTML = AAPL_loading_code;
 			
-			$('#' + AAPL_content).fadeIn("slow", function() {
-				$.ajax({
+			jQuery('#' + AAPL_content).fadeIn("slow", function() {
+				jQuery.ajax({
 					type: "GET",
 					url: url,
 					data: getData,
@@ -224,49 +210,37 @@ function AAPL_loadPage(url, push, getData){
 						//put the resulting html back into the page!
 						
 						//See the below - NEVER TRUST jQuery to sort ALL your problems - this breaks Ie7 + 8 :o
-						//$('#' + AAPL_content).html(output);
+						//jQuery('#' + AAPL_content).html(output);
 						
 						//Nothing like good old pure JavaScript...
 						document.getElementById(AAPL_content).innerHTML = output;
 
 						//move content area so we cant see it.
-						$('#' + AAPL_content).css("position", "absolute");
-						$('#' + AAPL_content).css("left", "20000px");
+						jQuery('#' + AAPL_content).css("position", "absolute");
+						jQuery('#' + AAPL_content).css("left", "20000px");
 
 						//show the content area
-						$('#' + AAPL_content).show();
+						jQuery('#' + AAPL_content).show();
 
 						//recall loader so that new URLS are captured.
 						AAPL_loadPageInit("#" + AAPL_content + " ");
 						
 						if (AAPL_reloadDocumentReady == true) {
-							$(document).trigger("ready");
+							jQuery(document).trigger("ready");
 						}
 						
 						///////////////////////////////////////////
 						//  WE HAVE AN ADMIN PAGE NOW - GO THERE //
 						///////////////////////////////////////////
 						
-						AAPL_reload_code();		
-						
-						//How to re-call the jScrollPane...
-						//$('.scroll-pane').jScrollPane();
-						
-						//How to re-call nivoSlider
-						//$('#slider').nivoSlider({
-						//	pauseTime:3000,
-						//	effect:'boxRandom',
-						//	animSpeed:700,
-						//	directionNav:true,
-						//	controlNav: false
-						//});
+						AAPL_reload_code();
 
 						//now hide it again and put the position back!
-						$('#' + AAPL_content).hide();
-						$('#' + AAPL_content).css("position", "");
-						$('#' + AAPL_content).css("left", "");
+						jQuery('#' + AAPL_content).hide();
+						jQuery('#' + AAPL_content).css("position", "");
+						jQuery('#' + AAPL_content).css("left", "");
 
-						$('#' + AAPL_content).fadeIn("slow", function() {
+						jQuery('#' + AAPL_content).fadeIn("slow", function() {
 							//errmmm... Well isnt this embarrasing... Nothing to do here :s Kinda makes you think why is there a function attatched in the first place...
 							return true;
 							//Ahhh. See what I did there? NO ITS NOT POINTLESS... NO! ... ummm ok it kinda is :(
@@ -282,7 +256,7 @@ function AAPL_loadPage(url, push, getData){
 						AAPL_isLoad = false;
 						document.title = "Error loading requested page!";
 						//See the below - NEVER TRUST jQuery to sort ALL your problems - this breaks Ie7 + 8 :o
-						//$('#' + AAPL_content).html(AAPL_loading_error_code);
+						//jQuery('#' + AAPL_content).html(AAPL_loading_error_code);
 						
 						//Nothing like good old pure JavaScript...
 						document.getElementById(AAPL_content).innerHTML = AAPL_loading_error_code;

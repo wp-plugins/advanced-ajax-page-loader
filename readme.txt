@@ -1,13 +1,15 @@
 === Advanced AJAX Page Loader ===
 Contributors: deano1987, HappyApple, snumb130, bbodine1
 Donate link: http://resplace.net
-Version: 2.5.6
+Version: 2.5.7
 Tags: ajax, posts, pages, page, post, loading, loader, no refresh, dynamic, jquery
 Requires at least: 2.0?
 Tested up to: 3.3.1
-Stable tag: 2.5.6
+Stable tag: 2.5.7
 
 AJAX Page Loader will load posts, pages, etc. without reloading entire page.
+
+
 
 == Description ==
 Description:
@@ -19,70 +21,48 @@ dt_8792@yahoo.co.uk
 
 Many thanks to Luke Howell, author of the original plugin. 
 
+
+
 == Changelog ==
 
-= 1.0.0 =
-* First release by Luke Howell.
+= 2.5.7 =
+* Reversed the changelog and upgrade notice list so that the latest changes are at the top (thanks for the tip christianebuddy).
+* 'fixed' a short code <? to the correct <?php.
+* scripts now use jQuery instead of $ - should fix lots of compatibility problems, also we now try and call jQuery the RIGHT way :)
+* the "check for jQuery" option is now not required by default, and should be disabled unless it breaks your site.
+* You can now add code to a special section called "click code", useful for menu / link changing.
+* Added example codes to the resplace.net website, these should be useful for people :)
 
-= 2.0.0 =
-* First release by Dean williams with a huge improvement...
-* Using jQuery more than pure javascript to help compatibility and code layout.
-* Updated jquery to the latest 1.7 release.
-* fade transitions used when ajax is loading the page.
-* If a page fails to load it shows on the page (no ugly message box's)
-* When a page is loaded the URL bar is updated on the browser for easy copying or bookmarking of links.
-* When a page is loaded the browsers history is updated so that the user can go back/forward between pages.
-* Easier to edit the used id for content area, some themes differ on this one so it's useful.
+= 2.5.6 =
+* Sorry for rapid development releases...
+* Better integration with search box's, now you can set a "class", it is recommended to setup a "class" to search forms so (a) you can have multiple on the page, (b) more debugging availiable.
+* Google analytics support has now been added, so when someone AJAX's to another tab, you can track it in analytics!!!
+* extra information has been added to the admin panel to explain stuff.
+* search binding by ID is still supported for backwards compatibility and quick integration for atleast the main theme.
+* caching has been turned off for ajax requests, in the future though I will make an admin option for this...
+* debug mode now checks for jQuery version and reports if you are not in the 1.7 range. (hope 1.8 doesnt get released now ;)
 
-= 2.0.1 =
-* Yup some fixes for the readme.
+= 2.5.5 =
+* IE7 / IE8 issue resolved and was caused by jQuery : http://dean.resplace.net/blog/2012/04/ajax-loaded-content-not-visible-in-ie7-ie8-with-jquery/
+* Now using .on() to attatch click events.
+* Page titles are now not so messed up - but are still a problem :s
+* Leaving any field plank in the admin panel should now cause the default settings to load (useful when upgrading and there are new options).
+* Added some new loading animations (using WordPress logos).
 
-= 2.1.0 =
-* jQuery check to make sure it has not already been included
-* jQuery var in advanced-ajax-page-loader.php, set this to false to stop jQuery being included altogether.
-* When content is loaded you can optionally call document.ready, change the ready variable in javascript file.
+= 2.5.4 =
+* Plugin is disabled for IE7 and IE8 due to the peakaboo rendering bug in these versions.
 
-= 2.2.0 =
-* Some workaround code so things like jscrollpane can work properly.
+= 2.5.3 =
+* admin panel work, MORE FEATURES!!! :D
+* - You can now set the loading HTML code.
+* - You can also set the loading error HTML code.
+* - The href ignore has been extended and can now be changed in the admin panel.
 
-= 2.2.1 =
-* Fixed small problems checking if jQuery is called.
+= 2.5.2 =
+* Fix for back button.
 
-= 2.2.2 =
-* Removed link-back as it is against wordpress TOC
-
-= 2.3.0 =
-* Load current menu item (thanks to euphoriuhh).
-* nivoslider example reload code added.
-* IE fix for browser history (thanks to euphoriuhh).
-* Now sets page title when you change page.
-
-= 2.4.0 =
-* onpopstate fixed, sometimes clicking back on the browser would not work... Now it should!
-* The bindings to the search form were pretty poor (original authors code), I have re-written this and it should now work much better, still needs a little improving though.
-* Ajax requesting code completely re-written to use jQuery's library, this should offer better compatibility between browsers, makes the code neater and offers more options such as caching.
-* Ajax requests are not cached, and error catching is more reliable (you dont see it randomly when the page is in fact loading correctly).
-* New 'warnings' system implemented to give you debug if you set 'showWarnings' to 'true' in the .js file... This could help us BOTH ;)
-
-= 2.4.5 =
-* Fixed back button again and again and again and again (sorry my bad)
-
-= 2.4.6 =
-* Page title doesnt show html special character encoding anymore.
-
-= 2.4.7 =
-* HTML Special characters in the page <title> now display correctly (I hope).
-* Anchor links (hash (#) links) are now ignored by the ajax process.
-* I think I#m now correctly tagging my releases, hopefully!
-
-
-= 2.4.8 =
-* # links fix.
-* Improvements to loading.gif handling, dont need to provide dimensions anymore :)
-* Improvements to loading.gif handling, image is now pre-loaded and kept in memory :)
-* plugin file path code improved, now using plugins_url instead of hard coded paths!
-* Suffusion menu bar changer included (need to uncomment it to use it)
-* loading is more likely to be centered now - yup
+= 2.5.1 =
+* Fix for reload code.
 
 = 2.5.0 =
 * reverted AAPLhome variable as suggested by Brandon Nourse.
@@ -94,74 +74,112 @@ Many thanks to Luke Howell, author of the original plugin.
 * You can optionally enable a footer link to link to the project site!
 * Various sample loaders included so you can choose one to suit you.
 
-= 2.5.1 =
-* Fix for reload code.
+= 2.4.8 =
+* # links fix.
+* Improvements to loading.gif handling, dont need to provide dimensions anymore :)
+* Improvements to loading.gif handling, image is now pre-loaded and kept in memory :)
+* plugin file path code improved, now using plugins_url instead of hard coded paths!
+* Suffusion menu bar changer included (need to uncomment it to use it)
+* loading is more likely to be centered now - yup
 
-= 2.5.2 =
-* Fix for back button.
+= 2.4.7 =
+* HTML Special characters in the page <title> now display correctly (I hope).
+* Anchor links (hash (#) links) are now ignored by the ajax process.
+* I think I#m now correctly tagging my releases, hopefully!
 
-= 2.5.3 =
-* admin panel work, MORE FEATURES!!! :D
-* - You can now set the loading HTML code.
-* - You can also set the loading error HTML code.
-* - The href ignore has been extended and can now be changed in the admin panel.
+= 2.4.6 =
+* Page title doesnt show html special character encoding anymore.
 
-= 2.5.4 =
-* Plugin is disabled for IE7 and IE8 due to the peakaboo rendering bug in these versions.
+= 2.4.5 =
+* Fixed back button again and again and again and again (sorry my bad)
 
-= 2.5.5 =
-* IE7 / IE8 issue resolved and was caused by jQuery : http://dean.resplace.net/blog/2012/04/ajax-loaded-content-not-visible-in-ie7-ie8-with-jquery/
-* Now using .on() to attatch click events.
-* Page titles are now not so messed up - but are still a problem :s
-* Leaving any field plank in the admin panel should now cause the default settings to load (useful when upgrading and there are new options).
-* Added some new loading animations (using WordPress logos).
+= 2.4.0 =
+* onpopstate fixed, sometimes clicking back on the browser would not work... Now it should!
+* The bindings to the search form were pretty poor (original authors code), I have re-written this and it should now work much better, still needs a little improving though.
+* Ajax requesting code completely re-written to use jQuery's library, this should offer better compatibility between browsers, makes the code neater and offers more options such as caching.
+* Ajax requests are not cached, and error catching is more reliable (you dont see it randomly when the page is in fact loading correctly).
+* New 'warnings' system implemented to give you debug if you set 'showWarnings' to 'true' in the .js file... This could help us BOTH ;)
 
-= 2.5.6 =
-* Sorry for rapid development releases...
-* Better integration with search box's, now you can set a "class", it is recommended to setup a "class" to search forms so (a) you can have multiple on the page, (b) more debugging availiable.
-* Google analytics support has now been added, so when someone AJAX's to another tab, you can track it in analytics!!!
-* extra information has been added to the admin panel to explain stuff.
-* search binding by ID is still supported for backwards compatibility and quick integration for atleast the main theme.
-* caching has been turned off for ajax requests, in the future though I will make an admin option for this...
-* debug mode now checks for jQuery version and reports if you are not in the 1.7 range. (hope 1.8 doesnt get released now ;)
+= 2.3.0 =
+* Load current menu item (thanks to euphoriuhh).
+* nivoslider example reload code added.
+* IE fix for browser history (thanks to euphoriuhh).
+* Now sets page title when you change page.
+
+= 2.2.2 =
+* Removed link-back as it is against wordpress TOC
+
+= 2.2.1 =
+* Fixed small problems checking if jQuery is called.
+
+= 2.2.0 =
+* Some workaround code so things like jscrollpane can work properly.
+
+= 2.1.0 =
+* jQuery check to make sure it has not already been included
+* jQuery var in advanced-ajax-page-loader.php, set this to false to stop jQuery being included altogether.
+* When content is loaded you can optionally call document.ready, change the ready variable in javascript file.
+
+= 2.0.1 =
+* Yup some fixes for the readme.
+
+= 2.0.0 =
+* First release by Dean williams with a huge improvement...
+* Using jQuery more than pure javascript to help compatibility and code layout.
+* Updated jquery to the latest 1.7 release.
+* fade transitions used when ajax is loading the page.
+* If a page fails to load it shows on the page (no ugly message box's)
+* When a page is loaded the URL bar is updated on the browser for easy copying or bookmarking of links.
+* When a page is loaded the browsers history is updated so that the user can go back/forward between pages.
+* Easier to edit the used id for content area, some themes differ on this one so it's useful.
+
+= 1.0.0 =
+* First release by Luke Howell.
+
+
 
 == Upgrade Notice ==
 
-= 2.3.0 = 
-This version fix's IE issues and updates the page title. dont forget to backup any custom inserted code in the JS file before updating.
+= 2.5.7 =
+Major jQuery change in this release, change all '&' to 'jQuery' in your reload code AND please try turning off the "check for jquery" in the options. If it breaks turn it on, if it is still broken please ocntact me ASAP.
 
-= 2.4.0 =
-This version brings better cross-browser compatiblity, includes better error checking and fixes some annoying bugs.
-
-= 2.4.6 =
-Fixed back button again and again and again and again (sorry my bad)
-
-= 2.4.7 =
-Page titles will display better, and if you have any links with an anchor reference (# hash) they will be ignored.
-
-= 2.4.8 =
-fixes for # links and general plugin improvements!
-
-= 2.5.0 =
-majour changes, <b>MAKE SURE YOU BACKUP YOUR PLUGIN BEFORE UPGRADE JUST INCASE!</b> There is now an admin panel for settings (settings will be retained on update!).
-
-= 2.5.1 =
-small fix for reload code (well more of a confusion fix).
-
-= 2.5.2 =
-omg more back button fixes!
-
-= 2.5.3 =
-More editable features in the admin panel.
-
-= 2.5.4 =
-Plugin is disabled for IE7 and IE8 due to the peakaboo rendering bug in these versions.
+= 2.5.6 =
+Sorry for the rapid development, this release brings google analytics support and better search box integration!
 
 = 2.5.5 =
 IE7/8 bug now fixed and plugin works again in these browsers, also people having trouble with errors after updating should not anymore.
 
-= 2.5.6 =
-Sorry for the rapid development, this release brings google analytics support and better search box integration!
+= 2.5.4 =
+Plugin is disabled for IE7 and IE8 due to the peakaboo rendering bug in these versions.
+
+= 2.5.3 =
+More editable features in the admin panel.
+
+= 2.5.2 =
+omg more back button fixes!
+
+= 2.5.1 =
+small fix for reload code (well more of a confusion fix).
+
+= 2.5.0 =
+majour changes, <b>MAKE SURE YOU BACKUP YOUR PLUGIN BEFORE UPGRADE JUST INCASE!</b> There is now an admin panel for settings (settings will be retained on update!).
+
+= 2.4.8 =
+fixes for # links and general plugin improvements!
+
+= 2.4.7 =
+Page titles will display better, and if you have any links with an anchor reference (# hash) they will be ignored.
+
+= 2.4.6 =
+Fixed back button again and again and again and again (sorry my bad)
+
+= 2.4.0 =
+This version brings better cross-browser compatiblity, includes better error checking and fixes some annoying bugs.
+
+= 2.3.0 = 
+This version fix's IE issues and updates the page title. dont forget to backup any custom inserted code in the JS file before updating.
+
+
 
 == Installation ==
 
@@ -202,6 +220,8 @@ If you theme's search function stops working or causes the page to reload, then 
 4. Now edit your theme's "searchform.php" file.
 5. Make sure the "form" tag has the ID of "searchform".
 6. Make sure the "input" tag has the ID of "s".
+
+
 
 == Donations ==
 

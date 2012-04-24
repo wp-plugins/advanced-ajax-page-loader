@@ -1,7 +1,7 @@
 <?php
 /*
 Plugin Name: Advanced AJAX Page Loader
-Version: 2.5.6
+Version: 2.5.7
 Plugin URI: http://software.resplace.net/WordPress/AjaxPageLoader.php
 Description: Load pages within blog without reloading page, shows loading bar and updates the browsers URL so that the user can bookmark or share the url as if they had loaded a page normally. Also updates there history so they have a track of there browsing habbits on your blog!
 Author URI: http://dean.resplace.net
@@ -59,6 +59,7 @@ if (is_admin()) {
 		register_setting('AAPL', 'AAPL_search_class');
 		register_setting('AAPL', 'AAPL_loading_img');
 		register_setting('AAPL', 'AAPL_reload_code');
+		register_setting('AAPL', 'AAPL_click_code');
 		register_setting('AAPL', 'AAPL_ignore_list');
 		register_setting('AAPL', 'AAPL_loading_code');
 		register_setting('AAPL', 'AAPL_loading_error_code');
@@ -104,9 +105,11 @@ if (is_admin()) {
 		if ($AAPLupdate === true) {
 			//perform updates to files
 			$data = get_option('AAPL_reload_code');
+			$data2 = get_option('AAPL_click_code');
 			
 			//this is probably better
-			$data = 'function AAPL_reload_code() {' . "\n" . '//This file is generated from the admin panel - dont edit here! ' . "\n" . $data . "\n" . '}';
+			$data = 'function AAPL_reload_code() {' . "\n" . '//This file is generated from the admin panel - dont edit here! ' . "\n" . $data . "\n" . '}'. "\n". "\n";
+			$data .= 'function AAPL_click_code(thiss) {' . "\n" . '//This file is generated from the admin panel - dont edit here! ' . "\n" . $data2 . "\n" . '}';
 			
 			$file = fopen(plugin_dir_path(__FILE__) . '/reload_code.js', 'w');
 			fwrite($file, $data);
@@ -153,15 +156,22 @@ if (is_admin()) {
 }
 
 // Set Hook for outputting JavaScript
-add_action('wp_head','insert_head_AAPL');
-add_action('wp_footer','insert_foot_AAPL');
+add_action('wp_head', 'insert_head_AAPL');
+add_action('wp_footer', 'insert_foot_AAPL');
+add_action('wp_enqueue_scripts', 'enqueue_AAPL');
 
+function enqueue_AAPL() {
+	//Make sure we use latest jquery?
+	wp_deregister_script('jquery');
+    wp_register_script('jquery', plugins_url( 'jquery.js' , __FILE__ ));
+    wp_enqueue_script('jquery');
+}
 
 function insert_foot_AAPL() {
 	if (strcmp(get_option('AAPL_sponsor'), 'true') == 0) {
 		?>
 		<center>Proudly Using: <a href='http://software.resplace.net/WordPress/AjaxPageLoader.php' title="Advanced Ajax Page Loader">AAPL</a></center>
-		<?
+		<?php
 	}
 }
 
@@ -188,10 +198,11 @@ function insert_head_AAPL() {
 		//Maybe the script is being a twat...
 		var AAPL_warnings = <?php echo get_option('AAPL_js_debug'); ?>;
 		
+		//This is probably not even needed anymore, but lets keep for a fallback
 		function initJQuery() {
 			if (checkjQuery == true) {
 				//if the jQuery object isn't available
-				if (typeof($) == 'undefined') {
+				if (typeof(jQuery) == 'undefined') {
 				
 					if (! jQueryScriptOutputted) {
 						//only output the script once..
@@ -219,8 +230,8 @@ function insert_head_AAPL() {
 		
 		//The old code here was RETARDED - Much like the rest of the code... Now I have replaced this with something better ;)
 		//PRELOADING YEEEYYYYY!!
-		var AAPLloadingIMG = $('<img/>').attr('src', '<?php echo $GLOBALS['AAPLimagesurl'] . '/loaders/' . get_option('AAPL_loading_img') ;?>');
-		var AAPLloadingDIV = $('<div/>').attr('style', 'display:none;').attr('id', 'ajaxLoadDivElement');
+		var AAPLloadingIMG = jQuery('<img/>').attr('src', '<?php echo $GLOBALS['AAPLimagesurl'] . '/loaders/' . get_option('AAPL_loading_img') ;?>');
+		var AAPLloadingDIV = jQuery('<div/>').attr('style', 'display:none;').attr('id', 'ajaxLoadDivElement');
 		AAPLloadingDIV.appendTo('body');
 		AAPLloadingIMG.appendTo('#ajaxLoadDivElement');
 		//My code can either be seen as sexy? Or just a terribly orchestrated hack? Really it's up to you...
@@ -262,7 +273,7 @@ function install_AAPL() {
 	}
 	
 	if (strcmp(get_option('AAPL_jquery_check'), '') == 0) {
-		update_option('AAPL_jquery_check', 'true');
+		update_option('AAPL_jquery_check', 'false');
 	}
 	
 	if (strcmp(get_option('AAPL_track_analytics'), '') == 0) {
@@ -271,6 +282,16 @@ function install_AAPL() {
 	
 	if (strcmp(get_option('AAPL_reload_code'), '') == 0) {
 		update_option('AAPL_reload_code', '');
+	}
+	
+	if (strcmp(get_option('AAPL_click_code'), '') == 0) {
+		$data =
+			'// highlight the current menu item' . "\n" .
+			'jQuery(\'ul.menu li\').each(function() {' . "\n\t" .
+				'jQuery(thiss).removeClass(\'current-menu-item\');' . "\n" .
+			'});' . "\n" .
+			'jQuery(thiss).parents(\'li\').addClass(\'current-menu-item\');';
+		update_option('AAPL_click_code', $data);
 	}
 	
 	if (strcmp(get_option('AAPL_loading_code'), '') == 0) {
