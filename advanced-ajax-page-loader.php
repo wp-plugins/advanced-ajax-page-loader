@@ -1,7 +1,7 @@
 <?php
 /*
 Plugin Name: Advanced AJAX Page Loader
-Version: 2.5.8
+Version: 2.5.9
 Plugin URI: http://software.resplace.net/WordPress/AjaxPageLoader.php
 Description: Load pages within blog without reloading page, shows loading bar and updates the browsers URL so that the user can bookmark or share the url as if they had loaded a page normally. Also updates there history so they have a track of there browsing habbits on your blog!
 Author URI: http://dean.resplace.net
@@ -149,7 +149,7 @@ if (is_admin()) {
 			}
 		}
 		
-		return get_settings('AAPL_loading_img');
+		return get_option('AAPL_loading_img');
 		
 	}
 
@@ -225,8 +225,8 @@ function insert_head_AAPL() {
 	
 	<script type="text/javascript">
 		//urls
-		var AAPLsiteurl = "<?php echo get_settings('home');?>";
-		var AAPLhome = "<?php echo get_settings('siteurl');?>";
+		var AAPLsiteurl = "<?php echo get_option('home');?>";
+		var AAPLhome = "<?php echo get_option('siteurl');?>";
 		
 		//The old code here was RETARDED - Much like the rest of the code... Now I have replaced this with something better ;)
 		//PRELOADING YEEEYYYYY!!

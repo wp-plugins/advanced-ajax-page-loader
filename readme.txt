@@ -1,11 +1,11 @@
 === Advanced AJAX Page Loader ===
 Contributors: deano1987, HappyApple, snumb130, bbodine1
 Donate link: http://resplace.net
-Version: 2.5.8
+Version: 2.5.9
 Tags: ajax, posts, pages, page, post, loading, loader, no refresh, dynamic, jquery
 Requires at least: 2.0?
 Tested up to: 3.3.1
-Stable tag: 2.5.8
+Stable tag: 2.5.9
 
 AJAX Page Loader will load posts, pages, etc. without reloading entire page.
 
@@ -24,6 +24,9 @@ Many thanks to Luke Howell, author of the original plugin.
 
 
 == Changelog ==
+
+= 2.5.9 =
+* replaced all get_settings() to get_option() - get_settings() is now deprecated since wordpress 2.1 and if you have debugging enabled it breaks this script. 
 
 = 2.5.8 =
 * Reverted the .on() back to .click() - some people reported problems where their other plguins were calling jQuery 1.5 and AAPL was failing because it needed 1.7 minimum, now 1.5 will work again.
@@ -142,6 +145,9 @@ Many thanks to Luke Howell, author of the original plugin.
 
 
 == Upgrade Notice ==
+
+= 2.5.9 =
+Fixed a problem with the script breaking if you have wordpress debug enabled (perhaps in other cases too) - recommended to update, especially if the plugin will not work currently.
 
 = 2.5.7 =
 Major jQuery change in this release, change all '&' to 'jQuery' in your reload code AND please try turning off the "check for jquery" in the options. If it breaks turn it on, if it is still broken please ocntact me ASAP.
