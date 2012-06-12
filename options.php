@@ -18,7 +18,7 @@ if (get_option('AAPL_upload_error')) {
 						<form action="https://www.paypal.com/cgi-bin/webscr" method="post">
 							<input type="hidden" name="cmd" value="_s-xclick">
 							<input type="hidden" name="hosted_button_id" value="3P6VT6B5EBVCA">
-							<input type="image" src="https://www.paypalobjects.com/en_US/GB/i/btn/btn_donateCC_LG.gif" border="0" name="submit" alt="PayPal — The safer, easier way to pay online.">
+							<input type="image" src="https://www.paypalobjects.com/en_US/GB/i/btn/btn_donateCC_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online.">
 							<img alt="" border="0" src="https://www.paypalobjects.com/en_GB/i/scr/pixel.gif" width="1" height="1">
 						</form>
 					</div>
@@ -133,6 +133,18 @@ if (get_option('AAPL_upload_error')) {
 					<i>Make sure function AAPL_reload_code() { } isnt around the code (if you upgraded from 2.5.0)</i>
 					<br><br>
 					<textarea name="AAPL_reload_code" style="width:100%;height:250px"><?php echo get_option('AAPL_reload_code'); ?></textarea><br>
+					<b>jQuery tip:</b> replace all '$' to 'jQuery'.
+				</td>
+			</tr>
+			
+			<tr valign="top">
+				<th scope="row">Data ajax loaded Code</th>
+				<td>
+					<b><a href="http://software.resplace.net/WordPress/AjaxPageLoader.php" target="_blank">Useful get data codes</a>.</b><br>
+					This is a special code block to retrieve additional information from the content, the page loaded Ajax. For example, the styles of the body tag, to update the <body> not recharge. <br>
+                                        <i>You can access the code loaded through the variable "dataa" or "jQuery(dataa)"</i>
+					<br><br>
+					<textarea name="AAPL_data_code" style="width:100%;height:250px"><?php echo get_option('AAPL_data_code'); ?></textarea><br>
 					<b>jQuery tip:</b> replace all '$' to 'jQuery'.
 				</td>
 			</tr>

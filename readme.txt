@@ -1,5 +1,5 @@
 === Advanced AJAX Page Loader ===
-Contributors: deano1987, HappyApple, snumb130, bbodine1
+Contributors: deano1987, snumb130
 Donate link: http://resplace.net
 Version: 2.5.9
 Tags: ajax, posts, pages, page, post, loading, loader, no refresh, dynamic, jquery
@@ -19,7 +19,7 @@ If this has helped you and saved you time please consider a donation via PayPal 
 
 dt_8792@yahoo.co.uk
 
-Many thanks to Luke Howell, author of the original plugin. 
+Many thanks to Luke Howell, author of the original plugin which motivated me to re-write it and extend it to what it is today.
 
 
 

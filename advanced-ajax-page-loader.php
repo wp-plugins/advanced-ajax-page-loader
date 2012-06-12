@@ -59,6 +59,7 @@ if (is_admin()) {
 		register_setting('AAPL', 'AAPL_search_class');
 		register_setting('AAPL', 'AAPL_loading_img');
 		register_setting('AAPL', 'AAPL_reload_code');
+		register_setting('AAPL', 'AAPL_data_code');                     /* eag */
 		register_setting('AAPL', 'AAPL_click_code');
 		register_setting('AAPL', 'AAPL_ignore_list');
 		register_setting('AAPL', 'AAPL_loading_code');
@@ -106,10 +107,12 @@ if (is_admin()) {
 			//perform updates to files
 			$data = get_option('AAPL_reload_code');
 			$data2 = get_option('AAPL_click_code');
+			$data3 = get_option('AAPL_data_code');                  /* eag */
 			
 			//this is probably better
 			$data = 'function AAPL_reload_code() {' . "\n" . '//This file is generated from the admin panel - dont edit here! ' . "\n" . $data . "\n" . '}'. "\n". "\n";
 			$data .= 'function AAPL_click_code(thiss) {' . "\n" . '//This file is generated from the admin panel - dont edit here! ' . "\n" . $data2 . "\n" . '}';
+			$data .= 'function AAPL_data_code(dataa) {' . "\n" . '//This file is generated from the admin panel - dont edit here! ' . "\n" . $data3 . "\n" . '}';          /* eag */
 			
 			$file = fopen(plugin_dir_path(__FILE__) . '/reload_code.js', 'w');
 			fwrite($file, $data);
@@ -283,6 +286,10 @@ function install_AAPL() {
 	if (strcmp(get_option('AAPL_reload_code'), '') == 0) {
 		update_option('AAPL_reload_code', '');
 	}
+	
+	if (strcmp(get_option('AAPL_data_code'), '') == 0) {                    /* eag */
+		update_option('AAPL_data_code', '');                            /* eag */
+	}                                                                       /* eag */
 	
 	if (strcmp(get_option('AAPL_click_code'), '') == 0) {
 		$data =

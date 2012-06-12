@@ -185,6 +185,13 @@ function AAPL_loadPage(url, push, getData){
 							}
 						}
 						
+						///////////////////////////////////////////
+						//  WE HAVE AN ADMIN PAGE NOW - GO THERE //
+						///////////////////////////////////////////
+                                                
+						AAPL_data_code(data);                                               
+                                                
+                                                
 						//get content
 						data = data.split('id="' + AAPL_content + '"')[1];
 						data = data.substring(data.indexOf('>') + 1);
