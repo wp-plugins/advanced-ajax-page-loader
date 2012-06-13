@@ -1,6 +1,6 @@
 /*
 Plugin Name: Advanced AJAX Page Loader
-Version: 2.5.9
+Version: 2.5.11
 Plugin URI: http://software.resplace.net/WordPress/AjaxPageLoader.php
 Description: Load pages within blog without reloading page, shows loading bar and updates the browsers URL so that the user can bookmark or share the url as if they had loaded a page normally. Also updates there history so they have a track of there browsing habbits on your blog!
 Author URI: http://dean.resplace.net
@@ -162,7 +162,7 @@ function AAPL_loadPage(url, push, getData){
 							
 							//set the title?
 							//after several months, I think this is the solution to fix &amp; issues
-							$(document).attr('title', ($("<div/>").html(titles).text()));
+							jQuery(document).attr('title', (jQuery("<div/>").html(titles).text()));
 						} else {
 							if (AAPL_warnings == true) {
 								alert("You seem to have more than one <title> tag on the page, this is going to cause some major problems so page title changing is disabled.");
