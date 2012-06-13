@@ -1,11 +1,11 @@
 === Advanced AJAX Page Loader ===
 Contributors: deano1987, snumb130
 Donate link: http://resplace.net
-Version: 2.5.9
+Version: 2.5.10
 Tags: ajax, posts, pages, page, post, loading, loader, no refresh, dynamic, jquery
 Requires at least: 2.0?
 Tested up to: 3.3.1
-Stable tag: 2.5.9
+Stable tag: 2.5.10
 
 AJAX Page Loader will load posts, pages, etc. without reloading entire page.
 
@@ -24,6 +24,10 @@ Many thanks to Luke Howell, author of the original plugin which motivated me to 
 
 
 == Changelog ==
+
+= 2.5.10 =
+* title tag code has been updated and should now fix the &amp; issues! (Needs Testing).
+* [eag] - Thanks to Juanjo who has contributed a function for manipulating returned data before AJAX drops it onto the page.
 
 = 2.5.9 =
 * replaced all get_settings() to get_option() - get_settings() is now deprecated since wordpress 2.1 and if you have debugging enabled it breaks this script. 
@@ -145,6 +149,9 @@ Many thanks to Luke Howell, author of the original plugin which motivated me to 
 
 
 == Upgrade Notice ==
+
+= 2.5.10 =
+Title encoding fix and new "data code" feature.
 
 = 2.5.9 =
 Fixed a problem with the script breaking if you have wordpress debug enabled (perhaps in other cases too) - recommended to update, especially if the plugin will not work currently.

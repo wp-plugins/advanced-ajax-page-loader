@@ -161,8 +161,8 @@ function AAPL_loadPage(url, push, getData){
 							titles = data.split('</title>')[0];
 							
 							//set the title?
-							//TODO: this still doesnt set the title in the history list (atleast in chrome...) more research required here.
-							document.title = titles;
+							//after several months, I think this is the solution to fix &amp; issues
+							$(document).attr('title', ($("<div/>").html(titles).text()));
 						} else {
 							if (AAPL_warnings == true) {
 								alert("You seem to have more than one <title> tag on the page, this is going to cause some major problems so page title changing is disabled.");
