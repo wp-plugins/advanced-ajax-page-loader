@@ -1,7 +1,7 @@
 <?php
 /*
 Plugin Name: Advanced AJAX Page Loader
-Version: 2.5.11
+Version: 2.5.12
 Plugin URI: http://software.resplace.net/WordPress/AjaxPageLoader.php
 Description: Load pages within blog without reloading page, shows loading bar and updates the browsers URL so that the user can bookmark or share the url as if they had loaded a page normally. Also updates there history so they have a track of there browsing habbits on your blog!
 Author URI: http://dean.resplace.net
@@ -111,7 +111,7 @@ if (is_admin()) {
 			
 			//this is probably better
 			$data = 'function AAPL_reload_code() {' . "\n" . '//This file is generated from the admin panel - dont edit here! ' . "\n" . $data . "\n" . '}'. "\n". "\n";
-			$data .= 'function AAPL_click_code(thiss) {' . "\n" . '//This file is generated from the admin panel - dont edit here! ' . "\n" . $data2 . "\n" . '}';
+			$data .= 'function AAPL_click_code(thiss) {' . "\n" . '//This file is generated from the admin panel - dont edit here! ' . "\n" . $data2 . "\n" . '}'. "\n". "\n";
 			$data .= 'function AAPL_data_code(dataa) {' . "\n" . '//This file is generated from the admin panel - dont edit here! ' . "\n" . $data3 . "\n" . '}';          /* eag */
 			
 			$file = fopen(plugin_dir_path(__FILE__) . '/reload_code.js', 'w');
@@ -295,7 +295,7 @@ function install_AAPL() {
 		$data =
 			'// highlight the current menu item' . "\n" .
 			'jQuery(\'ul.menu li\').each(function() {' . "\n\t" .
-				'jQuery(thiss).removeClass(\'current-menu-item\');' . "\n" .
+				'jQuery(this).removeClass(\'current-menu-item\');' . "\n" .
 			'});' . "\n" .
 			'jQuery(thiss).parents(\'li\').addClass(\'current-menu-item\');';
 		update_option('AAPL_click_code', $data);
