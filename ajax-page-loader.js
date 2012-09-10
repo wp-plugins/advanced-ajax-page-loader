@@ -56,7 +56,7 @@ function AAPL_loadPageInit(scope){
 			//Load click code - pass reference.
 			try {
 				AAPL_click_code(this);
-			} catch {
+			} catch(err) {
 				if (AAPL_warnings == true) {
 					txt="There was an error with click_code.\n\n";
 					txt+="Error description: " + err.message + "\n\n";
@@ -201,7 +201,7 @@ function AAPL_loadPage(url, push, getData){
 						
 						try {
 							AAPL_data_code(data);
-						} catch {
+						} catch(err) {
 							if (AAPL_warnings == true) {
 								txt="There was an error with data_code.\n\n";
 								txt+="Error description: " + err.message + "\n\n";
