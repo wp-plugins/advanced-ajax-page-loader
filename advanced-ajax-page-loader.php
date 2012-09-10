@@ -191,14 +191,14 @@ function insert_head_AAPL() {
 		//Search Class
 		var AAPL_search_class = '<?php echo get_option('AAPL_search_class'); ?>';
 		
-		//Ignore List - this is for travisavery who likes my comments... you ready?... I didn't ignore your mom last night... BOOM! ... Childish as fuck...
+		//Ignore List - this is for travisavery who likes my comments... hello
 		var AAPL_ignore_string = new String('<?php echo get_option('AAPL_ignore_list'); ?>'); 
 		var AAPL_ignore = AAPL_ignore_string.split(', ');
 		
 		//Shall we take care of analytics?
 		var AAPL_track_analytics = <?php echo get_option('AAPL_track_analytics'); ?>
 		
-		//Maybe the script is being a twat...
+		//Maybe the script is being a tw**? With this you can find out why...
 		var AAPL_warnings = <?php echo get_option('AAPL_js_debug'); ?>;
 		
 		//This is probably not even needed anymore, but lets keep for a fallback
