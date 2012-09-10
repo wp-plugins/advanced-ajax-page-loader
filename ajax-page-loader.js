@@ -54,7 +54,16 @@ function AAPL_loadPageInit(scope){
 			var group = this.rel || false;
 
 			//Load click code - pass reference.
-			AAPL_click_code(this);
+			try {
+				AAPL_click_code(this);
+			} catch {
+				if (AAPL_warnings == true) {
+					txt="There was an error with click_code.\n\n";
+					txt+="Error description: " + err.message + "\n\n";
+					txt+="Click OK to continue.\n\n";
+					alert(txt);
+				}
+			}
 
 			// display the box for the elements href
 			AAPL_loadPage(this.href);
@@ -188,10 +197,20 @@ function AAPL_loadPage(url, push, getData){
 						///////////////////////////////////////////
 						//  WE HAVE AN ADMIN PAGE NOW - GO THERE //
 						///////////////////////////////////////////
-                                                
-						AAPL_data_code(data);                                               
-                                                
-                                                
+                        
+						
+						try {
+							AAPL_data_code(data);
+						} catch {
+							if (AAPL_warnings == true) {
+								txt="There was an error with data_code.\n\n";
+								txt+="Error description: " + err.message + "\n\n";
+								txt+="Click OK to continue.\n\n";
+								alert(txt);
+							}
+						}
+
+						
 						//get content
 						data = data.split('id="' + AAPL_content + '"')[1];
 						data = data.substring(data.indexOf('>') + 1);
@@ -240,28 +259,42 @@ function AAPL_loadPage(url, push, getData){
 						//  WE HAVE AN ADMIN PAGE NOW - GO THERE //
 						///////////////////////////////////////////
 						
-						AAPL_reload_code();
+						try {
+							AAPL_reload_code();
+						} catch(err) {
+							if (AAPL_warnings == true) {
+								txt="There was an error with reload_code.\n\n";
+								txt+="Error description: " + err.message + "\n\n";
+								txt+="Click OK to continue.\n\n";
+								alert(txt);
+							}
+							
+							//we have to show something... + reset the position.
+							//jQuery('#' + AAPL_content).css("position", "");
+							//jQuery('#' + AAPL_content).css("left", "");
+							//jQuery('#' + AAPL_content).html('<br><br>There was an error loading the page.<br><br>');
+						}
 
 						//now hide it again and put the position back!
 						jQuery('#' + AAPL_content).hide();
 						jQuery('#' + AAPL_content).css("position", "");
 						jQuery('#' + AAPL_content).css("left", "");
 
-						jQuery('#' + AAPL_content).fadeIn("slow", function() {
-							//errmmm... Well isnt this embarrasing... Nothing to do here :s Kinda makes you think why is there a function attatched in the first place...
-							return true;
-							//Ahhh. See what I did there? NO ITS NOT POINTLESS... NO! ... ummm ok it kinda is :(
-							//.
-							//..
-							//...
-							//....
-							//Funny though ;)
-						});
+						jQuery('#' + AAPL_content).fadeIn("slow", function() {});
 					},
 					error: function(jqXHR, textStatus, errorThrown) {
 						//Would append this, but would not be good if this fired more than once!!
 						AAPL_isLoad = false;
 						document.title = "Error loading requested page!";
+						
+						if (AAPL_warnings == true) {
+							txt="There was an error with AJAX.\n\n";
+							txt+="Error status: " + textStatus + "\n\n";
+							txt+="Error: " + errorThrown + "\n\n";
+							txt+="Click OK to continue.\n\n";
+							alert(txt);
+						}
+						
 						//See the below - NEVER TRUST jQuery to sort ALL your problems - this breaks Ie7 + 8 :o
 						//jQuery('#' + AAPL_content).html(AAPL_loading_error_code);
 						
@@ -287,8 +320,10 @@ function AAPL_check_ignore(url) {
 		}
 	}
 	
-	//WHOA!! Lets fuck IE7 and IE8 off because they are fucking shite!
-		//No I'm corrected, it may be IE's fault also but it's definately jQuery fault I've had this fucking nightmare!!
+	//peakaboo fixed.
+	
+	//WHOA!! Lets f**k IE7 and IE8 off because they are sh**e!
+		//No I'm corrected, it may be IE's fault also but it's definately jQuery fault I've had this nightmare!!
 		/*
 		if ( AAPL_ua.msie && (AAPL_ua.version.slice(0,1) == "8" || AAPL_ua.version.slice(0,1) == "7") ) {
 			if (AAPL_warnings == true) {

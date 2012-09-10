@@ -5,7 +5,7 @@ Version: 2.5.14
 Tags: ajax, posts, pages, page, post, loading, loader, no refresh, dynamic, jquery
 Requires at least: 2.0?
 Tested up to: 3.4.2
-Stable tag: 2.5.13
+Stable tag: 2.5.14
 
 AJAX Page Loader will load posts, pages, etc. without reloading entire page.
 
@@ -28,6 +28,7 @@ Many thanks to Luke Howell, author of the original plugin which motivated me to 
 = 2.5.14 =
 * jQuery update warning now only appears if you have the debug enabled.
 * changes to the initJQuery() function.
+* try - catch added around reload codes to avoid error reports when it is in fact reload code. (put AAPL in debug to see errors).
 
 = 2.5.13 =
 * Added compatibility tag for latest wordpress
