@@ -1,7 +1,7 @@
 === Advanced AJAX Page Loader ===
 Contributors: deano1987, snumb130
 Donate link: http://resplace.net
-Version: 2.5.13
+Version: 2.5.14
 Tags: ajax, posts, pages, page, post, loading, loader, no refresh, dynamic, jquery
 Requires at least: 2.0?
 Tested up to: 3.4.2
@@ -24,6 +24,10 @@ Many thanks to Luke Howell, author of the original plugin which motivated me to 
 
 
 == Changelog ==
+
+= 2.5.14 =
+* jQuery update warning now only appears if you have the debug enabled.
+* changes to the initJQuery() function.
 
 = 2.5.13 =
 * Added compatibility tag for latest wordpress
@@ -161,6 +165,9 @@ Many thanks to Luke Howell, author of the original plugin which motivated me to 
 
 
 == Upgrade Notice ==
+
+= 2.5.14 =
+jquery warning no longer appears unless you have debug enabled!
 
 = 2.5.13 =
 if you have 2.5.12 - no immediate need to update as this is only a tag update for latest wordpress.
