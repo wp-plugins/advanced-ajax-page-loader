@@ -1,7 +1,7 @@
 <?php
 /*
 Plugin Name: Advanced AJAX Page Loader
-Version: 2.5.17
+Version: 2.6.0
 Plugin URI: http://software.resplace.net/WordPress/AjaxPageLoader.php
 Description: Load pages within blog without reloading page, shows loading bar and updates the browsers URL so that the user can bookmark or share the url as if they had loaded a page normally. Also updates there history so they have a track of there browsing habbits on your blog!
 Author URI: http://dean.resplace.net
@@ -71,6 +71,8 @@ if (is_admin()) {
 		register_setting('AAPL', 'AAPL_jquery_check');
 		register_setting('AAPL', 'AAPL_track_analytics');
 		
+		register_setting('AAPL', 'AAPL_scroll_top');
+		
 		//Update all tick box's that are unchecked
 		if (get_option('AAPL_sponsor') == '') {
 			update_option('AAPL_sponsor', 'false');
@@ -83,6 +85,10 @@ if (is_admin()) {
 		}
 		if (get_option('AAPL_track_analytics') == '') {
 			update_option('AAPL_track_analytics', 'false');
+		}
+		
+		if (get_option('AAPL_scroll_top') == '') {
+			update_option('AAPL_scroll_top', 'false');
 		}
 		
 		update_option('AAPL_upload_error', '');
@@ -198,6 +204,9 @@ function insert_head_AAPL() {
 		//Shall we take care of analytics?
 		var AAPL_track_analytics = <?php echo get_option('AAPL_track_analytics'); ?>
 		
+		//Various options and settings
+		var AAPL_scroll_top = <?php echo get_option('AAPL_scroll_top'); ?>
+		
 		//Maybe the script is being a tw**? With this you can find out why...
 		var AAPL_warnings = <?php echo get_option('AAPL_js_debug'); ?>;
 		
@@ -212,8 +221,8 @@ function insert_head_AAPL() {
 						jQueryScriptOutputted = true;
 						
 						//output the jquery script
-						//document.write("<scr" + "ipt type='text/javascript' src='<?php echo plugins_url( 'jquery.js' , __FILE__ );?>'></scr" + "ipt>");
-						jQuery("head").append("<scr" + "ipt type='text/javascript' src='<?php echo plugins_url( 'jquery.js' , __FILE__ );?>'></scr" + "ipt>");
+						//one day I will complain :/ double quotes inside singles.
+						document.write('<scr' + 'ipt type="text/javascript" src="<?php echo plugins_url( 'jquery.js' , __FILE__ );?>"></scr' + 'ipt>');
 					}
 					setTimeout('initJQuery()', 50);
 				}
@@ -282,6 +291,10 @@ function install_AAPL() {
 	
 	if (strcmp(get_option('AAPL_track_analytics'), '') == 0) {
 		update_option('AAPL_track_analytics', 'false');
+	}
+	
+	if (strcmp(get_option('AAPL_scroll_top'), '') == 0) {
+		update_option('AAPL_scroll_top', 'true');
 	}
 	
 	if (strcmp(get_option('AAPL_reload_code'), '') == 0) {
