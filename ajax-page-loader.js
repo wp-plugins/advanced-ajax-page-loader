@@ -72,7 +72,7 @@ function AAPL_loadPageInit(scope){
 		}
 	});
 	
-	jQuery('#' + AAPL_search_class).each(function(index) {
+	jQuery('.' + AAPL_search_class).each(function(index) {
 		if (jQuery(this).attr("action")) {
 			//Get the current action so we know where to submit to
 			AAPL_searchPath = jQuery(this).attr("action");
@@ -90,7 +90,7 @@ function AAPL_loadPageInit(scope){
 		}
 	});
 	
-	if (jQuery('#' + AAPL_search_class).attr("action")) {} else {
+	if (jQuery('.' + AAPL_search_class).attr("action")) {} else {
 		if (AAPL_warnings == true) {
 			alert("WARNING: \nCould not bind to search form...\nCould not find <form> tag with class='" + AAPL_search_class + "' or action='' missing. This may mean search form doesnt work with AAPL!");
 		}
