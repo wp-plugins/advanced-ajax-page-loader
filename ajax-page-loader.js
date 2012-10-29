@@ -1,6 +1,6 @@
 /*
 Plugin Name: Advanced AJAX Page Loader
-Version: 2.6.0
+Version: 2.6.1
 Plugin URI: http://software.resplace.net/WordPress/AjaxPageLoader.php
 Description: Load pages within blog without reloading page, shows loading bar and updates the browsers URL so that the user can bookmark or share the url as if they had loaded a page normally. Also updates there history so they have a track of there browsing habbits on your blog!
 Author URI: http://dean.resplace.net
@@ -20,9 +20,12 @@ var AAPL_ua = jQuery.browser;
 //The holy grail...
 jQuery(document).ready(function() {
 	if (AAPL_warnings == true) {
+		alert("DEBUG MODE! \nThanks for downloading AAPL - you are currently in DEBUG MODE, once you are confident AAPL is working as you require please disable DEBUG MODE from the AAPL options in wordpress.");
+	}
+	if (AAPL_warnings == true) {
 		AAPL_jqVersion = jQuery().jquery;
 		if (AAPL_jqVersion.substr(0,3) != "1.8" && AAPL_warnings == true) {
-			alert("cmon guys, your jQuery version is outdated, please update it - I can see version: " + AAPL_jqVersion);
+			alert("INFORMATION: \njQuery may be outdated! This plugin was made using 1.8, I can see version: " + AAPL_jqVersion);
 		}
 	}
 	
@@ -58,9 +61,8 @@ function AAPL_loadPageInit(scope){
 				AAPL_click_code(this);
 			} catch(err) {
 				if (AAPL_warnings == true) {
-					txt="There was an error with click_code.\n\n";
-					txt+="Error description: " + err.message + "\n\n";
-					txt+="Click OK to continue.\n\n";
+					txt="ERROR: \nThere was an error with click_code.\n";
+					txt+="Error description: " + err.message;
 					alert(txt);
 				}
 			}
@@ -70,7 +72,7 @@ function AAPL_loadPageInit(scope){
 		}
 	});
 	
-	jQuery('.' + AAPL_search_class).each(function(index) {
+	jQuery('#' + AAPL_search_class).each(function(index) {
 		if (jQuery(this).attr("action")) {
 			//Get the current action so we know where to submit to
 			AAPL_searchPath = jQuery(this).attr("action");
@@ -83,28 +85,34 @@ function AAPL_loadPageInit(scope){
 			});
 		} else {
 			if (AAPL_warnings == true) {
-				alert("Search form found but attribute 'action' missing!?!?!");
+				alert("WARNING: \nSearch form found but attribute 'action' missing!?!?! This may mean search form doesnt work with AAPL!");
 			}
 		}
 	});
+	
+	if (jQuery('#' + AAPL_search_class).attr("action")) {} else {
+		if (AAPL_warnings == true) {
+			alert("WARNING: \nCould not bind to search form...\nCould not find <form> tag with class='" + AAPL_search_class + "' or action='' missing. This may mean search form doesnt work with AAPL!");
+		}
+	}
   
-	if (scope == "") { 
-		if (jQuery('#searchform').attr("action")) {
+	/*if (scope == "") { 
+		if (jQuery('#' + AAPL_search_class).attr("action")) {
 			//Get the current action so we know where to submit to
-			AAPL_searchPath = jQuery('#searchform').attr("action");
+			AAPL_searchPath = jQuery('#' + AAPL_search_class).attr("action");
 
 			//bind our code to search submit, now we can load everything through ajax :)
 			//jQuery('#searchform').name = 'searchform';
-			jQuery('#searchform').submit(function() {
+			jQuery('#' + AAPL_search_class).submit(function() {
 				submitSearch(jQuery(this).serialize());
 				return false;
 			});
 		} else {
 			if (AAPL_warnings == true) {
-				alert("Could not bind to search form...\nCould not find element with id='searchform' or attribute 'action' missing.");
+				alert("WARNING: \nCould not bind to search form...\nCould not find <form> tag with class='" + AAPL_search_class + "' or action='' missing. This may mean search form doesnt work with AAPL!");
 			}
 		}
-	}
+	}*/
 }
 
 function AAPL_loadPage(url, push, getData){
@@ -133,14 +141,14 @@ function AAPL_loadPage(url, push, getData){
 				history.pushState(stateObj, "ajax page loaded...", path);
 			} else {
 				if (AAPL_warnings == true) {
-					alert("'pushState' method not supported in this browser, sorry about that!");
+					alert("BROWSER COMPATIBILITY: \n'pushState' method not supported in this browser, sorry about that!");
 				}
 			}
 		}
 		
 		if (!jQuery('#' + AAPL_content)) {
 			if (AAPL_warnings == true) {
-				alert("Could not find content region, you need to set an ID to an element that surrounds the content on the page, make sure the 'content' variable is also set to the ID name.");
+				alert("ERROR: \nAAPL could not find your content, you need to set an ID to a div that surrounds all the content of the page (excluding menu, heading and footer) - AAPL was looking for id='" + AAPL_content + "'");
 				return false;
 			}
 		}
@@ -176,7 +184,7 @@ function AAPL_loadPage(url, push, getData){
 							jQuery(document).attr('title', (jQuery("<div/>").html(titles).text()));
 						} else {
 							if (AAPL_warnings == true) {
-								alert("You seem to have more than one <title> tag on the page, this is going to cause some major problems so page title changing is disabled.");
+								alert("WARNING: \nYou seem to have more than one <title> tag on the page, this is going to cause some major problems so page title changing is disabled.");
 							}
 						}
 						
@@ -191,7 +199,7 @@ function AAPL_loadPage(url, push, getData){
 								_gaq.push(['_trackPageview', path + getData]);
 							} else {
 								if (AAPL_warnings == true) {
-									alert("Analytics does not seem to be initialized! Could not track this page.");
+									alert("WARNING: \nAnalytics does not seem to be initialized! Could not track this page for google.");
 								}
 							}
 						}
@@ -205,9 +213,8 @@ function AAPL_loadPage(url, push, getData){
 							AAPL_data_code(data);
 						} catch(err) {
 							if (AAPL_warnings == true) {
-								txt="There was an error with data_code.\n\n";
-								txt+="Error description: " + err.message + "\n\n";
-								txt+="Click OK to continue.\n\n";
+								txt="ERROR: \nThere was an error with data_code.\n";
+								txt+="Error description: " + err.message;
 								alert(txt);
 							}
 						}
@@ -265,9 +272,8 @@ function AAPL_loadPage(url, push, getData){
 							AAPL_reload_code();
 						} catch(err) {
 							if (AAPL_warnings == true) {
-								txt="There was an error with reload_code.\n\n";
-								txt+="Error description: " + err.message + "\n\n";
-								txt+="Click OK to continue.\n\n";
+								txt="ERROR: \nThere was an error with reload_code.\n";
+								txt+="Error description: " + err.message;
 								alert(txt);
 							}
 							
@@ -290,10 +296,9 @@ function AAPL_loadPage(url, push, getData){
 						document.title = "Error loading requested page!";
 						
 						if (AAPL_warnings == true) {
-							txt="There was an error with AJAX.\n\n";
-							txt+="Error status: " + textStatus + "\n\n";
-							txt+="Error: " + errorThrown + "\n\n";
-							txt+="Click OK to continue.\n\n";
+							txt="ERROR: \nThere was an error with AJAX.\n";
+							txt+="Error status: " + textStatus + "\n";
+							txt+="Error: " + errorThrown;
 							alert(txt);
 						}
 						

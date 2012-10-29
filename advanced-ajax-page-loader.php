@@ -1,7 +1,7 @@
 <?php
 /*
 Plugin Name: Advanced AJAX Page Loader
-Version: 2.6.0
+Version: 2.6.1
 Plugin URI: http://software.resplace.net/WordPress/AjaxPageLoader.php
 Description: Load pages within blog without reloading page, shows loading bar and updates the browsers URL so that the user can bookmark or share the url as if they had loaded a page normally. Also updates there history so they have a track of there browsing habbits on your blog!
 Author URI: http://dean.resplace.net
@@ -67,6 +67,7 @@ if (is_admin()) {
 		
 		
 		register_setting('AAPL', 'AAPL_sponsor');
+		register_setting('AAPL', 'AAPL_commercial');
 		register_setting('AAPL', 'AAPL_js_debug');
 		register_setting('AAPL', 'AAPL_jquery_check');
 		register_setting('AAPL', 'AAPL_track_analytics');
@@ -76,6 +77,9 @@ if (is_admin()) {
 		//Update all tick box's that are unchecked
 		if (get_option('AAPL_sponsor') == '') {
 			update_option('AAPL_sponsor', 'false');
+		}
+		if (get_option('AAPL_commercial') == '') {
+			update_option('AAPL_commercial', 'false');
 		}
 		if (get_option('AAPL_js_debug') == '') {
 			update_option('AAPL_js_debug', 'false');
@@ -250,9 +254,10 @@ function insert_head_AAPL() {
 		//My code can either be seen as sexy? Or just a terribly orchestrated hack? Really it's up to you...
 		
 		//Loading/Error Code
-		var str = '<?php echo str_replace(array("\n", "\r", "\t"), array('', '', ''), get_option('AAPL_loading_code')); ?>';
+		//now using json_encode - two birds one bullet.
+		var str = '<?php echo json_encode(get_option('AAPL_loading_code')); ?>';
 		var AAPL_loading_code = str.replace('{loader}', AAPLloadingIMG.attr('src'));
-		str = '<?php echo str_replace(array("\n", "\r", "\t"), array('', '', ''), get_option('AAPL_loading_error_code')); ?>';
+		str = '<?php echo json_encode(get_option('AAPL_loading_error_code')); ?>';
 		var AAPL_loading_error_code = str.replace('{loader}', AAPLloadingIMG.attr('src'));
 	</script>
 	<?php 
@@ -283,6 +288,10 @@ function install_AAPL() {
 	
 	if (strcmp(get_option('AAPL_sponsor'), '') == 0) {
 		update_option('AAPL_sponsor', 'false');
+	}
+	
+	if (strcmp(get_option('AAPL_commercial'), '') == 0) {
+		update_option('AAPL_commercial', 'false');
 	}
 	
 	if (strcmp(get_option('AAPL_jquery_check'), '') == 0) {

@@ -1,11 +1,11 @@
 === Advanced AJAX Page Loader ===
 Contributors: deano1987, snumb130
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=MPJDRVYM87ZR4
-Version: 2.6.0
+Version: 2.6.1
 Tags: ajax, posts, pages, page, post, loading, loader, no refresh, dynamic, jquery
 Requires at least: 2.0?
 Tested up to: 3.4.2
-Stable tag: 2.6.0
+Stable tag: 2.6.1
 
 AJAX Page Loader will load posts, pages, etc. without reloading entire page.
 
@@ -24,6 +24,12 @@ Many thanks to Luke Howell, author of the original plugin which motivated me to 
 
 
 == Changelog ==
+
+= 2.6.1 =
+* People seem to be getting confused with debug mode, so modified messages and added info to the FAQ.
+* Now using json_encode when loading the error html and etc.
+* Search form checking had some problems, seems I merged an old code with a new one - dumbass I know.
+* Some new rules for commercial users and removing adverts/donation.
 
 = 2.6.0 =
 * sorry for bad releases!
@@ -193,6 +199,9 @@ Many thanks to Luke Howell, author of the original plugin which motivated me to 
 
 == Upgrade Notice ==
 
+= 2.6.1 =
+Some small updates - fixes for the search form again - good idea to update!
+
 = 2.6.0 =
 new features for you guys :)
 
@@ -283,25 +292,28 @@ changes... Put the binding code in the JS file after the line which says "DROP Y
 
 I have included a few example codes for nivoslider and jScrollPane, if you have other code please let me know and I can add it to the list.
 
+http://software.resplace.net/WordPress/AjaxPageLoader.php
+
 ----Theme Support----
 
 This edit may be required by some users with certain themes that cause AJAX Page Loader to reload the sidebar along with the content.
 
 1. Open your theme's index.php file.
 2.  find the "div" tag that contains the following inside a php tag: " if (have_posts()) : while (have_posts()) : the_post(); " . 
-3. Give this "div" tag a unique ID. (Example: div id="blogcontent")
-4. Edit "ajax-page-loader.js" and replace the word "content" at the top of the page with your id of the content area.
+3. Give this "div" tag a unique ID. (Default: div id='content')
+4. Check the AAPL settings page on your WordPress admin panel and make sure the content DIV id match, if you used 'content' this should be the default shown.
 
-If you theme's search function stops working or causes the page to reload, then you'll need to edit your theme's "search.php" and "searchform.php" files.
+If you theme's search function stops working or causes the page to reload, then you'll need to edit index.php (and any other pages the search box appears) and give the <form> a class (default: class='searchform'). Make sure "Search form Class" matches this for AAPL to find it.
 
-1. Edit your theme's "search.php" file.
-2. Find the "div" tag that containsthe following inside a php tag:
- "if (have_posts()) : "
-3. Give this "div" the same unique ID as mentioned earlier. (Example:  div id="blogcontent")
-4. Now edit your theme's "searchform.php" file.
-5. Make sure the "form" tag has the ID of "searchform".
-6. Make sure the "input" tag has the ID of "s".
+----Debugger----
 
+Some people have been concerned by the debugger, this has been cleared up a little with some extra information and a heading which I will explain below:
+
+Information - Anything with this is informative only, definately nothing to worry about.
+Warning - Anything with this is a warning, it may affect functionality but it may be working exactly as planned, for instance if your wordpress doesnt have a search form, this will show to say AAPL could not find it. It's fine.
+Error - Anything with this is an error, and should be diagnosed ASAP - it WILL affect the functionality of AAPL.
+
+Please switch off debug on a live site else everyone will be getting these messages. Only use this if you have a problem and wish to seek help on the forums.
 
 
 == Donations ==
