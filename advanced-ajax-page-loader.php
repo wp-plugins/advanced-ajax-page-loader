@@ -255,9 +255,9 @@ function insert_head_AAPL() {
 		
 		//Loading/Error Code
 		//now using json_encode - two birds one bullet.
-		var str = '<?php echo json_encode(get_option('AAPL_loading_code')); ?>';
+		var str = <?php echo json_encode(get_option('AAPL_loading_code')); ?>;
 		var AAPL_loading_code = str.replace('{loader}', AAPLloadingIMG.attr('src'));
-		str = '<?php echo json_encode(get_option('AAPL_loading_error_code')); ?>';
+		str = <?php echo json_encode(get_option('AAPL_loading_error_code')); ?>;
 		var AAPL_loading_error_code = str.replace('{loader}', AAPLloadingIMG.attr('src'));
 	</script>
 	<?php 
