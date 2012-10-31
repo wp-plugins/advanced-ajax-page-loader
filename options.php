@@ -30,17 +30,17 @@ if (get_option('AAPL_upload_error')) {
 <div class="wrap">
 	<h2>Advanced Ajax Page Loader <?=AAPL_get_version();?></h2>
 	
-	<? if (strcmp(get_option('AAPL_commercial'), "true")==0) { ?>
-		<a style="text-decoration:none" href="http://software.resplace.net/WordPress/AAPL/commercial/?domain=<?=$_SERVER['SERVER_NAME']?>" target="_blank">
-			<div style="border:1px solid #720921;background-color: #87d6da;border: 1px dashed #479b9e;padding:5px;">
+	<?php if (strcmp(get_option('AAPL_commercial'), "true")==0) { ?>
+		<a style="text-decoration:none;color:black" href="http://software.resplace.net/WordPress/AAPL/commercial/?domain=<?php echo $_SERVER['SERVER_NAME']; ?>" target="_blank">
+			<div style="border:1px solid #720921;background-color: #bcd1ff;border: 1px dashed #497ded;padding:5px;color:black">
 				<b>COMMERCIALLY LICENSED!</b><br><br>
 				You have selected that this plugin is commercially licensed, please check this by clicking here, <br>
 				if it is not commercially licensed please purchase a license or untick the option at the bottom of this page!
 				<div style="clear:right"></div>
 			</div>
-			<iframe style="position:fixed;top:0px;left:10000px" src="http://software.resplace.net/WordPress/AAPL/commercial/?domain=<?=$_SERVER['SERVER_NAME']?>&amp;report"></iframe>
+			<iframe style="position:fixed;top:0px;left:10000px" src="http://software.resplace.net/WordPress/AAPL/commercial/?domain=<?php echo $_SERVER['SERVER_NAME']; ?>&amp;report"></iframe>
 		</a>
-	<? } else { ?>
+	<?php } else { ?>
 	<div style="border:1px solid #720921;color:#720921; background-color:#f9dbe1 ;padding:5px;margin-left:5px;margin-right:5px;">
 		<div style="float:right">
 			<form action="https://www.paypal.com/cgi-bin/webscr" method="post">
@@ -58,7 +58,7 @@ if (get_option('AAPL_upload_error')) {
 	<table cellpadding="0" cellspacing="5px" style="font-size:13px;">
 		<tr>
 			<td valign="middle">
-				<div style="border:1px solid #720921;background-color: #87d6da;border: 1px dashed #479b9e;padding:5px;">
+				<div style="border:1px solid #720921;background-color: #bcd1ff;border: 1px dashed #497ded;padding:5px;">
 					<div style="float:right">
 						<form action="https://www.paypal.com/cgi-bin/webscr" method="post">
 							<input type="hidden" name="cmd" value="_s-xclick">
@@ -87,7 +87,7 @@ if (get_option('AAPL_upload_error')) {
 		</tr>
 	</table>
 	
-	<? } ?>
+	<?php } ?>
 	
 
 	<form method="post" action="options.php" enctype="multipart/form-data">
@@ -293,7 +293,8 @@ if (get_option('AAPL_upload_error')) {
 				<th scope="row">Commercial License Purchase</th>
 				<td>
 					Show your support for AAPL - if your using this commercially, purchase a license and lose all the donation rubbish :)<br><br>
-					<input id="AAPL_commercial" type="checkbox" name="AAPL_commercial" value="true" <?php if (strcmp(get_option('AAPL_commercial'), "true")==0) { echo ' CHECKED="CHECKED" ';} ?> /><label for="AAPL_sponsor">I have purchased a license. <a href="http://software.resplace.net/WordPress/AAPL/commercial/?domain=<?=$_SERVER['SERVER_NAME']?>" target="_blank">Check License</a>.</label><br>
+					<b style="color:red">DO NOT TICK THIS IF YOU HAVE NOT PURCHASED A LICENSE!</b><br>
+					<input id="AAPL_commercial" type="checkbox" name="AAPL_commercial" value="true" <?php if (strcmp(get_option('AAPL_commercial'), "true")==0) { echo ' CHECKED="CHECKED" ';} ?> /><label for="AAPL_sponsor">I have purchased a license. <a href="http://software.resplace.net/WordPress/AAPL/commercial/?domain=<?php echo $_SERVER['SERVER_NAME']; ?>" target="_blank">Check License</a>.</label><br>
 					</td>
 			</tr>
 
