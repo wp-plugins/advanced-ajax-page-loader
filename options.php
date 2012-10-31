@@ -117,7 +117,7 @@ if (get_option('AAPL_upload_error')) {
 									<tr valign="top">
 										<th scope="row">Search Form CLASS:</th>
 										<td><input type="text" name="AAPL_search_class" value="<?php echo get_option('AAPL_search_class'); ?>" style="width:200px;" /><br>
-										<i>This plugin automatically binds to the search form with an attribute ID "searchform", but if this is not set for your theme or you have multiple search forms then you will need to set class to each form that is for searching, ie: "&lt;form class='searchform'&gt;".</i>
+										<i>This plugin automatically binds to the search form with the provided class name (default: searchform), but if this is not set for your theme it will just do a normal post search without ajax.</i>
 										</td>
 									</tr>
 									
