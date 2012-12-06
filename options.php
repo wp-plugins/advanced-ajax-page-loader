@@ -32,7 +32,7 @@ if (get_option('AAPL_upload_error')) {
 	<h2>Advanced Ajax Page Loader <?=AAPL_get_version();?></h2>
 	<?php
 		$response = '';
-		$response = @file_get_contents('http://ssoftware.resplace.net/WordPress/AAPL/commercial/?domain='.$_SERVER['SERVER_NAME'].'&amp;return');
+		$response = @file_get_contents('http://software.resplace.net/WordPress/AAPL/commercial/?domain='.$_SERVER['SERVER_NAME'].'&amp;return');
 		
 		//manual
 		if ($response != '10800' && $response != '12800') {

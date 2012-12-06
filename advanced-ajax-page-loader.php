@@ -1,7 +1,7 @@
 <?php
 /*
 Plugin Name: Advanced AJAX Page Loader
-Version: 2.6.3
+Version: 2.6.4
 Plugin URI: http://software.resplace.net/WordPress/AjaxPageLoader.php
 Description: Load pages within blog without reloading page, shows loading bar and updates the browsers URL so that the user can bookmark or share the url as if they had loaded a page normally. Also updates there history so they have a track of there browsing habbits on your blog!
 Author URI: http://dean.resplace.net
@@ -17,20 +17,6 @@ Author: deano1987
 //                                                                                                    //
 ////////////////////////////////////////////////////////////////////////////////////////////////////////
 
----------------------------------------------------------------------
-This program is free software: you can redistribute it and/or modify
-it under the terms of the GNU General Public License as published by
-the Free Software Foundation, either version 3 of the License, or
-(at your option) any later version.
-
-This program is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-GNU General Public License for more details.
-
-You should have received a copy of the GNU General Public License
-along with this program.  If not, see <http://www.gnu.org/licenses/>.
----------------------------------------------------------------------
 */
 
 //useful variables
