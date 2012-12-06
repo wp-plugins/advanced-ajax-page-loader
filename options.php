@@ -1,4 +1,5 @@
 <?php
+	//Any modification to remove the donation or commercial messages is not allowed unless you get permission.
 $uploads = wp_upload_dir();
 $GLOBALS['AAPLimages'] = $uploads['basedir'] . '/AAPL';
 $GLOBALS['AAPLimagesurl'] = $uploads['baseurl'] . '/AAPL';
@@ -29,65 +30,143 @@ if (get_option('AAPL_upload_error')) {
 </style>
 <div class="wrap">
 	<h2>Advanced Ajax Page Loader <?=AAPL_get_version();?></h2>
-	
-	<?php if (strcmp(get_option('AAPL_commercial'), "true")==0) { ?>
-		<a style="text-decoration:none;color:black" href="http://software.resplace.net/WordPress/AAPL/commercial/?domain=<?php echo $_SERVER['SERVER_NAME']; ?>" target="_blank">
-			<div style="border:1px solid #720921;background-color: #bcd1ff;border: 1px dashed #497ded;padding:5px;color:black">
-				<b>COMMERCIALLY LICENSED!</b><br><br>
-				You have selected that this plugin is commercially licensed, please check this by clicking here, <br>
-				if it is not commercially licensed please purchase a license or untick the option at the bottom of this page!
-				<div style="clear:right"></div>
-			</div>
-			<iframe style="position:fixed;top:0px;left:10000px" src="http://software.resplace.net/WordPress/AAPL/commercial/?domain=<?php echo $_SERVER['SERVER_NAME']; ?>&amp;report"></iframe>
-		</a>
-	<?php } else { ?>
-	<div style="border:1px solid #720921;color:#720921; background-color:#f9dbe1 ;padding:5px;margin-left:5px;margin-right:5px;">
-		<div style="float:right">
-			<form action="https://www.paypal.com/cgi-bin/webscr" method="post">
-				<input type="hidden" name="cmd" value="_s-xclick">
-				<input type="hidden" name="hosted_button_id" value="LQ8EHZDUDSM5A">
-				<input type="image" src="https://www.paypalobjects.com/en_US/GB/i/btn/btn_buynowCC_LG.gif" border="0" name="submit" alt="PayPal — The safer, easier way to pay online.">
-				<img alt="" border="0" src="https://www.paypalobjects.com/en_GB/i/scr/pixel.gif" width="1" height="1">
-			</form>
-		</div>
-		<b>Using this Commercially?</b><br>
-		You <b>must</b> tick "Link to us" in "misc Settings" at the bottom of this page. Please consider purchasing a "commercial license" which will mean you can remove the "link to us" and the adverts in the header of this page!<br>
-		<div style="clear:right"></div>
-	</div>
-	
-	<table cellpadding="0" cellspacing="5px" style="font-size:13px;">
-		<tr>
-			<td valign="middle">
-				<div style="border:1px solid #720921;background-color: #bcd1ff;border: 1px dashed #497ded;padding:5px;">
+	<?php
+		$response = '';
+		$response = @file_get_contents('http://ssoftware.resplace.net/WordPress/AAPL/commercial/?domain='.$_SERVER['SERVER_NAME'].'&amp;return');
+		
+		//manual
+		if ($response != '10800' && $response != '12800') {
+			?>
+			<div style="color:#720921; padding:5px;margin-left:5px;margin-right:5px;">
+			<b>Could not connect to resplace.net to check commercial license... Manual system active!</b>
+			</div><br>
+			<?php
+			if (strcmp(get_option('AAPL_commercial'), "true")==0) {
+				?>
+				<a style="text-decoration:none;color:black" href="http://software.resplace.net/WordPress/AAPL/commercial/?domain=<?php echo $_SERVER['SERVER_NAME']; ?>" target="_blank">
+					<div style="border:1px solid #720921;background-color: #bcd1ff;border: 1px dashed #497ded;padding:5px;color:black">
+						<b>COMMERCIALLY LICENSED!</b><br><br>
+						You have selected that this plugin is commercially licensed, please check this by clicking here, <br>
+						if it is not commercially licensed please purchase a license or untick the option at the bottom of this page!
+						<div style="clear:right"></div>
+					</div>
+					<iframe id="commercialcheck" style="position:fixed;top:0px;left:10000px" src="http://software.resplace.net/WordPress/AAPL/commercial/?domain=<?php echo $_SERVER['SERVER_NAME']; ?>&amp;report"></iframe>
+				</a>
+				<?php 
+			} else { 
+				?>
+				<div style="border:1px solid #720921;color:#720921; background-color:#f9dbe1 ;padding:5px;margin-left:5px;margin-right:5px;">
 					<div style="float:right">
 						<form action="https://www.paypal.com/cgi-bin/webscr" method="post">
 							<input type="hidden" name="cmd" value="_s-xclick">
-							<input type="hidden" name="hosted_button_id" value="3P6VT6B5EBVCA">
-							<input type="image" src="https://www.paypalobjects.com/en_US/GB/i/btn/btn_donateCC_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online.">
+							<input type="hidden" name="hosted_button_id" value="LQ8EHZDUDSM5A">
+							<input type="image" src="https://www.paypalobjects.com/en_US/GB/i/btn/btn_buynowCC_LG.gif" border="0" name="submit" alt="PayPal — The safer, easier way to pay online.">
 							<img alt="" border="0" src="https://www.paypalobjects.com/en_GB/i/scr/pixel.gif" width="1" height="1">
 						</form>
 					</div>
-					If your using this on your site and it has saved you time/money and/or just made your site FREAKIN AWESOME, think about the time and
-					effort put into this plugin for free so that life is easier for you, <b>consider a donation!</b>
+					<b>Using this Commercially?</b><br>
+					You <b>must</b> tick "Link to us" in "misc Settings" at the bottom of this page. Please consider purchasing a "commercial license" which will mean you can remove the "link to us" and the adverts in the header of this page!<br>
 					<div style="clear:right"></div>
 				</div>
-				
-				<div style="margin-top:5px;text-align: left;background-color: #87d6da;border: 1px dashed #479b9e;padding: 2px;margin-bottom: 8px;padding:5px;">
-					<div style="float:right;color:#7a1c1c"><b>From as little as &pound;18ph</b></div>
-					<b>Need this script installing/modifying?</b><br>
-					We can install this script and integrate it into your website for a small fee, or make modifications/add new features that you require.<br>
-					<a href="http://dean.resplace.net/freelance/quote/?script=AAPL" target="_blank" title="script install modification services from as little as &pound;12">Ask for a quote</a>.
+
+				<table cellpadding="0" cellspacing="5px" style="font-size:13px;">
+					<tr>
+						<td valign="middle">
+							<div style="border:1px solid #720921;background-color: #bcd1ff;border: 1px dashed #497ded;padding:5px;">
+								<div style="float:right">
+									<form action="https://www.paypal.com/cgi-bin/webscr" method="post">
+										<input type="hidden" name="cmd" value="_s-xclick">
+										<input type="hidden" name="hosted_button_id" value="3P6VT6B5EBVCA">
+										<input type="image" src="https://www.paypalobjects.com/en_US/GB/i/btn/btn_donateCC_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online.">
+										<img alt="" border="0" src="https://www.paypalobjects.com/en_GB/i/scr/pixel.gif" width="1" height="1">
+									</form>
+								</div>
+								If your using this on your site and it has saved you time/money and/or just made your site FREAKIN AWESOME, think about the time and
+								effort put into this plugin for free so that life is easier for you, <b>consider a donation!</b>
+								<div style="clear:right"></div>
+							</div>
+							
+							<div style="margin-top:5px;text-align: left;background-color: #87d6da;border: 1px dashed #479b9e;padding: 2px;margin-bottom: 8px;padding:5px;">
+								<div style="float:right;color:#7a1c1c"><b>From as little as &pound;18ph</b></div>
+								<b>Need this script installing/modifying?</b><br>
+								We can install this script and integrate it into your website for a small fee, or make modifications/add new features that you require.<br>
+								<a href="http://dean.resplace.net/freelance/quote/?script=AAPL" target="_blank" title="script install modification services from as little as &pound;12">Ask for a quote</a>.
+							</div>
+						</td>
+						<td style="float:left;padding:10px;background-color:#87d6da">
+							<a href="https://www.e-junkie.com/ecom/gb.php?cl=66209&c=ib&aff=210604" target="ejejcsingle"><img src="http://alohathemes.com/wp-content/themes/reverb-aloha/images/logo.png" alt="Aloha Themes" title="Wordpress Themes" /></a>
+							<br>
+							<center><a href="https://www.e-junkie.com/ecom/gb.php?cl=66209&c=ib&aff=210604" target="ejejcsingle" style="color:black; text-decoration:none">Great themes for WordPress.</a></center>
+						</td>
+					</tr>
+				</table>
+				<?php 
+			}
+		} else {
+			
+			if ($response == '10800') {
+				?>
+				<a style="text-decoration:none;color:black" href="http://software.resplace.net/WordPress/AAPL/commercial/?domain=<?php echo $_SERVER['SERVER_NAME']; ?>" target="_blank">
+					<div style="border:1px solid #720921;background-color: #bcd1ff;border: 1px dashed #497ded;padding:5px;color:black">
+						<b>COMMERCIALLY LICENSED!</b><br><br>
+						This plugin is commercially licensed, thank you for purchasing this plugin, your support helps the development of AAPL :)
+						<div style="clear:right"></div>
+					</div>
+					<iframe id="commercialcheck" style="position:fixed;top:0px;left:10000px" src="http://software.resplace.net/WordPress/AAPL/commercial/?domain=<?php echo $_SERVER['SERVER_NAME']; ?>&amp;report"></iframe>
+				</a>
+				<?php
+			} else {
+				?>
+				<div style="border:1px solid #720921;color:#720921; background-color:#f9dbe1 ;padding:5px;margin-left:5px;margin-right:5px;">
+					<div style="float:right">
+						<form action="https://www.paypal.com/cgi-bin/webscr" method="post">
+							<input type="hidden" name="cmd" value="_s-xclick">
+							<input type="hidden" name="hosted_button_id" value="LQ8EHZDUDSM5A">
+							<input type="image" src="https://www.paypalobjects.com/en_US/GB/i/btn/btn_buynowCC_LG.gif" border="0" name="submit" alt="PayPal — The safer, easier way to pay online.">
+							<img alt="" border="0" src="https://www.paypalobjects.com/en_GB/i/scr/pixel.gif" width="1" height="1">
+						</form>
+					</div>
+					<b>Using this Commercially?</b><br>
+					You <b>must</b> tick "Link to us" in "misc Settings" at the bottom of this page. Please consider purchasing a "commercial license" which will mean you can remove the "link to us" and the adverts in the header of this page!<br>
+					If you have already purchased a license to remove this header, please wait for a confirmation email and this should disappear by itself.
+					<div style="clear:right"></div>
 				</div>
-			</td>
-			<td style="float:left;padding:10px;background-color:#87d6da">
-				<a href="https://www.e-junkie.com/ecom/gb.php?cl=66209&c=ib&aff=210604" target="ejejcsingle"><img src="http://alohathemes.com/wp-content/themes/reverb-aloha/images/logo.png" alt="Aloha Themes" title="Wordpress Themes" /></a>
-				<br>
-				<center><a href="https://www.e-junkie.com/ecom/gb.php?cl=66209&c=ib&aff=210604" target="ejejcsingle" style="color:black; text-decoration:none">Great themes for WordPress.</a></center>
-			</td>
-		</tr>
-	</table>
-	
-	<?php } ?>
+
+				<table cellpadding="0" cellspacing="5px" style="font-size:13px;">
+					<tr>
+						<td valign="middle">
+							<div style="border:1px solid #720921;background-color: #bcd1ff;border: 1px dashed #497ded;padding:5px;">
+								<div style="float:right">
+									<form action="https://www.paypal.com/cgi-bin/webscr" method="post">
+										<input type="hidden" name="cmd" value="_s-xclick">
+										<input type="hidden" name="hosted_button_id" value="3P6VT6B5EBVCA">
+										<input type="image" src="https://www.paypalobjects.com/en_US/GB/i/btn/btn_donateCC_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online.">
+										<img alt="" border="0" src="https://www.paypalobjects.com/en_GB/i/scr/pixel.gif" width="1" height="1">
+									</form>
+								</div>
+								If your using this on your site and it has saved you time/money and/or just made your site FREAKIN AWESOME, think about the time and
+								effort put into this plugin for free so that life is easier for you, <b>consider a donation!</b>
+								<div style="clear:right"></div>
+							</div>
+							
+							<div style="margin-top:5px;text-align: left;background-color: #87d6da;border: 1px dashed #479b9e;padding: 2px;margin-bottom: 8px;padding:5px;">
+								<div style="float:right;color:#7a1c1c"><b>From as little as &pound;18ph</b></div>
+								<b>Need this script installing/modifying?</b><br>
+								We can install this script and integrate it into your website for a small fee, or make modifications/add new features that you require.<br>
+								<a href="http://dean.resplace.net/freelance/quote/?script=AAPL" target="_blank" title="script install modification services from as little as &pound;12">Ask for a quote</a>.
+							</div>
+						</td>
+						<td style="float:left;padding:10px;background-color:#87d6da">
+							<a href="https://www.e-junkie.com/ecom/gb.php?cl=66209&c=ib&aff=210604" target="ejejcsingle"><img src="http://alohathemes.com/wp-content/themes/reverb-aloha/images/logo.png" alt="Aloha Themes" title="Wordpress Themes" /></a>
+							<br>
+							<center><a href="https://www.e-junkie.com/ecom/gb.php?cl=66209&c=ib&aff=210604" target="ejejcsingle" style="color:black; text-decoration:none">Great themes for WordPress.</a></center>
+						</td>
+					</tr>
+				</table>
+				<?php
+			}
+		}
+		?>
 	
 
 	<form method="post" action="options.php" enctype="multipart/form-data">
@@ -289,15 +368,21 @@ if (get_option('AAPL_upload_error')) {
 					</td>
 			</tr>
 			
-			<tr valign="top">
-				<th scope="row">Commercial License Purchase</th>
-				<td>
-					Show your support for AAPL - if your using this commercially, purchase a license and lose all the donation rubbish :)<br><br>
-					<b style="color:red">DO NOT TICK THIS IF YOU HAVE NOT PURCHASED A LICENSE!</b><br>
-					<input id="AAPL_commercial" type="checkbox" name="AAPL_commercial" value="true" <?php if (strcmp(get_option('AAPL_commercial'), "true")==0) { echo ' CHECKED="CHECKED" ';} ?> /><label for="AAPL_sponsor">I have purchased a license. <a href="http://software.resplace.net/WordPress/AAPL/commercial/?domain=<?php echo $_SERVER['SERVER_NAME']; ?>" target="_blank">Check License</a>.</label><br>
-					</td>
-			</tr>
-
+			<?php
+			//manual
+			if ($response != '10800' && $response != '12800') {
+				?>
+				<tr valign="top">
+					<th scope="row">Commercial License Purchase</th>
+					<td>
+						Show your support for AAPL - if your using this commercially, purchase a license and lose all the donation rubbish :)<br><br>
+						<b style="color:red">DO NOT TICK THIS IF YOU HAVE NOT PURCHASED A LICENSE!</b><br>
+						<input id="AAPL_commercial" type="checkbox" name="AAPL_commercial" value="true" <?php if (strcmp(get_option('AAPL_commercial'), "true")==0) { echo ' CHECKED="CHECKED" ';} ?> /><label for="AAPL_sponsor">I have purchased a license. <a href="http://software.resplace.net/WordPress/AAPL/commercial/?domain=<?php echo $_SERVER['SERVER_NAME']; ?>" target="_blank">Check License</a>.</label><br>
+						</td>
+				</tr>
+				<?php
+			}
+			?>
 		</table>
 
 		<input type="hidden" name="action" value="update" />

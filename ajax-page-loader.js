@@ -1,6 +1,6 @@
 /*
 Plugin Name: Advanced AJAX Page Loader
-Version: 2.6.2
+Version: 2.6.3
 Plugin URI: http://software.resplace.net/WordPress/AjaxPageLoader.php
 Description: Load pages within blog without reloading page, shows loading bar and updates the browsers URL so that the user can bookmark or share the url as if they had loaded a page normally. Also updates there history so they have a track of there browsing habbits on your blog!
 Author URI: http://dean.resplace.net
@@ -95,31 +95,14 @@ function AAPL_loadPageInit(scope){
 			alert("WARNING: \nCould not bind to search form...\nCould not find <form> tag with class='" + AAPL_search_class + "' or action='' missing. This may mean search form doesnt work with AAPL!");
 		}
 	}
-  
-	/*if (scope == "") { 
-		if (jQuery('#' + AAPL_search_class).attr("action")) {
-			//Get the current action so we know where to submit to
-			AAPL_searchPath = jQuery('#' + AAPL_search_class).attr("action");
-
-			//bind our code to search submit, now we can load everything through ajax :)
-			//jQuery('#searchform').name = 'searchform';
-			jQuery('#' + AAPL_search_class).submit(function() {
-				submitSearch(jQuery(this).serialize());
-				return false;
-			});
-		} else {
-			if (AAPL_warnings == true) {
-				alert("WARNING: \nCould not bind to search form...\nCould not find <form> tag with class='" + AAPL_search_class + "' or action='' missing. This may mean search form doesnt work with AAPL!");
-			}
-		}
-	}*/
 }
 
 function AAPL_loadPage(url, push, getData){
 
 	if (!AAPL_isLoad){
 		if (AAPL_scroll_top == true) {
-			scroll(0,0);
+			//Nicer Scroll to top - thanks Bram Perry
+			jQuery('html,body').animate({scrollTop: 0}, 1500);
 		}
 		AAPL_isLoad = true;
 		
