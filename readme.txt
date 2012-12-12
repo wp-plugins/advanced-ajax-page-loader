@@ -4,7 +4,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_i
 Version: 2.6.4
 Tags: ajax, posts, pages, page, post, loading, loader, no refresh, dynamic, jquery
 Requires at least: 2.0?
-Tested up to: 3.4.2
+Tested up to: 3.5.0
 Stable tag: 2.6.4
 
 AJAX Page Loader will load posts, pages, etc. without reloading entire page.
