@@ -1,11 +1,11 @@
 === Advanced AJAX Page Loader ===
 Contributors: deano1987, snumb130
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=MPJDRVYM87ZR4
-Version: 2.6.7
+Version: 2.6.8
 Tags: ajax, posts, pages, page, post, loading, loader, no refresh, dynamic, jquery
 Requires at least: 2.0?
 Tested up to: 3.8.1
-Stable tag: 2.6.7
+Stable tag: 2.6.8
 
 AJAX Page Loader will load posts, pages, etc. without reloading entire page.
 
@@ -25,7 +25,7 @@ Many thanks to Luke Howell, author of the original plugin which motivated me to 
 
 == Changelog ==
 
-= 2.6.7 =
+= 2.6.8 =
 * Updated compatibility to latest wordpress.
 * This version is GPL'd, a new PAID version will be released soon!
 
@@ -221,7 +221,7 @@ Many thanks to Luke Howell, author of the original plugin which motivated me to 
 
 == Upgrade Notice ==
 
-= 2.6.7 =
+= 2.6.8 =
 This version is GPL'd, a new PAID version will be released soon!
 
 = 2.6.3 =
