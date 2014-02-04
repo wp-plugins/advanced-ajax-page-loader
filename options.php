@@ -32,14 +32,8 @@ if (get_option('AAPL_upload_error')) {
 	<h2>Advanced Ajax Page Loader <?=AAPL_get_version();?></h2>
 	<?php
 		$response = '';
-		$response = @file_get_contents('http://software.resplace.net/WordPress/AAPL/commercial/?domain='.$_SERVER['SERVER_NAME'].'&amp;return');
-		
 		//manual
-		if ($response != '10800' && $response != '12800') {
 			?>
-			<div style="color:#720921; padding:5px;margin-left:5px;margin-right:5px;">
-			<b>Could not connect to resplace.net to check if purchased... Manual system active!</b>
-			</div><br>
 			<?php
 			if (strcmp(get_option('AAPL_commercial'), "true")==0) {
 				?>
@@ -88,56 +82,7 @@ if (get_option('AAPL_upload_error')) {
 				</table>
 				<?php 
 			}
-		} else {
-			
-			if ($response == '10800') {
-				?>
-				<a style="text-decoration:none;color:black" href="http://software.resplace.net/WordPress/AAPL/commercial/?domain=<?php echo $_SERVER['SERVER_NAME']; ?>" target="_blank">
-					<div style="border:1px solid #720921;background-color: #bcd1ff;border: 1px dashed #497ded;padding:5px;color:black">
-						<b>PLUGIN PURCHASED!</b><br><br>
-						Thanks for supporting this plugin's development, once paid version has been released you will be given a discount to upgrade, thanks again!!
-						<div style="clear:right"></div>
-					</div>
-					<iframe id="commercialcheck" style="position:fixed;top:0px;left:10000px" src="http://software.resplace.net/WordPress/AAPL/commercial/?domain=<?php echo $_SERVER['SERVER_NAME']; ?>&amp;report"></iframe>
-				</a>
-				<?php
-			} else {
-				?>
-			
-				<table cellpadding="0" cellspacing="5px" style="font-size:13px;">
-					<tr>
-						<td valign="middle">
-							<div style="border:1px solid #720921;color:#720921; background-color:#f9dbe1 ;padding:5px;margin-left:5px;margin-right:5px;">
-								<div style="float:right">
-									<form action="https://www.paypal.com/cgi-bin/webscr" method="post">
-										<input type="hidden" name="cmd" value="_s-xclick">
-										<input type="hidden" name="hosted_button_id" value="LQ8EHZDUDSM5A">
-										<input type="image" src="https://www.paypalobjects.com/en_US/GB/i/btn/btn_buynowCC_LG.gif" border="0" name="submit" alt="PayPal — The safer, easier way to pay online.">
-										<img alt="" border="0" src="https://www.paypalobjects.com/en_GB/i/scr/pixel.gif" width="1" height="1">
-									</form>
-								</div>
-								<b>Plugin saved you time?</b><br>
-								If this plugin has saved you time consider purchasing it for your website, not only will you be helping the development of this plugin but you will also be able to get the latest paid version of AAPL cheaper when paid version is released.
-								<div style="clear:right"></div>
-							</div>
-							
-							<div style="margin-top:5px;text-align: left;background-color: #87d6da;border: 1px dashed #479b9e;padding: 2px;margin-bottom: 8px;padding:5px;">
-								<div style="float:right;color:#7a1c1c"><b>From as little as &pound;18ph</b></div>
-								<b>Need this script installing/modifying?</b><br>
-								We can install this script and integrate it into your website for a small fee, or make modifications/add new features that you require.<br>
-								<a href="http://dean.resplace.net/freelance/quote/?script=AAPL" target="_blank" title="script install modification services from as little as &pound;12">Ask for a quote</a>.
-							</div>
-						</td>
-						<td style="float:left;padding:10px;background-color:#87d6da">
-							<a href="https://www.e-junkie.com/ecom/gb.php?cl=66209&c=ib&aff=210604" target="ejejcsingle"><img src="http://alohathemes.com/wp-content/themes/reverb-aloha/images/logo.png" alt="Aloha Themes" title="Wordpress Themes" /></a>
-							<br>
-							<center><a href="https://www.e-junkie.com/ecom/gb.php?cl=66209&c=ib&aff=210604" target="ejejcsingle" style="color:black; text-decoration:none">Great themes for WordPress.</a></center>
-						</td>
-					</tr>
-				</table>
-				<?php
-			}
-		}
+		
 		?>
 	
 
