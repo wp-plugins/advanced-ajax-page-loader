@@ -25,7 +25,7 @@ Many thanks to Luke Howell, author of the original plugin which motivated me to 
 
 == Changelog ==
 
-= 2.6.7 =
+= 2.6.8 =
 * Updated compatibility to latest wordpress.
 * This version is GPL'd, a new PAID version will be released soon!
 
@@ -221,7 +221,7 @@ Many thanks to Luke Howell, author of the original plugin which motivated me to 
 
 == Upgrade Notice ==
 
-= 2.6.7 =
+= 2.6.8 =
 This version is GPL'd, a new PAID version will be released soon!
 
 = 2.6.3 =
