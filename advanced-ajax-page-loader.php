@@ -24,8 +24,8 @@ $uploads = wp_upload_dir();
 $GLOBALS['AAPLimages'] = $uploads['basedir'] . '/AAPL';
 $GLOBALS['AAPLimagesurl'] = $uploads['baseurl'] . '/AAPL';
 
-if(!function_exists('get_option'))
-  require_once('../../../wp-config.php');
+//if(!function_exists('get_option'))
+  //require_once('../../../wp-config.php');
   
 //install - uninstall
 register_activation_hook(__FILE__, 'install_AAPL');
@@ -231,8 +231,7 @@ function insert_head_AAPL() {
 		var AAPLsiteurl = "<?php echo get_option('home');?>";
 		var AAPLhome = "<?php echo get_option('siteurl');?>";
 		
-		//The old code here was RETARDED - Much like the rest of the code... Now I have replaced this with something better ;)
-		//PRELOADING YEEEYYYYY!!
+		//reload code here
 		var AAPLloadingIMG = jQuery('<img/>').attr('src', '<?php echo $GLOBALS['AAPLimagesurl'] . '/loaders/' . get_option('AAPL_loading_img') ;?>');
 		var AAPLloadingDIV = jQuery('<div/>').attr('style', 'display:none;').attr('id', 'ajaxLoadDivElement');
 		AAPLloadingDIV.appendTo('body');
