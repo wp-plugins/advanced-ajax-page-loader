@@ -73,11 +73,6 @@ if (get_option('AAPL_upload_error')) {
 								<a href="http://dean.resplace.net/freelance/quote/?script=AAPL" target="_blank" title="script install modification services from as little as &pound;12">Ask for a quote</a>.
 							</div>
 						</td>
-						<td style="float:left;padding:10px;background-color:#87d6da">
-							<a href="https://www.e-junkie.com/ecom/gb.php?cl=66209&c=ib&aff=210604" target="ejejcsingle"><img src="http://alohathemes.com/wp-content/themes/reverb-aloha/images/logo.png" alt="Aloha Themes" title="Wordpress Themes" /></a>
-							<br>
-							<center><a href="https://www.e-junkie.com/ecom/gb.php?cl=66209&c=ib&aff=210604" target="ejejcsingle" style="color:black; text-decoration:none">Great themes for WordPress.</a></center>
-						</td>
 					</tr>
 				</table>
 				<?php 
@@ -284,22 +279,6 @@ if (get_option('AAPL_upload_error')) {
 					<input id="AAPL_sponsor" type="checkbox" name="AAPL_sponsor" value="true" <?php if (strcmp(get_option('AAPL_sponsor'), "true")==0) { echo ' CHECKED="CHECKED" ';} ?> /><label for="AAPL_sponsor">Enable footer link.</label><br>
 					</td>
 			</tr>
-			
-			<?php
-			//manual
-			if ($response != '10800' && $response != '12800') {
-				?>
-				<tr valign="top">
-					<th scope="row">Commercial License Purchase</th>
-					<td>
-						Show your support for AAPL - make a donation or purchase and lose all the donation rubbish :)<br><br>
-						<b style="color:red">TICK THIS TO REMOVE DONATION AND LINK BACK</b><br>
-						<input id="AAPL_commercial" type="checkbox" name="AAPL_commercial" value="true" <?php if (strcmp(get_option('AAPL_commercial'), "true")==0) { echo ' CHECKED="CHECKED" ';} ?> /><label for="AAPL_sponsor">I have purchased. <a href="http://software.resplace.net/WordPress/AAPL/commercial/?domain=<?php echo $_SERVER['SERVER_NAME']; ?>" target="_blank">Check Purchase</a>.</label><br>
-						</td>
-				</tr>
-				<?php
-			}
-			?>
 		</table>
 
 		<input type="hidden" name="action" value="update" />
