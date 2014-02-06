@@ -161,8 +161,8 @@ add_action('wp_enqueue_scripts', 'enqueue_AAPL');
 
 function enqueue_AAPL() {
 	//Make sure we use latest jquery?
-	wp_deregister_script('jquery');
-    wp_register_script('jquery', plugins_url( 'jquery.js' , __FILE__ ));
+	//wp_deregister_script('jquery');
+    //wp_register_script('jquery', plugins_url( 'jquery.js' , __FILE__ ));
     wp_enqueue_script('jquery');
 }
 
@@ -212,7 +212,7 @@ function insert_head_AAPL() {
 						
 						//output the jquery script
 						//one day I will complain :/ double quotes inside singles.
-						document.write('<scr' + 'ipt type="text/javascript" src="<?php echo plugins_url( 'jquery.js' , __FILE__ );?>"></scr' + 'ipt>');
+						//document.write('<scr' + 'ipt type="text/javascript" src="<?php echo plugins_url( 'jquery.js' , __FILE__ );?>"></scr' + 'ipt>');
 					}
 					setTimeout('initJQuery()', 50);
 				}
