@@ -1,11 +1,11 @@
 === Advanced AJAX Page Loader ===
 Contributors: deano1987, snumb130
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=MPJDRVYM87ZR4
-Version: 2.6.8
+Version: 2.7.0
 Tags: ajax, posts, pages, page, post, loading, loader, no refresh, dynamic, jquery
 Requires at least: 2.0?
-Tested up to: 3.8.1
-Stable tag: 2.6.8
+Tested up to: 4.1.0
+Stable tag: 2.7.0
 
 AJAX Page Loader will load posts, pages, etc. without reloading entire page.
 
@@ -25,9 +25,9 @@ Many thanks to Luke Howell, author of the original plugin which motivated me to 
 
 == Changelog ==
 
-= 2.6.8 =
+= 2.7.0 =
 * Updated compatibility to latest wordpress.
-* This version is GPL'd, a new PAID version will be released soon!
+* Premium plugin coming soon!
 
 = 2.6.6 =
 * Updated compatibility to latest wordpress.
@@ -221,8 +221,8 @@ Many thanks to Luke Howell, author of the original plugin which motivated me to 
 
 == Upgrade Notice ==
 
-= 2.6.8 =
-This version is GPL'd, a new PAID version will be released soon!
+= 2.7.0 =
+Important update!!
 
 = 2.6.3 =
 Options panel changes and new scroll method that is smooth!
@@ -305,6 +305,8 @@ This version fix's IE issues and updates the page title. dont forget to backup a
 3. Goto "Settings" > "Advanced Ajax Page Loader" and review the settings, click save.
 3. make sure your theme has the content area wrapped in a tag such as a DIV with an id attribute called "content". (data within this div will be replaced with AJAX content). SEE THEME GUIDE IN FAQ.
 
+Visit: http://ajaxpageloader.com
+
 == Frequently Asked Questions ==
 
 Q: The plugin isn't working right,  HHEEEELLLPPPP!!!!!!!!
@@ -333,6 +335,9 @@ This edit may be required by some users with certain themes that cause AJAX Page
 
 If you theme's search function stops working or causes the page to reload, then you'll need to edit index.php (and any other pages the search box appears) and give the <form> a class (default: class='searchform'). Make sure "Search form Class" matches this for AAPL to find it.
 
+Need more help?
+Visit: http://ajaxpageloader.com
+
 ----Debugger----
 
 Some people have been concerned by the debugger, this has been cleared up a little with some extra information and a heading which I will explain below:
@@ -342,6 +347,9 @@ Warning - Anything with this is a warning, it may affect functionality but it ma
 Error - Anything with this is an error, and should be diagnosed ASAP - it WILL affect the functionality of AAPL.
 
 Please switch off debug on a live site else everyone will be getting these messages. Only use this if you have a problem and wish to seek help on the forums.
+
+If you need support please visit:
+http://ajaxpageloader.com
 
 
 == Donations ==

@@ -1,7 +1,7 @@
 <?php
 /*
 Plugin Name: Advanced AJAX Page Loader
-Version: 2.6.8
+Version: 2.7.0
 Plugin URI: http://software.resplace.net/WordPress/AjaxPageLoader.php
 Description: Load pages within blog without reloading page, shows loading bar and updates the browsers URL so that the user can bookmark or share the url as if they had loaded a page normally. Also updates there history so they have a track of there browsing habbits on your blog!
 Author URI: http://dean.resplace.net
@@ -24,8 +24,8 @@ $uploads = wp_upload_dir();
 $GLOBALS['AAPLimages'] = $uploads['basedir'] . '/AAPL';
 $GLOBALS['AAPLimagesurl'] = $uploads['baseurl'] . '/AAPL';
 
-//if(!function_exists('get_option'))
-  //require_once('../../../wp-config.php');
+if(!function_exists('get_option'))
+  require_once('../../../wp-config.php');
   
 //install - uninstall
 register_activation_hook(__FILE__, 'install_AAPL');
@@ -161,8 +161,8 @@ add_action('wp_enqueue_scripts', 'enqueue_AAPL');
 
 function enqueue_AAPL() {
 	//Make sure we use latest jquery?
-	//wp_deregister_script('jquery');
-    //wp_register_script('jquery', plugins_url( 'jquery.js' , __FILE__ ));
+	wp_deregister_script('jquery');
+    wp_register_script('jquery', plugins_url( 'jquery.js' , __FILE__ ));
     wp_enqueue_script('jquery');
 }
 
@@ -212,7 +212,7 @@ function insert_head_AAPL() {
 						
 						//output the jquery script
 						//one day I will complain :/ double quotes inside singles.
-						//document.write('<scr' + 'ipt type="text/javascript" src="<?php echo plugins_url( 'jquery.js' , __FILE__ );?>"></scr' + 'ipt>');
+						document.write('<scr' + 'ipt type="text/javascript" src="<?php echo plugins_url( 'jquery.js' , __FILE__ );?>"></scr' + 'ipt>');
 					}
 					setTimeout('initJQuery()', 50);
 				}
@@ -231,7 +231,8 @@ function insert_head_AAPL() {
 		var AAPLsiteurl = "<?php echo get_option('home');?>";
 		var AAPLhome = "<?php echo get_option('siteurl');?>";
 		
-		//reload code here
+		//The old code here was RETARDED - Much like the rest of the code... Now I have replaced this with something better ;)
+		//PRELOADING YEEEYYYYY!!
 		var AAPLloadingIMG = jQuery('<img/>').attr('src', '<?php echo $GLOBALS['AAPLimagesurl'] . '/loaders/' . get_option('AAPL_loading_img') ;?>');
 		var AAPLloadingDIV = jQuery('<div/>').attr('style', 'display:none;').attr('id', 'ajaxLoadDivElement');
 		AAPLloadingDIV.appendTo('body');

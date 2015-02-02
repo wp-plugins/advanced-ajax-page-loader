@@ -1,6 +1,6 @@
 /*
 Plugin Name: Advanced AJAX Page Loader
-Version: 2.6.8
+Version: 2.7.0
 Plugin URI: http://software.resplace.net/WordPress/AjaxPageLoader.php
 Description: Load pages within blog without reloading page, shows loading bar and updates the browsers URL so that the user can bookmark or share the url as if they had loaded a page normally. Also updates there history so they have a track of there browsing habbits on your blog!
 Author URI: http://dean.resplace.net
@@ -85,7 +85,7 @@ function AAPL_loadPageInit(scope){
 			});
 		} else {
 			if (AAPL_warnings == true) {
-				alert("WARNING: \nSearch form found but attribute 'action' missing!?!?! This may mean search form doesnt work with AAPL!");
+				alert("WARNING: \nSearch form found but attribute 'action' missing!?!?! This may mean search form doesn't work with AAPL!");
 			}
 		}
 	});
@@ -138,7 +138,7 @@ function AAPL_loadPage(url, push, getData){
 		
 		//start changing the page content.
 		jQuery('#' + AAPL_content).fadeOut("slow", function() {
-			//See the below - NEVER TRUST jQuery to sort ALL your problems - this breaks Ie7 + 8 :o
+			//See peakaboo below - NEVER TRUST jQuery to sort ALL your problems - this breaks Ie7 + 8 :o
 			//jQuery('#' + AAPL_content).html(AAPL_loading_code);
 			
 			//Nothing like good old pure JavaScript...
@@ -171,7 +171,7 @@ function AAPL_loadPage(url, push, getData){
 							}
 						}
 						
-						//Google analytics?
+						//GOOGLE ANALYTICS TRACKING
 						if (AAPL_track_analytics == true) {
 							if(typeof _gaq != "undefined") {
 								if (typeof getData == "undefined") {
@@ -187,11 +187,8 @@ function AAPL_loadPage(url, push, getData){
 							}
 						}
 						
-						///////////////////////////////////////////
-						//  WE HAVE AN ADMIN PAGE NOW - GO THERE //
-						///////////////////////////////////////////
                         
-						
+						//TRY TO RUN DATA CODE
 						try {
 							AAPL_data_code(data);
 						} catch(err) {
@@ -203,9 +200,8 @@ function AAPL_loadPage(url, push, getData){
 						}
 
 						
-						//get content
-						data = data.split('id="' + AAPL_content + '"')[1];
-						data = data.substring(data.indexOf('>') + 1);
+						//GET PAGE CONTENT
+						data = data.split(RegExp('id=["\']?' + AAPL_content + '["\']?'))[1];
 						var depth = 1;
 						var output = '';
 						
@@ -227,7 +223,7 @@ function AAPL_loadPage(url, push, getData){
 
 						//put the resulting html back into the page!
 						
-						//See the below - NEVER TRUST jQuery to sort ALL your problems - this breaks Ie7 + 8 :o
+						//See peakaboo below - NEVER TRUST jQuery to sort ALL your problems - this breaks Ie7 + 8 :o
 						//jQuery('#' + AAPL_content).html(output);
 						
 						//Nothing like good old pure JavaScript...
@@ -247,10 +243,8 @@ function AAPL_loadPage(url, push, getData){
 							jQuery(document).trigger("ready");
 						}
 						
-						///////////////////////////////////////////
-						//  WE HAVE AN ADMIN PAGE NOW - GO THERE //
-						///////////////////////////////////////////
 						
+						//TRY TO RUN RELOAD CODE
 						try {
 							AAPL_reload_code();
 						} catch(err) {
@@ -259,11 +253,6 @@ function AAPL_loadPage(url, push, getData){
 								txt+="Error description: " + err.message;
 								alert(txt);
 							}
-							
-							//we have to show something... + reset the position.
-							//jQuery('#' + AAPL_content).css("position", "");
-							//jQuery('#' + AAPL_content).css("left", "");
-							//jQuery('#' + AAPL_content).html('<br><br>There was an error loading the page.<br><br>');
 						}
 
 						//now hide it again and put the position back!
@@ -285,7 +274,7 @@ function AAPL_loadPage(url, push, getData){
 							alert(txt);
 						}
 						
-						//See the below - NEVER TRUST jQuery to sort ALL your problems - this breaks Ie7 + 8 :o
+						//See peakaboo below - NEVER TRUST jQuery to sort ALL your problems - this breaks Ie7 + 8 :o
 						//jQuery('#' + AAPL_content).html(AAPL_loading_error_code);
 						
 						//Nothing like good old pure JavaScript...
@@ -310,18 +299,18 @@ function AAPL_check_ignore(url) {
 		}
 	}
 	
-	//peakaboo fixed.
+	/*___  ____   __   __ _   __   ____   __    __                             
+	(  _ \(  __) / _\ (  / ) / _\ (  _ \ /  \  /  \                            
+	 ) __/ ) _) /    \ )  ( /    \ ) _ ((  O )(  O )                           
+	(__)  (____)\_/\_/(__\_)\_/\_/(____/ \__/  \__/                            
+	 ____  __  _  _  ____  ____    ____  __  __ _   __   __    __    _  _  _   
+	(  __)(  )( \/ )(  __)(    \  (  __)(  )(  ( \ / _\ (  )  (  )  ( \/ )/ \  
+	 ) _)  )(  )  (  ) _)  ) D (   ) _)  )( /    //    \/ (_/\/ (_/\ )  / \_/  
+	(__)  (__)(_/\_)(____)(____/  (__)  (__)\_)__)\_/\_/\____/\____/(__/  (_)  
+	*/
 	
-	//WHOA!! Lets f**k IE7 and IE8 off because they are sh**e!
-		//No I'm corrected, it may be IE's fault also but it's definately jQuery fault I've had this nightmare!!
-		/*
-		if ( AAPL_ua.msie && (AAPL_ua.version.slice(0,1) == "8" || AAPL_ua.version.slice(0,1) == "7") ) {
-			if (AAPL_warnings == true) {
-				alert("Unfortunately there is a bug in IE7 and IE8 which affects the renderer, it's called the peakaboo bug. So we have disabled this plugin.");
-			}
-			return false;
-		}
-		*/
-	
+	//AHHHGGRRR!! Long story short, IE is a nightmare and this plagued me for many nights :(
+	//The problem was actually down to jQuery, once I decided to replace the code commented out above (labelled peakaboo) with native JS it worked perfectly!
+
 	return true;
 }
