@@ -25,6 +25,9 @@ Many thanks to Luke Howell, author of the original plugin which motivated me to 
 
 == Changelog ==
 
+= 2.7.1 =
+* Fixed a bug with data appearing in the page.
+
 = 2.7.0 =
 * Updated compatibility to latest wordpress.
 * Premium plugin coming soon!
@@ -220,6 +223,9 @@ Many thanks to Luke Howell, author of the original plugin which motivated me to 
 
 
 == Upgrade Notice ==
+
+= 2.7.1 =
+Bug fix!
 
 = 2.7.0 =
 Important update!!

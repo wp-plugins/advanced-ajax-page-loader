@@ -56,13 +56,6 @@ if (get_option('AAPL_upload_error')) {
 	<table>
 		<tr>
 			<td>
-				<div style="margin-right:10px;width:300px;">
-					<script type="text/javascript"><!--
-					amazon_ad_tag = "resplace-21"; amazon_ad_width = "300"; amazon_ad_height = "250"; amazon_ad_logo = "hide"; amazon_ad_link_target = "new"; amazon_ad_border = "hide"; amazon_color_background = "F1F1F1";//--></script>
-					<script type="text/javascript" src="http://ir-uk.amazon-adsystem.com/s/ads.js"></script>
-				</div>
-			</td>
-			<td>
 				<div class="aaplblue">
 					<? /*<img style="float:right;margin:0px 10px 10px 10px" src="http://www.eelanmedia.com/wp-content/uploads/2014/01/Paypal-Buy-Now-button.png" />
 					*/ ?><img style="float:right;margin:0px 10px 10px 10px;width:300px" src="http://theriteconcept.com/wp-content/uploads/2013/12/comingsoon.png" />
@@ -92,28 +85,6 @@ if (get_option('AAPL_upload_error')) {
 
 		<table>
 			<tr>
-				<td valign="top" style="padding:20px 10px 10px 10px">
-					<script type="text/javascript"><!--
-					amazon_ad_tag = "resplace-21"; amazon_ad_width = "160"; amazon_ad_height = "600"; amazon_ad_logo = "hide"; amazon_ad_link_target = "new"; amazon_ad_border = "hide"; amazon_color_background = "F1F1F1";//--></script>
-					<script type="text/javascript" src="http://ir-uk.amazon-adsystem.com/s/ads.js"></script>
-					<br>
-					<script type="text/javascript"><!--
-					amazon_ad_tag = "resplace-21"; amazon_ad_width = "160"; amazon_ad_height = "600"; amazon_ad_logo = "hide"; amazon_ad_link_target = "new"; amazon_ad_border = "hide"; amazon_color_background = "F1F1F1";//--></script>
-					<script type="text/javascript" src="http://ir-uk.amazon-adsystem.com/s/ads.js"></script>
-					<br>
-					<script type="text/javascript"><!--
-					amazon_ad_tag = "resplace-21"; amazon_ad_width = "160"; amazon_ad_height = "600"; amazon_ad_logo = "hide"; amazon_ad_link_target = "new"; amazon_ad_border = "hide"; amazon_color_background = "F1F1F1";//--></script>
-					<script type="text/javascript" src="http://ir-uk.amazon-adsystem.com/s/ads.js"></script>
-					<br>
-					<script type="text/javascript"><!--
-					amazon_ad_tag = "resplace-21"; amazon_ad_width = "160"; amazon_ad_height = "600"; amazon_ad_logo = "hide"; amazon_ad_link_target = "new"; amazon_ad_border = "hide"; amazon_color_background = "F1F1F1";//--></script>
-					<script type="text/javascript" src="http://ir-uk.amazon-adsystem.com/s/ads.js"></script>
-					<br>
-					<script type="text/javascript"><!--
-					amazon_ad_tag = "resplace-21"; amazon_ad_width = "160"; amazon_ad_height = "600"; amazon_ad_logo = "hide"; amazon_ad_link_target = "new"; amazon_ad_border = "hide"; amazon_color_background = "F1F1F1";//--></script>
-					<script type="text/javascript" src="http://ir-uk.amazon-adsystem.com/s/ads.js"></script>
-					<br>
-				</td>
 				<td>
 					<table class="form-table">
 
