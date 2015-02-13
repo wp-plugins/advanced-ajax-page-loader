@@ -1,11 +1,11 @@
 === Advanced AJAX Page Loader ===
 Contributors: deano1987, snumb130
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=MPJDRVYM87ZR4
-Version: 2.7.0
+Version: 2.7.1
 Tags: ajax, posts, pages, page, post, loading, loader, no refresh, dynamic, jquery
 Requires at least: 2.0?
 Tested up to: 4.1.0
-Stable tag: 2.7.0
+Stable tag: 2.7.1
 
 AJAX Page Loader will load posts, pages, etc. without reloading entire page.
 
